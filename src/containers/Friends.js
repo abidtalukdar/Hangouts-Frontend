@@ -2,7 +2,7 @@ import React from 'react';
 import Friend from '../components/Friend'
 import { ReactComponent as Friendicon } from '../icons/friends.svg'
 
-class Friends extends React.Component {
+class Friends extends React.Component{
 
   // renderFriends = () => {
   //   return Friends.map(friend => { <Friend key={friend.id} friend={friend} />})

@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-        <Navbar />
+        <Navbar />  
         <Route exact path={`/`} component={Main} /> 
         </Router>
       </div>
