@@ -13,9 +13,9 @@ class Friends extends React.Component {
       <section className="friends">
         <ul className="friends-list">
           <li className="friend-label">Friends</li>
-          <Friend />
-          <Friend />
-          <Friend />
+            <Friend />
+            <Friend />
+            <Friend />
         {/* renderFriends() */}
         </ul>
       </section>

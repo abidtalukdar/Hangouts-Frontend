@@ -99,6 +99,7 @@ rgb(31, 25, 25) brown
   background-color: rgb(48, 41, 43);
   transition: 600ms;
   font-family: 'Righteous', cursive;
+  cursor: pointer;
   /* filter: brightness(1.2) */
 }
 

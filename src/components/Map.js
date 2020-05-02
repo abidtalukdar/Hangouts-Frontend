@@ -28,19 +28,15 @@ class MapContainer extends React.Component {
       })
       this.geoCodeLocation()
    }
-   
+  
 
    geoCodeLocation = () => {
      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
      .then(r => r.json())
-     .then(object => {
-      this.setState({
-        currentLocation: object.results[0].formatted_address
-      })
+     .then(object => {console.log(object)
     })
   }
    
-
   
     render() {
     const position = [this.state.lat, this.state.lng]
