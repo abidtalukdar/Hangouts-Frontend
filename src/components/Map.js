@@ -44,7 +44,6 @@ class MapContainer extends React.Component {
   
     render() {
     const position = [this.state.lat, this.state.lng]
-    console.log(this.state)
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 
