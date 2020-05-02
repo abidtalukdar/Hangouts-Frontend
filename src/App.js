@@ -3,14 +3,19 @@ import React from 'react';
 import './App.css';
 import Navbar from './containers/Navbar'
 import Main from './containers/Main'
+// import { NativeRouter, Route, Link } from "react-router-native";
+
+
 
 class App extends React.Component {
 
+  
   render(){
     return (
       <div className="App">
         <Navbar />
         <Main />
+        
       </div>
     );
   }
