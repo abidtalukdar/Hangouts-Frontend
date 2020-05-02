@@ -19,9 +19,6 @@ class MapContainer extends React.Component {
        (this.geolocationCallback(position));
       }
     )
-
-    
-
 }
 
   geolocationCallback(position){ 
@@ -49,7 +46,7 @@ class MapContainer extends React.Component {
     const position = [this.state.lat, this.state.lng]
     console.log(this.state)
     return (
-    <div style={{textAlign: "center", marginBottom: "15px"}}>
+    <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 
       style={{display: "inline-block",height: "400px", width: "800px", border:"2px solid #ED2939", borderRadius: "25px"}}>
         <TileLayer
