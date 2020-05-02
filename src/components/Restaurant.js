@@ -37,7 +37,7 @@ const Restaurant = (props) => {
             Yes we have food
           </a>
         </Card.Content>
-  </Card>
+      </Card>
     );
 }
 
