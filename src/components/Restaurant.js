@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Image, Icon } from 'semantic-ui-react'
 
 
@@ -26,7 +26,7 @@ const Restaurant = (props) => {
             Yes we have food
           </a>
         </Card.Content>
-  </Card>
+      </Card>
     );
 }
 
