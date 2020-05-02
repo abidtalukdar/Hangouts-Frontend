@@ -10,6 +10,7 @@ class MapContainer extends React.Component {
     lat: 51.505,
     lng: -0.09,
     zoom: 14,
+    currentLocation: ""
   }
 
   componentDidMount() {
@@ -17,7 +18,10 @@ class MapContainer extends React.Component {
       (position) => {
        (this.geolocationCallback(position));
       }
-  );
+    )
+
+    
+
 }
 
   geolocationCallback(position){ 
@@ -25,13 +29,27 @@ class MapContainer extends React.Component {
         lat:position.coords.latitude,
         lng:position.coords.longitude
       })
+      this.geoCodeLocation()
    }
+   
+
+   geoCodeLocation = () => {
+     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
+     .then(r => r.json())
+     .then(object => {
+      this.setState({
+        currentLocation: object.results[0].formatted_address
+      })
+    })
+  }
+   
 
   
     render() {
     const position = [this.state.lat, this.state.lng]
+    console.log(this.state)
     return (
-    <div style={{textAlign: "center"}}>
+    <div style={{textAlign: "center", marginBottom: "15px"}}>
       <Map center={position} zoom={this.state.zoom} 
       style={{display: "inline-block",height: "400px", width: "800px", border:"2px solid #ED2939", borderRadius: "25px"}}>
         <TileLayer
@@ -40,7 +58,7 @@ class MapContainer extends React.Component {
         />
         <Marker position={position}>
           <Popup>
-            This is your current location!
+            You are near {this.state.currentLocation}
           </Popup>
         </Marker>
       </Map>
