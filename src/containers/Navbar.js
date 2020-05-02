@@ -1,18 +1,18 @@
 import React from 'react';
+import Navitem from '../components/Navitem'
+import { ReactComponent as Profile } from '../icons/profile.svg'
+import { ReactComponent as Home } from '../icons/home.svg'
 
 class Navbar extends React.Component {
-
 
   render() {
     return (
       <nav className="navbar">
-        <h1>Profile</h1>
-        <h1>Home</h1>
-        <h1>Settings</h1>
+        <Navitem>Meetup</Navitem>
+        <Navitem><Profile/></Navitem>
+        <Navitem><Home/></Navitem>
       </nav>
     )
   }
 }
-
-
   export default Navbar;

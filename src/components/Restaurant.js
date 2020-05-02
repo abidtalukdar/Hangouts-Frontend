@@ -3,7 +3,6 @@ import { Card, Image, Icon } from 'semantic-ui-react'
 import styled from 'styled-components';
 
 
-
 const Restaurant = (props) => {
 
   let centerText = {

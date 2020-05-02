@@ -4,12 +4,55 @@
 
 .navbar {
   top: 0;
-  background-color: #78290F;
+  background-color: #EB5E55;
   width: 100%;
   display: flex;
   height: 5rem;
   justify-content: space-evenly;
   color: blanchedalmond;
+  list-style: none;
+  align-items: center;
+  font-size: 2rem;
+  font-family: 'Righteous', cursive;
+}
+
+/* rgb(255, 78, 78) red
+rgb(31, 25, 25) brown 
+#F05365 red pink*/
+
+.navitem:first-child {
+  margin-right: auto;
+}
+
+.navitem:last-child {
+  margin-right: 3rem;
+}
+
+.navitem {
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.navitem a svg{
+  color: white;
+  height: 3rem;
+  width: 3rem;
+}
+
+.navitem a {
+  color: white;
+}
+
+.navitem:hover a{
+  color: rgb(245, 200, 109);
+  text-shadow: 1px 1px rgb(252, 31, 31);
+  transition: 600ms;
+}
+.navitem:hover a svg{
+  color: rgb(245, 200, 109);
+  text-shadow: 1px 1px rgb(252, 31, 31);
+  transition: 600ms;
 }
 
 .main {
@@ -18,12 +61,45 @@
 }
 
 .friends {
-  left: 0;
-  width: 12rem;
-  display: flex;
+  width: 20rem;
+  display: inline-block;
   height: 100vh;
-  background-color: #FF7D00;
-  padding: 2rem;
+  background-color: #3A3335;
+  left: 0;
+  position: sticky;
+  top: 0;
+  font-family: 'Righteous', cursive;
+}
+
+.friends-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.friends-list li {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: white;
+}
+
+.friends h2{
+  font-family: 'Righteous', cursive;
+  font-size: 1.25rem;
+}
+
+.friend-label {
+  font-size: 1.5rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.friend:hover {
+  background-color: rgb(48, 41, 43);
+  transition: 600ms;
+  font-family: 'Righteous', cursive;
+  /* filter: brightness(1.2) */
 }
 
 .section {

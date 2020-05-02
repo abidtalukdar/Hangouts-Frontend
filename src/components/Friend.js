@@ -3,8 +3,8 @@ import React from 'react';
 const Friend = () => {
 
   return (
-    <li>
-      <h1>This is a friend</h1>
+    <li className="friend">
+      <h2>friend</h2>
     </li>
   )
 }
