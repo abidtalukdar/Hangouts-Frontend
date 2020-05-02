@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './containers/Navbar'
 import Main from './containers/Main'
+import Login from './components/Login'
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,13 +14,13 @@ import {
 
 class App extends React.Component {
 
-  
   render(){
     return (
       <div className="App">
         <Router>
         <Navbar />  
         <Route exact path={`/`} component={Main} /> 
+        <Route exact path={`/login`} component={Login} /> 
         </Router>
       </div>
     );
