@@ -1,9 +1,6 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 
-
-
-
 class MapContainer extends React.Component {
 
   state = {
@@ -33,13 +30,17 @@ class MapContainer extends React.Component {
    geoCodeLocation = () => {
      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
      .then(r => r.json())
-     .then(object => {console.log(object)
+     .then(object => {
+      this.setState({
+        currentLocation: object.results[0].formatted_address
+      })
     })
   }
    
   
     render() {
     const position = [this.state.lat, this.state.lng]
+    console.log(this.state)
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 

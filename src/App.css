@@ -2,6 +2,19 @@
   font-size: 16px;
 }
 
+body::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+body::-webkit-scrollbar-track{
+  background: rgb(212, 212, 212);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #3A3335;
+  border-radius: 10px;
+}
+
 .navbar {
   top: 0;
   background-color: #EB5E55;
