@@ -4,6 +4,8 @@ import './App.css';
 import Navbar from './containers/Navbar'
 import Main from './containers/Main'
 import Login from './components/Login'
+import Register from './components/Register'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,9 +20,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
+        {/* <Switch> */}
         <Navbar />  
         <Route exact path={`/`} component={Main} /> 
-        <Route exact path={`/login`} component={Login} /> 
+        <Route exact path={`/register`} component={Register} /> 
+        <Route exact path={`/login`} component={Login} />
+        {/* </Switch>  */}
         </Router>
       </div>
     );
