@@ -11,3 +11,63 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Forms */
+.form-container {
+  margin: 1rem auto;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 0px 8px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  margin-top: -250px;
+  margin-left: -250px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container form label {
+  font-size: 0.8rem;
+}
+
+.form-container form input, 
+.form-container form textarea, 
+.form-container form select {
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem;
+  font-weight: bold;
+  border: none;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 2px;
+}
+
+.form-container form input:focus, 
+.form-container form textarea:focus, 
+.form-container form select:focus {
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+.form-container form input[type="submit"] {
+  width: 30%;
+  font-weight: 500;
+  background-color: var(--magenta);
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.form-container form input[type="submit"]:focus,
+.form-container form input[type="submit"]:active {
+  outline: none;
+  transform: scale(0.95);
+}
