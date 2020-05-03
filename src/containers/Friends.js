@@ -2,7 +2,13 @@ import React from 'react';
 import Friend from '../components/Friend'
 import { ReactComponent as Friendicon } from '../icons/friends.svg'
 
-class Friends extends React.Component {
+class Friends extends React.Component{
+
+  friend = { 
+    name: "Eric",
+    address: "Brooklyn",
+    img: "https://www.thewholesomedish.com/wp-content/uploads/2019/06/The-Best-Classic-Tacos-550.jpg"
+  }
 
   // renderFriends = () => {
   //   return Friends.map(friend => { <Friend key={friend.id} friend={friend} />})
@@ -13,9 +19,9 @@ class Friends extends React.Component {
       <section className="friends">
         <ul className="friends-list">
           <li className="friend-label">Friends</li>
-            <Friend />
-            <Friend />
-            <Friend />
+            <Friend friend={this.friend} />
+            <Friend friend={this.friend} />
+            <Friend friend={this.friend} />
         {/* renderFriends() */}
         </ul>
       </section>

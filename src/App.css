@@ -11,7 +11,7 @@ body::-webkit-scrollbar-track{
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #3A3335;
+  background: rgb(43, 37, 39);
   border-radius: 10px;
 }
 
@@ -74,7 +74,7 @@ rgb(31, 25, 25) brown
 }
 
 .friends {
-  width: 20rem;
+  width: 25rem;
   display: inline-block;
   height: 100vh;
   background-color: #3A3335;
@@ -82,6 +82,7 @@ rgb(31, 25, 25) brown
   position: sticky;
   top: 0;
   font-family: 'Righteous', cursive;
+  overflow-y: scroll;
 }
 
 .friends-list {
@@ -98,6 +99,11 @@ rgb(31, 25, 25) brown
   color: white;
 }
 
+.friend-details {
+  color: white;
+  padding: 0 1rem 1rem 1rem;
+}
+
 .friends h2{
   font-family: 'Righteous', cursive;
   font-size: 1.25rem;
@@ -106,6 +112,10 @@ rgb(31, 25, 25) brown
 .friend-label {
   font-size: 1.5rem;
   margin: 1rem 0 1rem 0;
+}
+
+.friend-details img{
+  max-width: 13rem;
 }
 
 .friend:hover {
@@ -117,5 +127,28 @@ rgb(31, 25, 25) brown
 }
 
 .section {
-  margin: 3rem 4rem 3rem 4rem;
+  margin: 3rem;
+}
+
+.display-enter {
+  opacity: 0;
+  transform: translateY(-30%);
+}
+
+.display-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.display-exit {
+  opacity: 0;
+  transform: translateY(-30%);
+  transition: .3s ease-in-out;
+}
+
+.display-exit-active {
+  opacity: 0;
+  transition: .3s ease-in-out;
+  transition: opacity 300ms, transform 300ms;
 }

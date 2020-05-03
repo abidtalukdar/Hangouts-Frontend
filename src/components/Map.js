@@ -1,46 +1,17 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import {LocationContext} from '../contexts/LocationContext'
 
 class MapContainer extends React.Component {
 
-  state = {
-    lat: 51.505,
-    lng: -0.09,
-    zoom: 14,
-    currentLocation: ""
-  }
-
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-       (this.geolocationCallback(position));
-      }
-    )
-}
-
-  geolocationCallback(position){ 
-      this.setState({
-        lat:position.coords.latitude,
-        lng:position.coords.longitude
-      })
-      this.geoCodeLocation()
-   }
-  
-
-   geoCodeLocation = () => {
-     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
-     .then(r => r.json())
-     .then(object => {
-      this.setState({
-        currentLocation: object.results[0].formatted_address
-      })
-    })
-  }
-   
+    state = {
+      zoom: 11
+    } 
+    static contextType = LocationContext
   
     render() {
-    const position = [this.state.lat, this.state.lng]
-    console.log(this.state)
+    const position = [this.context.lat, this.context.lng]
+    
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 
@@ -51,7 +22,7 @@ class MapContainer extends React.Component {
         />
         <Marker position={position}>
           <Popup>
-            You are near {this.state.currentLocation}
+            You are near {this.context.currentLocation}
           </Popup>
         </Marker>
       </Map>
