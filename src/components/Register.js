@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import { Card, Button, Checkbox, Form } from 'semantic-ui-react'
 
-class Login extends React.Component {
+class Register extends React.Component {
   state = {
     username: "",
     password: "",
@@ -34,4 +34,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Register;

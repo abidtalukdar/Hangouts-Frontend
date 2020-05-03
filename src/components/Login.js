@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import { Card, Button, Checkbox, Form } from 'semantic-ui-react'
 
-class Register extends React.Component {
+class Login extends React.Component {
   state = {
     username: "",
     password: "",
@@ -24,7 +24,6 @@ class Register extends React.Component {
           <input type="text" name="username" onChange={this.handleInputChange} value={username} />
           <label>Password:</label>
           <input type="password" name="password" onChange={this.handleInputChange} value={password} />
-          
           <Button type='submit'>Submit</Button>
         </form>
       </div>
@@ -32,4 +31,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default Login;
