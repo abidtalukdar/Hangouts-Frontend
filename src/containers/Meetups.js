@@ -3,12 +3,30 @@ import { Card, Accordion, Icon } from 'semantic-ui-react'
 import Meetup from '../components/Meetup'
 
 class Meetups extends Component {
+
+  state = {
+    meetups: []
+  }
+
+  componentDidMount(){
+      fetch('http://localhost:3000/meetups')
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          meetups: object})
+        })
+  }
+
+  renderMeetup = () => {
+    return this.state.meetups.map(meetup => 
+      <Meetup key={meetup.id} meetup={meetup}/>
+    )
+  }
+
   render() {
     return (
       <div className="meetup-container">
-        <Meetup />
-        <Meetup />
-        <Meetup />
+        {this.renderMeetup()}
       </div>
     );
   }

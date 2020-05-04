@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
-export default function Friend(props) {
+export default function Friend({ first_name, last_name, image, default_address }) {
   const [open, setOpen] = useState(false);
   return (
     <div>
       <li className="friend" onClick={() => setOpen(!open)}>
         <h2>
-          {props.friend.name}
+          {friend.first_name} {friend.last_name}
         </h2>
       </li>
       <CSSTransition in={open} timeout={400} classNames="display" unmountOnExit>
         <div className="friend-details">
-          <img src={props.friend.img} />
-          <h3>{props.friend.address}</h3>
+          <img src={friend.image} />
+          <h3>{friend.default_address}</h3>
         </div>
       </CSSTransition>
     </div>
