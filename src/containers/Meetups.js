@@ -26,7 +26,8 @@ class Meetups extends Component {
   render() {
     return (
       <div className="meetup-container">
-        {this.renderMeetup()}
+
+        {this.state.meetups ? this.renderMeetup() : <h2>There are no planned Hangouts</h2>}
       </div>
     );
   }

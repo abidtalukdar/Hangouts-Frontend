@@ -170,3 +170,18 @@ rgb(31, 25, 25) brown
   transition: .3s ease-in-out;
   transition: opacity 300ms, transform 300ms;
 }
+
+.create-container{
+  width: 75%; 
+  height: 500px;
+  border: 2px solid #EB5E55;
+  border-radius: 25px;
+  margin:auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.hangout{
+  font-size: 20px;
+  
+}
