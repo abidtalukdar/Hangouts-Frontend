@@ -12,18 +12,21 @@ class Meetup extends React.Component {
   }
 
   render() {
+    const { location_name, location, date, time} = this.props.meetup
     const open = this.state.open
+    // console.log(this.props)
+    
     return (
       <Accordion styled>
         <Accordion.Title
           onClick={this.handleClick}
           >
           <Icon name='dropdown' />
-          Location Name | Meetup Date
+          {location_name} | {date}
         </Accordion.Title>
         <Accordion.Content active={open === true}>
-          <p>Location Address</p>
-          <p>Meetup Time</p>
+          <p>{location}</p>
+          <p>{time}</p>
         </Accordion.Content>
       </Accordion>
     );

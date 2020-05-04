@@ -3,13 +3,7 @@ import { Card, Icon } from 'semantic-ui-react'
 import styled from 'styled-components';
 
 
-const Restaurant = (props) => {
-
-  let centerText = {
-    textAlign: "center"
-  }
-
-  let HoverImage = styled.img`
+let HoverImage = styled.img`
   height: 200px; 
   transition: transform .2s;
   display: inline;
@@ -17,6 +11,14 @@ const Restaurant = (props) => {
     transform: scale(1.25)
   }
   `
+
+const Restaurant = (props) => {
+
+  let centerText = {
+    textAlign: "center"
+  }
+
+  
   
     return (
       <Card style={{width:"23%", padding: "10px"}}>
