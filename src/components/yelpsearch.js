@@ -10,12 +10,9 @@ class YelpSearch extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log('hi')
-
-    let access_token = '2ZXb-IYEHI6iG2T09GbHcT_PahTAavoiajZhXQ5YHMJDirm-jPcwTDJ-NX-T9PIT7o7yHD8RE8boVb0m5DJBEDZvR1H90poosZGD-EK_K59hPIRbtPcpYpOSRmOwXnYx'
 
     let cors_url = 'https://cors-anywhere.herokuapp.com'
-    let yelp_url = `https://api.yelp.com/v3/businesses/search?term=${this.state.value}&radius=1500&limit=6&latitude=40.712776&longitude=-74.005974`
+    let yelp_url = `https://api.yelp.com/v3/businesses/search?term=${this.state.value}&radius=1500&limit=6&latitude=${this.props.latitude}&longitude=${this.props.longitude}`
 
     fetch(cors_url + '/' + yelp_url ,{
         headers: new Headers({
