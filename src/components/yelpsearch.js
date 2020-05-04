@@ -14,8 +14,7 @@ class YelpSearch extends React.Component {
     event.preventDefault()
     console.log('hi')
 
-    let access_token = '2ZXb-IYEHI6iG2T09GbHcT_PahTAavoiajZhXQ5YHMJDirm-jPcwTDJ-NX-T9PIT7o7yHD8RE8boVb0m5DJBEDZvR1H90poosZGD-EK_K59hPIRbtPcpYpOSRmOwXnYx'
-
+    
     let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + access_token);
 
