@@ -30,11 +30,8 @@ class MeetupCreate extends React.Component {
     }, ()=>console.log(this.state))
   }
 
-  inviteFriendToEvent = (event) => {
-    console.log(event.target.value)
-    // this.setState(prevState => ({
-    //   friendsInvited: ...prevState, event.target.value
-    // }))
+  inviteFriendToEvent = (e, select) => {
+    this.setState({friendsInvited: select.value}, ()=>console.log(this.state))
   }
 
   render() {
@@ -49,7 +46,7 @@ class MeetupCreate extends React.Component {
     return (
 
           <div className="create-container">
-            <h1> Create Meetup </h1> 
+            <h1> Create Hangout </h1> 
             <YelpSearch/>
             <form>
               <label className="hangout">Hangout Date: </label>
@@ -59,7 +56,7 @@ class MeetupCreate extends React.Component {
               {/* should get location by address. should be auto populated? */}
               <Select placeholder='Select the location' options={restaurantLocation} onChange={this.onChangeLocation} />
               <br></br>
-              <label className="hangout">Invited:</label><Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onClick={this.inviteFriendToEvent}/>
+              <label className="hangout">Add Friends to Hangout:</label><Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}/>
               <br></br>
               <Button type='submit'>Create Hangout</Button>
             </form>

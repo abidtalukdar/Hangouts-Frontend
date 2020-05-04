@@ -15,6 +15,7 @@
     "react-router-dom": "^5.1.2",
     "react-router-native": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-search-bar-semantic-ui": "^1.1.1",
     "react-semantic-ui-datepickers": "^2.6.0-beta.0",
     "react-transition-group": "^4.3.0",
     "semantic-ui-css": "^2.4.1",
