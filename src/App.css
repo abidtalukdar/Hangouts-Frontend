@@ -98,6 +98,7 @@ rgb(31, 25, 25) brown
   margin-bottom: 1rem;
   padding: 1rem;
   color: white;
+  transition: 600ms;
 }
 
 .friend-details {
@@ -124,7 +125,6 @@ rgb(31, 25, 25) brown
   transition: 600ms;
   font-family: 'Righteous', cursive;
   cursor: pointer;
-  /* filter: brightness(1.2) */
 }
 
 .section {

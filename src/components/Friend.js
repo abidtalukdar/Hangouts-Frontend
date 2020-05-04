@@ -5,8 +5,8 @@ export default function Friend(props) {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <li className="friend">
-        <h2 onClick={() => setOpen(!open)}>
+      <li className="friend" onClick={() => setOpen(!open)}>
+        <h2>
           {props.friend.name}
         </h2>
       </li>
