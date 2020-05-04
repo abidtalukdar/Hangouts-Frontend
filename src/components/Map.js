@@ -15,7 +15,7 @@ class MapContainer extends React.Component {
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 
-      style={{display: "inline-block",height: "400px", width: "800px", border:"2px solid #ED2939", borderRadius: "25px"}}>
+      style={{display: "inline-block", height: "400px", width: "700px", border:"2px solid #ED2939", borderRadius: "25px"}}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"

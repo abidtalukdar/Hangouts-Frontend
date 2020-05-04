@@ -7,8 +7,10 @@ const Section = () => {
 
   return (
     <section className="section">
-      <Map />
-      <Meetups />
+      <div className="meetup-map">
+        <Map />
+        <Meetups />
+      </div>
       <Restaurants />
     </section>
   )

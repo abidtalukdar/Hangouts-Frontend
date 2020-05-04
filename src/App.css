@@ -58,14 +58,15 @@ rgb(31, 25, 25) brown
 }
 
 .navitem:hover a{
-  color: rgb(245, 200, 109);
-  text-shadow: 1px 1px rgb(252, 31, 31);
+  color: white;
+  text-shadow: 2px 2px rgb(245, 200, 109);
   transition: 600ms;
 }
 .navitem:hover a svg{
-  color: rgb(245, 200, 109);
-  text-shadow: 1px 1px rgb(252, 31, 31);
-  transition: 600ms;
+  color: white;
+  transition: 200ms ease-in-out;
+  -webkit-filter: drop-shadow( 2px 2px rgb(245, 200, 109));
+  filter: drop-shadow( 2px 2px rgb(245, 200, 109));
 }
 
 .main {
@@ -74,7 +75,7 @@ rgb(31, 25, 25) brown
 }
 
 .friends {
-  width: 25rem;
+  width: 21rem;
   display: inline-block;
   height: 100vh;
   background-color: #3A3335;
@@ -127,12 +128,29 @@ rgb(31, 25, 25) brown
 }
 
 .section {
-  margin: 3rem;
+  margin: 2.5rem;
+  flex-direction: column;
+}
+
+.meetup-map {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.meetup-container {
+  width: 300px;
+  height: 400px;
+  margin: 0 0 1.5rem 1.5rem;
+}
+
+.accordion ui styled {
+  width: 400px;
+  margin: 1rem;
 }
 
 .display-enter {
   opacity: 0;
-  transform: translateY(-30%);
+  transform: translateY(-10%);
 }
 
 .display-enter-active {
@@ -143,7 +161,7 @@ rgb(31, 25, 25) brown
 
 .display-exit {
   opacity: 0;
-  transform: translateY(-30%);
+  transform: translateY(-10%);
   transition: .3s ease-in-out;
 }
 

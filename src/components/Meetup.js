@@ -1,42 +1,33 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Accordion, Icon } from 'semantic-ui-react'
 import styled from 'styled-components';
 
 
-const Meetup = (props) => {
+class Meetup extends React.Component {
 
-  let centerText = {
-    textAlign: "center"
+  state = { open: false }
+
+  handleClick = (e) => {
+    this.setState({ open: !this.state.open })
   }
 
-  let HoverImage = styled.img`
-  height: 200px; 
-  transition: transform .2s;
-  display: inline;
-   :hover{
-    transform: scale(1.25)
+  render() {
+    const open = this.state.open
+    return (
+      <Accordion styled>
+        <Accordion.Title
+          onClick={this.handleClick}
+          >
+          <Icon name='dropdown' />
+          Location Name | Meetup Date
+        </Accordion.Title>
+        <Accordion.Content active={open === true}>
+          <p>Location Address</p>
+          <p>Meetup Time</p>
+        </Accordion.Content>
+      </Accordion>
+    );
   }
-  `
-
-  return (
-    <Card style={{width:"23%", padding: "10px"}}>
-      <HoverImage src={props.img} alt="restaurant"/>
-      <Card.Content>
-        <Card.Header style={centerText}>{props.name}</Card.Header>
-        <Card.Meta style={centerText}>
-          <span className='datetime'>{props.datetime}</span>
-        </Card.Meta>
-        <Card.Description style={centerText}>
-          {props.description + props.name}
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra style={centerText}>
-        <a>
-          <Icon name='info circle'/> See Details
-        </a>
-      </Card.Content>
-    </Card>
-  );
 }
 
 
@@ -47,3 +38,35 @@ Meetup.defaultProps = {
 }
 
 export default Meetup;
+
+
+
+    // let centerText = {
+    //   textAlign: "center"
+    // }
+
+    // let HoverImage = styled.img`
+    // height: 200px; 
+    // transition: transform .2s;
+    // display: inline;
+    //  :hover{
+    //   transform: scale(1.25)
+    // }
+    // `
+    // <Card style={{width:"23%", padding: "10px"}}>
+    //   <HoverImage src={props.img} alt="restaurant"/>
+    //   <Card.Content>
+    //     <Card.Header style={centerText}>{props.name}</Card.Header>
+    //     <Card.Meta style={centerText}>
+    //       <span className='datetime'>{props.datetime}</span>
+    //     </Card.Meta>
+    //     <Card.Description style={centerText}>
+    //       {props.description + props.name}
+    //     </Card.Description>
+    //   </Card.Content>
+    //   <Card.Content extra style={centerText}>
+    //     <a>
+    //       <Icon name='info circle'/> See Details
+    //     </a>
+    //   </Card.Content>
+    // </Card>
