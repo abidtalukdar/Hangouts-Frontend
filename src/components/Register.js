@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
-import { Card, Button, Checkbox, Form } from 'semantic-ui-react'
+// import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
+import {Button} from 'semantic-ui-react'
 
 class Register extends React.Component {
   state = {
@@ -21,6 +21,7 @@ class Register extends React.Component {
       <div className="form-container">
         <h3>Register</h3>
         <form onSubmit={this.handleSubmit}>
+          {/* need to create handleSubmit function */}
           <label>Username:</label>
           <input type="text" name="username" onChange={this.handleInputChange} value={username} />
           <label>Password:</label>

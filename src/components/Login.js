@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
-import { Card, Button, Checkbox, Form } from 'semantic-ui-react'
+// import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
+import {Button} from 'semantic-ui-react'
 
 class Login extends React.Component {
   state = {
@@ -19,7 +19,8 @@ class Login extends React.Component {
     return (
       <div className="form-container">
         <h3>Login</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}> 
+        {/* need to create handleSubmit function */}
           <label>Username:</label>
           <input type="text" name="username" onChange={this.handleInputChange} value={username} />
           <label>Password:</label>

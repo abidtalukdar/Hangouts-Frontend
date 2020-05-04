@@ -3,7 +3,6 @@ import React, { createContext } from 'react';
 
 export const LocationContext = createContext();
 
-
 class LocationContextProvider extends React.Component{
 
     state = {
@@ -19,7 +18,7 @@ class LocationContextProvider extends React.Component{
         )
     }
 
-    geolocationCallback(position){      
+    geolocationCallback(position) {
         this.setState({
           lat:position.coords.latitude,
           lng:position.coords.longitude
@@ -37,7 +36,7 @@ class LocationContextProvider extends React.Component{
        })
      }
 
-    render(){
+    render() {
         return(
             <LocationContext.Provider value={{...this.state}}>
             {this.props.children}

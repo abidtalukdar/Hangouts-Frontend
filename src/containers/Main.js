@@ -6,10 +6,11 @@ import LocationContextProvider from '../contexts/LocationContext'
 class Main extends React.Component {
 
   render() {
+    console.log(this.props)
     return (
       <main className="main">
         <LocationContextProvider>
-        <Friends />
+        <Friends friends={this.props.friends}/>
         <Section />
         </LocationContextProvider>
       </main>
