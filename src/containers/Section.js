@@ -11,6 +11,7 @@ const Section = () => {
         <Map />
         <Meetups />
       </div>
+      
       <Restaurants />
     </section>
   )

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Search } from 'semantic-ui-react'
 
-
 class YelpSearch extends React.Component {
   state = {
     value: "",
@@ -9,59 +8,43 @@ class YelpSearch extends React.Component {
     isLoading: false
   }
 
-  fetchSearch(event) {
+  handleSubmit = (event) => {
     event.preventDefault()
     console.log('hi')
 
-    const access_token = process.env.REACT_APP_YELP_API
+    let access_token = '2ZXb-IYEHI6iG2T09GbHcT_PahTAavoiajZhXQ5YHMJDirm-jPcwTDJ-NX-T9PIT7o7yHD8RE8boVb0m5DJBEDZvR1H90poosZGD-EK_K59hPIRbtPcpYpOSRmOwXnYx'
 
-    const url = 'https://api.yelp.com/v3/businesses/search?term="deli"&limit=6&location="New York"'
-    
-    let req = new Request(url, {
-        method: 'GET',
+    let cors_url = 'https://cors-anywhere.herokuapp.com'
+    let yelp_url = `https://api.yelp.com/v3/businesses/search?term=${this.state.value}&radius=1500&limit=6&latitude=40.712776&longitude=-74.005974`
+
+    fetch(cors_url + '/' + yelp_url ,{
         headers: new Headers({
-        'Authorization': `Bearer ${access_token}`,
-          'Content-Type': 'application/json'
-        }),
-        mode: 'no-cors'
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json'
+        })
       })
-
-
-        fetch(req)
-        .then(response => response.json())
-        .then(locations => this.setState({
+      .then(response => response.json())
+      .then(locations => {
+        this.props.handleResults(locations)
+        this.setState({
         results: locations
-        // need callback function to retrieve results
-      }, () => console.log(locations)))
-
-
-
-
-
-
-
-
+      }, () => console.log(locations))})
   }
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.title })
-
-  handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-    this.fetchSearch(e)
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value
+    })
   }
 
   render() {
-    const { isLoading, value, results } = this.state
     return (
-      <Search
-        loading={isLoading}
-        onResultSelect={this.handleResultSelect}
-        onSearchChange={this.handleSearchChange}
-        results={results}
-        value={value}
-        {...this.props}
-      />
-
+      <form className="ui search" onSubmit={this.handleSubmit}>
+        <div className="ui icon input">
+          <input className="prompt" onChange={this.handleChange} value={this.state.value} />
+          <i className="search icon" />
+        </div>
+      </form>
     )
   }
 }
