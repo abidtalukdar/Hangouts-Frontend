@@ -11,8 +11,6 @@ import { AuthContext } from '../contexts/AuthContext'
 import {Redirect} from "react-router-dom";
 
 
-
-
 class MeetupCreate extends React.Component {
 
   state = {
@@ -83,7 +81,7 @@ class MeetupCreate extends React.Component {
               </div>
               <div className="hangout-friends">
                 <label className="hangout">Invited:</label>
-                <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
+                <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
                 value = {this.state.friendsInvited}
                 />
               </div>

@@ -328,8 +328,10 @@ html, body {
   text-align: center;
 }
 
-.popup-image {
-  width: 100%;
+
+.leaflet-popup-content-wrapper {
+  width: 14rem;
+  height: 17rem;
 }
 
 .create-section {
@@ -389,3 +391,4 @@ html, body {
   padding: 2rem;
   background-color: rgb(218, 203, 203);
 }
+
