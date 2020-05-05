@@ -362,7 +362,7 @@ html, body {
 .create-hangout {
   position: relative;
   margin: 0 1rem;
-  text-align: left;
+  text-align: center;
   top: 1rem;
 }
 
@@ -373,14 +373,14 @@ html, body {
   margin: 0;
 }
 
-.create-hangout .ui.button {
+.hangout-friends .ui.button {
   background-color: #3A3335;
   color: white;
   box-shadow: 0 0 5px black;
   width: 295px;
 }
 
-.create-hangout:hover .ui.button {
+.hangout-friends:hover .ui.button {
   filter: brightness(1.2);
   background-color: #3A3335;
   color: white;

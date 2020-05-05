@@ -81,6 +81,7 @@ class MeetupCreate extends React.Component {
       return { key: `${friend.id}`, text: `${friend.first_name}`, value: `${friend.id}` }
     })
     
+    
     return (
       <section className="create-section">
         <h2 className="create-header">Create Hangout</h2>
@@ -110,18 +111,19 @@ class MeetupCreate extends React.Component {
                 />
                 <Button>Recalculate Locations</Button>
               </div>
+              <Button type='submit'>Create Hangout</Button>
             </div>
-            <Button type='submit'>Create Hangout</Button>
           </form>
-
-          <div className="create-map">
-            <Map restaurants={this.state.results}/>
+  
+            <div className="create-map">
+              <Map restaurants={this.state.results}/>
+            </div>
           </div>
-        </div>
-      </section>
-    );
+        </section>
+      );
+    }
   }
-}
+  
 
 export default MeetupCreate;
 
