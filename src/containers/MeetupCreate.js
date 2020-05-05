@@ -60,43 +60,45 @@ class MeetupCreate extends React.Component {
     })
 
     
+    
     return (
-      <section className="create-section">
-        <h2 className="create-header">Create Hangout</h2>
-
-        <div className="create-container">
-        {!this.context.user? <Redirect to="/register" />:null}
-          <form className="create-form">
-            <YelpSearch  results = {this.onChangeResults}/>
-
-            <div className="create-hangout">
-              <h2></h2>
-              <div className="hangout-div">
-                <Calendar /><SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/>
+        <section className="create-section">
+          <h2 className="create-header">Create Hangout</h2>
+  
+          <div className="create-container">
+          {!this.context.user? <Redirect to="/register" />:null}
+            <form className="create-form">
+              <YelpSearch  results = {this.onChangeResults}/>
+  
+              <div className="create-hangout">
+                <h2></h2>
+                <div className="hangout-div">
+                  <Calendar /><SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/>
+                </div>
+                <div className="hangout-div">
+                  {/* should get location by address. should be auto populated? */}
+                  <Location /><Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
+                  {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
+                </div>
+                <div className="hangout-friends">
+                  <label className="hangout">Invited:</label>
+                  <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
+                  value = {this.state.friendsInvited}
+                  />
+                </div>
               </div>
-              <div className="hangout-div">
-                {/* should get location by address. should be auto populated? */}
-                <Location /><Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
-                {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
-              </div>
-              <div className="hangout-friends">
-                <label className="hangout">Invited:</label>
-                <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
-                value = {this.state.friendsInvited}
-                />
-              </div>
+              <Button type='submit'>Create Hangout</Button>
+            </form>
+  
+            <div className="create-map">
+              <Map restaurants={this.state.results}/>
             </div>
-            <Button type='submit'>Create Hangout</Button>
-          </form>
-
-          <div className="create-map">
-            <Map restaurants={this.state.results}/>
           </div>
-        </div>
-      </section>
-    );
+        </section>
+      );
+    }
   }
-}
+  
 
 export default MeetupCreate;
 
