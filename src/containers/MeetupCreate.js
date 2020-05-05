@@ -6,7 +6,9 @@ import { Dropdown, Select, Button } from 'semantic-ui-react'
 import YelpSearch from '../components/yelpsearch'
 import Map from '../components/Map'
 import { AuthContext } from '../contexts/AuthContext'
-import {Redirect} from "react-router-dom";
+import {
+Redirect
+} from "react-router-dom";
 
 
 
@@ -14,7 +16,6 @@ import {Redirect} from "react-router-dom";
 class MeetupCreate extends React.Component {
 
   state = {
-    friendsInvited: ["2","3"],
     dateSelected: undefined,
     restaurantSelected: [],
     startDate: new Date(new Date().setDate(new Date().getDate()-1)),
@@ -64,6 +65,7 @@ class MeetupCreate extends React.Component {
     
 
 
+    console.log(this.props)
     
     return (
           <div className="create-container">
@@ -84,8 +86,8 @@ class MeetupCreate extends React.Component {
               {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
               <br></br><br></br>
               <label className="hangout">Add Friends to Hangout:</label>
-              <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
-              value = {this.state.friendsInvited}
+              <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.props.inviteFriend}
+              value = {this.props.friendsInvited}
               />
               <br></br><br></br>
               <Button type='submit'>Create Hangout</Button>
