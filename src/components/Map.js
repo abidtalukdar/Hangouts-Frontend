@@ -7,11 +7,11 @@ class MapContainer extends React.Component {
     state = {
       zoom: 11
     } 
+
     static contextType = LocationContext
   
     render() {
     const position = [this.context.lat, this.context.lng]
-    
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 
@@ -24,6 +24,11 @@ class MapContainer extends React.Component {
           <Popup>
             You are near {this.context.currentLocation}
           </Popup>
+          {this.props.test.length > 0? 
+          this.props.test.map(result => {
+            return <Marker key={result.id} position={[result.coordinates.latitude,result.coordinates.longitude]}/>
+          }):null  
+        }
         </Marker>
       </Map>
     </div>
