@@ -10,7 +10,6 @@ class YelpSearch extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-
     let cors_url = 'https://cors-anywhere.herokuapp.com'
     let yelp_url = `https://api.yelp.com/v3/businesses/search?term=${this.state.value}&radius=1500&limit=6&latitude=40.712776&longitude=-74.005974`
 
@@ -22,9 +21,8 @@ class YelpSearch extends React.Component {
       })
       .then(response => response.json())
       .then(locations => {
-        this.setState({
-        results: locations
-      }, () => console.log(this.state.locations))})
+        this.props.results(locations)
+        })
   }
 
   handleChange = (event) => {
@@ -32,6 +30,7 @@ class YelpSearch extends React.Component {
       value: event.target.value
     })
   }
+
 
   render() {
     return (

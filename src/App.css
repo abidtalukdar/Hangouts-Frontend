@@ -206,7 +206,7 @@ html, body {
 
 .create-container{
   width: 75%; 
-  height: 500px;
+  height: 750px;
   border: 2px solid #EB5E55;
   border-radius: 25px;
   margin:auto;
@@ -290,5 +290,9 @@ html, body {
 
 .hangout{
   font-size: 20px;
-  
+}
+
+
+.create-form{
+  margin-top: 25px;
 }
