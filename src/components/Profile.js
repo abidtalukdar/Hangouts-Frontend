@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ReactComponent as ProfileIcon } from '../icons/profile.svg'
 
 const Profile = () => {
 
@@ -8,8 +9,8 @@ const Profile = () => {
     <section className="profile-section">
       <div className={showFront ? "profile-div":"profile-div flip"} onClick={() => setShowFront(!showFront)}>
         <div className="profile-front" >
-          <h2>Eric Cheung</h2>
-          <p>Image</p>
+          <article className="profile-image-container"><div className="profile-image">Profile Image</div></article>
+          <header className="profile-header"><h2>Eric Cheung</h2></header>
           <h3>Email</h3>
           <h3>Default Address</h3>
         </div>
