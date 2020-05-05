@@ -13,7 +13,6 @@ class MapContainer extends React.Component {
     render() {
     const position = [this.context.lat, this.context.lng]
     return (
-<<<<<<< HEAD
     <div style={{textAlign: "center", marginBottom: "20px"}}>
       <Map center={position} zoom={this.state.zoom} 
       style={{display: "inline-block", height: "400px", width: "700px", border:"2px solid #ED2939", borderRadius: "25px"}}>
@@ -33,22 +32,6 @@ class MapContainer extends React.Component {
         </Marker>
       </Map>
     </div>
-=======
-      <div style={{textAlign: "center", marginBottom: "20px"}}>
-        <Map center={position} zoom={this.state.zoom} 
-        style={{display: "inline-block", height: "400px", width: "700px", border:"2px solid #ED2939", borderRadius: "25px"}}>
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-          />
-          <Marker position={position}>
-            <Popup>
-              You are near {this.context.currentLocation}
-            </Popup>
-          </Marker>
-        </Map>
-      </div>
->>>>>>> Development
     )
     }
 

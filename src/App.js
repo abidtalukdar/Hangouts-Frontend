@@ -7,6 +7,8 @@ import Login from './components/Login'
 import Register from './components/Register'
 import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
+import LocationContextProvider from './contexts/LocationContext'
+
 
 import {
   BrowserRouter as Router,
@@ -41,15 +43,11 @@ class App extends React.Component {
         <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
         <Route exact path={`/register`} component={Register} /> 
         <Route exact path={`/login`} component={Login} />
-<<<<<<< HEAD
         <LocationContextProvider>
         <Route exact path={`/meetup`} render={() => 
         <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
         </LocationContextProvider>
-=======
-        <Route exact path={`/meetup`} render={() => <MeetupCreate friends={this.state.friends} />}/>
         <Route exact path={`/profile`} component={() => <Profile />}/>
->>>>>>> Development
         </Router>
       </div>
     );
