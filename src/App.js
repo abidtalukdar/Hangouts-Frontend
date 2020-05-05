@@ -12,11 +12,13 @@ import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
 
 
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -26,8 +28,12 @@ class App extends React.Component {
     friendsInvited: []  
   }
 
+
+
+
   componentDidMount(){
-    fetch('http://localhost:3000/friends')
+    let userId = this.context.user
+    fetch(`http://localhost:3000/friends/${userId}`)
     .then(r => r.json())
     .then(object => {
       this.setState({
@@ -36,21 +42,24 @@ class App extends React.Component {
     })
   }
 
+  static contextType = AuthContext
+
+
+
   render(){
+ 
     return (
       <div className="App">
         <Router>
-        <Navbar />  
-        <AuthContextProvider>        
+        <Navbar />
         <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
-        <Route exact path={`/register`} component={Register} /> 
-        <Route exact path={`/login`} component={Login} />
         <LocationContextProvider>
         <Route exact path={`/meetup`} render={() => 
         <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
         </LocationContextProvider>
         <Route exact path={`/profile`} component={() => <Profile />}/>
-        </AuthContextProvider>
+        <Route exact path={`/register`} component={() => <Register />}/>
+        <Route exact path={`/login`} component={() => <Login />}/>
         </Router>
       </div>
     );

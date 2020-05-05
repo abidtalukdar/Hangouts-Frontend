@@ -11,6 +11,7 @@ class AuthContextProvider extends React.Component{
 
     render() {
         return(
+            
             <AuthContext.Provider value={{...this.state}}>
             {this.props.children}
             </AuthContext.Provider>
