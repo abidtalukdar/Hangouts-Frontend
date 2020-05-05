@@ -30,10 +30,10 @@ class MapContainer extends React.Component {
             <div className="popup">
               <h3>{result.name}</h3>
               <img className="popup-image" src={result.image_url}/>
-              <p>{result.location.display_address.join(', ')}</p>
-              <p>{result.display_phone}</p>
-              <p>{result.rating}</p>
-              <p>{result.price}</p>
+              {result.location.display_address.join(', ')} <br></br>
+              {result.display_phone}<br></br>
+              {result.rating}<br></br>
+              {result.price}
             </div>
             </Popup></Marker>
           }):null  

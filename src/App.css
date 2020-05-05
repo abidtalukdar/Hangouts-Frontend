@@ -305,6 +305,7 @@ html, body {
 
 .hangout-div {
   margin-bottom: 1rem;
+  height: 3rem;
   text-align: center;
 }
 
@@ -312,9 +313,21 @@ html, body {
   width: 2rem;
   color: #3A3335;
   margin-right: 0.5rem;
-  margin-top: auto;
   position: relative;
-  top: 0.5rem;
+  top: 0.75rem;
+}
+
+.hangout-time {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.hangout-time svg {
+  width: 2rem;
+  color: #3A3335;
+  margin-right: 0.65rem;
+  position: relative;
+  height: 37px;
 }
 
 .hangout-friends {
@@ -322,16 +335,11 @@ html, body {
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .create-form{
   text-align: center;
-}
-
-
-.leaflet-popup-content-wrapper {
-  width: 14rem;
-  height: 17rem;
 }
 
 .create-section {
@@ -353,9 +361,30 @@ html, body {
 
 .create-hangout {
   position: relative;
-  margin: 2rem;
+  margin: 0 1rem;
   text-align: left;
-  top: 1.5rem;
+  top: 1rem;
+}
+
+.create-hangout h2, label{
+  color: #3A3335;
+  text-align: center;
+  font-family: "Righteous", cursive;
+  margin: 0;
+}
+
+.create-hangout .ui.button {
+  background-color: #3A3335;
+  color: white;
+  box-shadow: 0 0 5px black;
+  width: 295px;
+}
+
+.create-hangout:hover .ui.button {
+  filter: brightness(1.2);
+  background-color: #3A3335;
+  color: white;
+  box-shadow: 0 0 5px black;
 }
 
 .ui.input {
@@ -368,18 +397,36 @@ html, body {
 
 .ui.fluid.dropdown {
   width: 295px;
-  margin-bottom: 2.5rem;
 }
 
 .ui.button {
   background-color: #EB5E55;
   color: white;
+  box-shadow: 0 0 5px black;
 }
 
 .ui.button:hover {
-  filter: brightness(1.5);
+  filter: brightness(1.2);
   background-color: #EB5E55;
   color: white;
+}
+
+.leaflet-popup-content-wrapper {
+  width: 15rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-popup-content-wrapper h3 {
+  margin: 0;
+}
+
+.popup-image {
+  width: 90%;
+  object-fit: cover;
+  height: 10rem;
+  display: block;
 }
 
 .create-container{
