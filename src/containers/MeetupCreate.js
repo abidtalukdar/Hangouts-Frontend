@@ -5,6 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Dropdown, Select, Button } from 'semantic-ui-react'
 import YelpSearch from '../components/yelpsearch'
 import Map from '../components/Map'
+import { AuthContext } from '../contexts/AuthContext'
+import {Redirect} from "react-router-dom";
+
 
 
 
@@ -45,10 +48,12 @@ class MeetupCreate extends React.Component {
    let x =  this.state.results.map(restaurants =>{
       return {key: restaurants.id, value: restaurants, text: restaurants.name}
     })
-
-
     return x
   }
+
+
+  static contextType = AuthContext
+
 
   render() {
     const friendOptions = this.props.friends.map(friend => {
@@ -62,6 +67,7 @@ class MeetupCreate extends React.Component {
     
     return (
           <div className="create-container">
+            {!this.context.user? <Redirect to="/register" />:null}
             <h1> Create Hangout </h1> 
             <div className="create-map">
             <Map restaurants={this.state.results}/>

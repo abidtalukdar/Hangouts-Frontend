@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Icon } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { Rating } from 'semantic-ui-react'
 
 
 let HoverImage = styled.img`
@@ -18,8 +19,11 @@ const Restaurant = (props) => {
     textAlign: "center"
   }
 
-  
-  
+
+
+
+
+
     return (
       <Card style={{width:"23%", padding: "10px"}}>
         <HoverImage src={props.img} alt="restaurant"/>
@@ -29,7 +33,9 @@ const Restaurant = (props) => {
             <span className='date'>{props.meta}</span>
           </Card.Meta>
           <Card.Description style={centerText}>
-            {props.description}
+            {props.rating}
+            <br></br>
+            <strong>{props.location === undefined? null: props.location.address1}</strong>
           </Card.Description>
         </Card.Content>
         <Card.Content extra style={centerText}>
