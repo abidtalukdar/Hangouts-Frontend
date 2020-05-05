@@ -3,7 +3,8 @@ import React from 'react';
 const Navitem = (props) => {
   return (
     <li className="navitem">
-        {props.children}
+      <p className="nav-text">{props.text}</p>
+      <div>{props.children}</div>
     </li>
   )
 }

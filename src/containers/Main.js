@@ -1,7 +1,8 @@
 import React from 'react';
 import Friends from './Friends'
-import MeetupCreate from './MeetupCreate'
-import Section from './Section'
+import Map from '../components/Map'
+import Restaurants from './Restaurants'
+import Meetups from './Meetups'
 import LocationContextProvider from '../contexts/LocationContext'
 import {
   BrowserRouter as Router,
@@ -15,7 +16,13 @@ class Main extends React.Component {
       <main className="main">
         <LocationContextProvider>
         <Friends friends={this.props.friends}/>
-        <Section />
+        <section className="section">
+          <div className="meetup-map">
+            <Map />
+            <Meetups />
+          </div>
+          <Restaurants />
+        </section>
         </LocationContextProvider>
       </main>
     );

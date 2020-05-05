@@ -1,8 +1,8 @@
 import React from 'react';
 import Navitem from '../components/Navitem'
-import { ReactComponent as Profile } from '../icons/profile.svg'
-import { ReactComponent as Home } from '../icons/home.svg'
-import { ReactComponent as Meetup } from '../icons/friends.svg'
+import { ReactComponent as ProfileIcon } from '../icons/profile.svg'
+import { ReactComponent as HomeIcon } from '../icons/home.svg'
+import { ReactComponent as MeetupIcon } from '../icons/friends.svg'
 import { BrowserRouter as Route, Link } from "react-router-dom";
 
 class Navbar extends React.Component {
@@ -11,9 +11,9 @@ class Navbar extends React.Component {
     return (
       <nav className="navbar">
         <Navitem><Link to="/">Hangouts</Link></Navitem>
-        <Navitem><Link to="/meetup"><Meetup/></Link></Navitem>
-        <Navitem><Link to="/home"><Home/></Link></Navitem>
-        <Navitem><Link to="/profile"><Profile/></Link></Navitem>
+        <Navitem text="Hangout"><Link to="/meetup"><MeetupIcon/></Link></Navitem>
+        <Navitem text="Home"><Link to="/home"><HomeIcon/></Link></Navitem>
+        <Navitem text="Profile"><Link to="/profile"><ProfileIcon/></Link></Navitem>
       </nav>
     )
   }

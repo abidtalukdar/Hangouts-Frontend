@@ -8,8 +8,6 @@ import Map from '../components/Map'
 
 
 
-
-
 class MeetupCreate extends React.Component {
 
   state = {

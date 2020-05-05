@@ -21,8 +21,14 @@ class YelpSearch extends React.Component {
       })
       .then(response => response.json())
       .then(locations => {
+<<<<<<< HEAD
         this.props.results(locations)
         })
+=======
+        this.setState({
+        results: locations
+      }, () => console.log(this.state.locations))})
+>>>>>>> Development
   }
 
   handleChange = (event) => {

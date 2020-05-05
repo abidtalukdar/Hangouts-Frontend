@@ -2,6 +2,15 @@
   font-size: 16px;
 }
 
+#root, .App {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
 body::-webkit-scrollbar {
   width: 0.75rem;
 }
@@ -13,6 +22,10 @@ body::-webkit-scrollbar-track{
 body::-webkit-scrollbar-thumb {
   background: rgb(43, 37, 39);
   border-radius: 10px;
+}
+
+html, body {
+  height: 100%;
 }
 
 .navbar {
@@ -29,22 +42,42 @@ body::-webkit-scrollbar-thumb {
   font-family: 'Righteous', cursive;
 }
 
-/* rgb(255, 78, 78) red
-rgb(31, 25, 25) brown 
-#F05365 red pink*/
-
 .navitem:first-child {
   margin-right: auto;
 }
 
 .navitem:last-child {
-  margin-right: 3rem;
+  margin-right: 5rem;
 }
 
 .navitem {
   margin: 1rem;
-  padding: 1rem;
   font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  transition: 200ms ease;
+  right: 0;
+}
+
+.nav-text {
+  padding-right: 1rem;
+  line-height: 50px;
+  margin: 0;
+  transition: 600ms ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.navitem:hover .nav-text{
+  transition: 600ms ease;
+  display: inline-block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.navitem:hover {
+  transition: 600ms;
 }
 
 .navitem a svg{
@@ -60,7 +93,7 @@ rgb(31, 25, 25) brown
 .navitem:hover a{
   color: white;
   text-shadow: 2px 2px rgb(245, 200, 109);
-  transition: 600ms;
+  width: 5rem;
 }
 .navitem:hover a svg{
   color: white;
@@ -179,6 +212,56 @@ rgb(31, 25, 25) brown
   margin:auto;
   margin-top: 50px;
   text-align: center;
+}
+
+.profile-section {
+  background-color: #3A3335;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+}
+
+.profile-div {
+  top: 2rem;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  box-shadow: 3px 2px 3px;
+  border-radius: 5px;
+  width: 30%;
+  height: 75%;
+  margin: auto;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
+
+.profile-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 3rem;
+  backface-visibility: hidden;
+  background-color: rgb(218, 203, 203);
+  border-radius: 5px;
+}
+
+.profile-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 3rem;
+  backface-visibility: hidden;
+  background-color: rgb(197, 182, 182);
+  transform: rotateY(180deg);
+  border-radius: 5px;
+}
+
+.profile-div.flip {
+  transform: rotateY(180deg);
+  transition: 700ms ease-in-out;
 }
 
 .hangout{
