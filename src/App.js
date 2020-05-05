@@ -18,8 +18,9 @@ import {
 class App extends React.Component {
 
   state = {
-    user: "",
-    friends: []
+    friends: [],
+    friendsInvited: [],
+    user: ""  
   }
 
   componentDidMount(){
@@ -40,8 +41,15 @@ class App extends React.Component {
         <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
         <Route exact path={`/register`} component={Register} /> 
         <Route exact path={`/login`} component={Login} />
+<<<<<<< HEAD
+        <LocationContextProvider>
+        <Route exact path={`/meetup`} render={() => 
+        <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
+        </LocationContextProvider>
+=======
         <Route exact path={`/meetup`} render={() => <MeetupCreate friends={this.state.friends} />}/>
         <Route exact path={`/profile`} component={() => <Profile />}/>
+>>>>>>> Development
         </Router>
       </div>
     );

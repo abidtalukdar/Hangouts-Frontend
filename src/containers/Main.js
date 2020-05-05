@@ -4,6 +4,10 @@ import Map from '../components/Map'
 import Restaurants from './Restaurants'
 import Meetups from './Meetups'
 import LocationContextProvider from '../contexts/LocationContext'
+import {
+  BrowserRouter as Router,
+  Route,
+} from "react-router-dom";
 
 class Main extends React.Component {
 
