@@ -11,11 +11,14 @@ class LocationContextProvider extends React.Component{
         friendsCoordinates: []
     }
 
-    componentDidMount() {
+    componentDidMount(){
         navigator.geolocation.getCurrentPosition(
           (position) => {(this.geolocationCallback(position))}
         )
     }
+
+
+  
 
     geolocationCallback(position) {
         this.setState({
@@ -29,7 +32,8 @@ class LocationContextProvider extends React.Component{
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
         .then(r => r.json())
         .then(object => {
-         this.setState({
+         this.setState({...this.state
+           ,
            currentLocation: object.results[0].formatted_address
          })
        })
@@ -37,7 +41,7 @@ class LocationContextProvider extends React.Component{
 
     render() {
         return(
-            <LocationContext.Provider value={{...this.state}}>
+            <LocationContext.Provider value={{...this.state, try: this.try}}>
             {this.props.children}
             </LocationContext.Provider>
         )

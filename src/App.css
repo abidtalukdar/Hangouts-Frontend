@@ -205,7 +205,6 @@ html, body {
   transition: opacity 300ms, transform 300ms;
 }
 
-
 .profile-section {
   background-color: #3A3335;
   width: 100vw;
@@ -301,6 +300,7 @@ html, body {
 
 .hangout{
   font-size: 20px;
+  margin-bottom: 0.5rem;
 }
 
 .hangout-div {
@@ -313,6 +313,15 @@ html, body {
   color: #3A3335;
   margin-right: 0.5rem;
   margin-top: auto;
+  position: relative;
+  top: 0.5rem;
+}
+
+.hangout-friends {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 
 .create-form{
@@ -355,7 +364,18 @@ html, body {
   width: 255px;
 }
 
+.ui.fluid.dropdown {
+  width: 295px;
+  margin-bottom: 2.5rem;
+}
+
 .ui.button {
+  background-color: #EB5E55;
+  color: white;
+}
+
+.ui.button:hover {
+  filter: brightness(1.5);
   background-color: #EB5E55;
   color: white;
 }

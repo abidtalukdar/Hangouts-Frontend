@@ -7,6 +7,11 @@ import YelpSearch from '../components/yelpsearch'
 import Map from '../components/Map'
 import { ReactComponent as Calendar } from '../icons/calendar.svg'
 import { ReactComponent as Location } from '../icons/location.svg'
+import { AuthContext } from '../contexts/AuthContext'
+import {Redirect} from "react-router-dom";
+
+
+
 
 class MeetupCreate extends React.Component {
 
@@ -44,9 +49,12 @@ class MeetupCreate extends React.Component {
    let x =  this.state.results.map(restaurants =>{
       return {key: restaurants.id, value: restaurants, text: restaurants.name}
     })
-
     return x
   }
+
+
+  static contextType = AuthContext
+
 
   render() {
     const friendOptions = this.props.friends.map(friend => {
@@ -59,21 +67,21 @@ class MeetupCreate extends React.Component {
         <h2 className="create-header">Create Hangout</h2>
 
         <div className="create-container">
+        {!this.context.user? <Redirect to="/register" />:null}
           <form className="create-form">
             <YelpSearch  results = {this.onChangeResults}/>
 
             <div className="create-hangout">
+              <h2></h2>
               <div className="hangout-div">
-                {/* <label className="hangout">Hangout Date: </label> */}
                 <Calendar /><SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/>
               </div>
               <div className="hangout-div">
-                {/* <label className="hangout">Hangout Location: </label> */}
                 {/* should get location by address. should be auto populated? */}
                 <Location /><Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
                 {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
               </div>
-              <div className="hangout-div">
+              <div className="hangout-friends">
                 <label className="hangout">Invited:</label>
                 <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
                 value = {this.state.friendsInvited}
@@ -82,7 +90,7 @@ class MeetupCreate extends React.Component {
             </div>
             <Button type='submit'>Create Hangout</Button>
           </form>
-          
+
           <div className="create-map">
             <Map restaurants={this.state.results}/>
           </div>
@@ -93,3 +101,5 @@ class MeetupCreate extends React.Component {
 }
 
 export default MeetupCreate;
+
+

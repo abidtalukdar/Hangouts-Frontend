@@ -1,6 +1,8 @@
 import React from 'react';
 // import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
+import { AuthContext } from '../contexts/AuthContext'
+
 
 class Register extends React.Component {
   state = {
@@ -14,6 +16,7 @@ class Register extends React.Component {
       [event.target.name]: event.target.value
     })
   }
+
 
   render() {
     const { username, password } = this.state

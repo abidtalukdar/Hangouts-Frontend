@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
 import { ReactComponent as ProfileIcon } from '../icons/profile.svg'
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import {Redirect} from "react-router-dom";
+
 
 const Profile = () => {
 
   const [showFront, setShowFront] = useState(true)
 
+  const authContext = useContext(AuthContext)
+
   return (
     <section className="profile-section">
+      {!authContext.user? <Redirect to="/register" />:null}
       <div className={showFront ? "profile-div":"profile-div flip"} onClick={() => setShowFront(!showFront)}>
         <div className="profile-front" >
           <article className="profile-image-container">
