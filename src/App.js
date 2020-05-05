@@ -39,14 +39,6 @@ class App extends React.Component {
     })
   }
 
-
-  inviteFriendToEvent = (e, select) => {
-    this.setState({friendsInvited: select.value}, ()=>console.log(this.state))
-  }
-  
-
-
-
   static contextType = AuthContext
 
   render(){
@@ -58,7 +50,7 @@ class App extends React.Component {
         <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
         <LocationContextProvider>
         <Route exact path={`/meetup`} render={() => 
-        <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} inviteFriend={this.inviteFriendToEvent} />}/>
+        <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
         </LocationContextProvider>
         <Route exact path={`/profile`} component={() => <Profile />}/>
         <Route exact path={`/register`} component={() => <Register />}/>

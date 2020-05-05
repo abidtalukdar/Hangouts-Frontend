@@ -8,14 +8,13 @@ import Map from '../components/Map'
 import { ReactComponent as Calendar } from '../icons/calendar.svg'
 import { ReactComponent as Location } from '../icons/location.svg'
 import { AuthContext } from '../contexts/AuthContext'
-import {
-Redirect
-} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 
 class MeetupCreate extends React.Component {
 
   state = {
+    friendsInvited: ["2","3"],
     dateSelected: undefined,
     restaurantSelected: [],
     startDate: new Date(new Date().setDate(new Date().getDate()-1)),
@@ -90,28 +89,8 @@ class MeetupCreate extends React.Component {
             <Button type='submit'>Create Hangout</Button>
           </form>
 
-<<<<<<< HEAD
           <div className="create-map">
             <Map restaurants={this.state.results}/>
-=======
-            <form className = "create-form">
-              <YelpSearch  results = {this.onChangeResults}/>
-              <label className="hangout">Hangout Date: </label>
-              <SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/><br></br>
-              <br></br><br></br>
-              <label className="hangout">Hangout Location: </label>
-              {/* should get location by address. should be auto populated? */}
-              <Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
-              {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
-              <br></br><br></br>
-              <label className="hangout">Add Friends to Hangout:</label>
-              <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.props.inviteFriend}
-              value = {this.props.friendsInvited}
-              />
-              <br></br><br></br>
-              <Button type='submit'>Create Hangout</Button>
-            </form>
->>>>>>> stanley-lee
           </div>
         </div>
       </section>

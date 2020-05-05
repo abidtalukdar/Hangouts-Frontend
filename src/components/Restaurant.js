@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Icon } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { Rating } from 'semantic-ui-react'
 
 
 let HoverImage = styled.img`
