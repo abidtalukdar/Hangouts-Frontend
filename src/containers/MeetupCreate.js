@@ -5,9 +5,7 @@ import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import "react-datepicker/dist/react-datepicker.css";
 import { Dropdown, Form, Radio, Select, Button } from 'semantic-ui-react'
 import YelpSearch from '../components/yelpsearch'
-
-
-
+import Map from '../components/Map'
 
 class MeetupCreate extends React.Component {
 
@@ -44,23 +42,23 @@ class MeetupCreate extends React.Component {
     ]
     
     return (
-
-          <div className="create-container">
-            <h1> Create Hangout </h1> 
-            <YelpSearch/>
-            <form>
-              <label className="hangout">Hangout Date: </label>
-              <SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/><br></br>
-              <br></br>
-              <label className="hangout">Hangout Location: </label>
-              {/* should get location by address. should be auto populated? */}
-              <Select placeholder='Select the location' options={restaurantLocation} onChange={this.onChangeLocation} />
-              <br></br>
-              <label className="hangout">Add Friends to Hangout:</label><Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}/>
-              <br></br>
-              <Button type='submit'>Create Hangout</Button>
-            </form>
-          </div>
+      <div className="create-container">
+        <h1> Create Hangout </h1> 
+        <form>
+          <label className="hangout">Hangout Date: </label>
+          <SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/><br></br>
+          <br></br>
+          <label className="hangout">Hangout Location: </label>
+          {/* should get location by address. should be auto populated? */}
+          <Select placeholder='Select the location' options={restaurantLocation} onChange={this.onChangeLocation} />
+          <br></br>
+          <label className="hangout">Add Friends to Hangout:</label><Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}/>
+          <br></br>
+          <Button type='submit'>Create Hangout</Button>
+        </form>
+        {/* <Map /> */}
+        <YelpSearch />
+      </div>
     );
   }
 }
