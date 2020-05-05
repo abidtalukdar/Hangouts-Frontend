@@ -4,8 +4,7 @@ import { Search } from 'semantic-ui-react'
 class YelpSearch extends React.Component {
   state = {
     value: "",
-    results: [],
-    isLoading: false
+    results: []
   }
 
   handleSubmit = (event) => {

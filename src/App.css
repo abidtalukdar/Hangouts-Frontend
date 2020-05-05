@@ -270,8 +270,12 @@ html, body {
 
 .profile-header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.profile-header h3 {
+  margin: 0 0 1rem 0;
 }
 
 .profile-image-container {
@@ -280,18 +284,26 @@ html, body {
   padding: 1rem;
 }
 
-.profile-image {
+.profile-image-circle {
   width: 10rem;
   height: 10rem;
   background-color: rgb(143, 77, 77);
   border-radius: 50%;
   bottom: 3rem;
+  box-shadow: 0 0 10px  rgba(0,0,0,10);
+}
+
+.profile-image {
+  width: 9rem;
+  height: 9rem;
+  background-color: rgb(190, 101, 101);
+  border-radius: 50%;
+  margin: .5rem auto;
 }
 
 .hangout{
   font-size: 20px;
 }
-
 
 .create-form{
   margin-top: 25px;
