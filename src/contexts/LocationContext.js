@@ -8,7 +8,6 @@ class LocationContextProvider extends React.Component{
         lat: 0,
         lng: 0,
         currentLocation: "",
-        friendsCoordinates: []
     }
 
     componentDidMount(){
