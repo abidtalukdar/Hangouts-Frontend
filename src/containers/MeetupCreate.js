@@ -63,22 +63,25 @@ class MeetupCreate extends React.Component {
     return (
           <div className="create-container">
             <h1> Create Hangout </h1> 
-            <YelpSearch results = {this.onChangeResults}/>
-            <Map test={this.state.results}/>
+            <div className="create-map">
+            <Map restaurants={this.state.results}/>
+            </div>
 
             <form className = "create-form">
+              <YelpSearch  results = {this.onChangeResults}/>
               <label className="hangout">Hangout Date: </label>
               <SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/><br></br>
-              <br></br>
+              <br></br><br></br>
               <label className="hangout">Hangout Location: </label>
               {/* should get location by address. should be auto populated? */}
               <Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
               {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
-              <br></br>
-              <label className="hangout">Add Friends to Hangout:</label><Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
+              <br></br><br></br>
+              <label className="hangout">Add Friends to Hangout:</label>
+              <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
               value = {this.state.friendsInvited}
               />
-              <br></br>
+              <br></br><br></br>
               <Button type='submit'>Create Hangout</Button>
             </form>
           </div>

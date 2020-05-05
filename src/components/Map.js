@@ -24,8 +24,8 @@ class MapContainer extends React.Component {
           <Popup>
             You are near {this.context.currentLocation}
           </Popup>
-          {this.props.test.length > 0? 
-          this.props.test.map(result => {
+          {this.props.restaurants.length > 0? 
+          this.props.restaurants.map(result => {
             return <Marker key={result.id} position={[result.coordinates.latitude,result.coordinates.longitude]}/>
           }):null  
         }
@@ -36,7 +36,10 @@ class MapContainer extends React.Component {
     }
 
 
+    
 }
+
+
 
 
 export default MapContainer

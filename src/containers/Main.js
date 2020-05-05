@@ -18,7 +18,7 @@ class Main extends React.Component {
         <Friends friends={this.props.friends}/>
         <section className="section">
           <div className="meetup-map">
-            <Map />
+            <Map restaurants={[]} />
             <Meetups />
           </div>
           <Restaurants />
