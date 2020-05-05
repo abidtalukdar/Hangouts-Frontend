@@ -204,15 +204,6 @@ html, body {
   transition: opacity 300ms, transform 300ms;
 }
 
-.create-container{
-  width: 75%; 
-  height: 750px;
-  border: 2px solid #EB5E55;
-  border-radius: 25px;
-  margin:auto;
-  margin-top: 50px;
-  text-align: center;
-}
 
 .profile-section {
   background-color: #3A3335;
@@ -306,5 +297,24 @@ html, body {
 }
 
 .create-form{
-  margin-top: 25px;
+  float: left;
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 2%;
+}
+
+
+.create-map{
+  margin-right: 20px;
+  float: right;
+}
+
+.create-container{
+  width: 85%; 
+  height: 550px;
+  border: 2px solid #EB5E55;
+  border-radius: 25px;
+  margin:auto;
+  margin-top: 50px;
+  text-align: center;
 }

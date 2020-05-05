@@ -8,6 +8,8 @@ import Register from './components/Register'
 import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
 import LocationContextProvider from './contexts/LocationContext'
+import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
+
 
 
 import {
@@ -21,8 +23,7 @@ class App extends React.Component {
 
   state = {
     friends: [],
-    friendsInvited: [],
-    user: ""  
+    friendsInvited: []  
   }
 
   componentDidMount(){
@@ -40,6 +41,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
         <Navbar />  
+        <AuthContextProvider>        
         <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
         <Route exact path={`/register`} component={Register} /> 
         <Route exact path={`/login`} component={Login} />
@@ -48,6 +50,7 @@ class App extends React.Component {
         <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
         </LocationContextProvider>
         <Route exact path={`/profile`} component={() => <Profile />}/>
+        </AuthContextProvider>
         </Router>
       </div>
     );
