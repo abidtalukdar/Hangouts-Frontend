@@ -5,8 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Dropdown, Select, Button } from 'semantic-ui-react'
 import YelpSearch from '../components/yelpsearch'
 import Map from '../components/Map'
-
-
+import { ReactComponent as Calendar } from '../icons/calendar.svg'
+import { ReactComponent as Location } from '../icons/location.svg'
 
 class MeetupCreate extends React.Component {
 
@@ -40,12 +40,10 @@ class MeetupCreate extends React.Component {
     }, ()=> console.log(this.state))
   }
 
-
   restaurantLocations = () =>{
    let x =  this.state.results.map(restaurants =>{
       return {key: restaurants.id, value: restaurants, text: restaurants.name}
     })
-
 
     return x
   }
@@ -56,35 +54,40 @@ class MeetupCreate extends React.Component {
     })
 
     
-    
-
-
-    
     return (
-          <div className="create-container">
-            <h1> Create Hangout </h1> 
-            <div className="create-map">
-            <Map restaurants={this.state.results}/>
-            </div>
+      <section className="create-section">
+        <h2 className="create-header">Create Hangout</h2>
 
-            <form className = "create-form">
-              <YelpSearch  results = {this.onChangeResults}/>
-              <label className="hangout">Hangout Date: </label>
-              <SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/><br></br>
-              <br></br><br></br>
-              <label className="hangout">Hangout Location: </label>
-              {/* should get location by address. should be auto populated? */}
-              <Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
-              {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
-              <br></br><br></br>
-              <label className="hangout">Add Friends to Hangout:</label>
-              <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
-              value = {this.state.friendsInvited}
-              />
-              <br></br><br></br>
-              <Button type='submit'>Create Hangout</Button>
-            </form>
+        <div className="create-container">
+          <form className="create-form">
+            <YelpSearch  results = {this.onChangeResults}/>
+
+            <div className="create-hangout">
+              <div className="hangout-div">
+                {/* <label className="hangout">Hangout Date: </label> */}
+                <Calendar /><SemanticDatepicker minDate={this.state.startDate} onChange={this.onChangeCalendar}/>
+              </div>
+              <div className="hangout-div">
+                {/* <label className="hangout">Hangout Location: </label> */}
+                {/* should get location by address. should be auto populated? */}
+                <Location /><Select placeholder='Select the location' options={this.restaurantLocations()} onChange={this.onChangeLocation} />
+                {/* <Dropdown placeholder='Select a location' search selection options={this.restaurantLocations()} /> */}
+              </div>
+              <div className="hangout-div">
+                <label className="hangout">Invited:</label>
+                <Dropdown placeholder='Select Friends'  fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
+                value = {this.state.friendsInvited}
+                />
+              </div>
+            </div>
+            <Button type='submit'>Create Hangout</Button>
+          </form>
+          
+          <div className="create-map">
+            <Map restaurants={this.state.results}/>
           </div>
+        </div>
+      </section>
     );
   }
 }

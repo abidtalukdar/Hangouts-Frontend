@@ -33,7 +33,8 @@ class YelpSearch extends React.Component {
 
   render() {
     return (
-      <form className="ui search" onSubmit={this.handleSubmit}>
+      <form id="yelpsearch" className="ui search" onSubmit={this.handleSubmit}>
+        <p>Search Restaurant Locations</p>
         <div className="ui icon input">
           <input className="prompt" onChange={this.handleChange} value={this.state.value} />
           <i className="search icon" />
