@@ -19,7 +19,7 @@ class Register extends React.Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault()
     if (this.state.password === this.state.password_confirmation) {
       fetch("http://localhost:3000/register", {
@@ -29,8 +29,17 @@ class Register extends React.Component {
         },
         body: JSON.stringify(this.state)
       })
-      .then(response => response.json())
-      .then(user => this.props.handleUpdateCurrentUser(user))
+      .then(r => {
+        if (!r.ok) {
+          throw r
+        }
+        return r.json()
+      })
+      .then(user => {
+        this.props.history.push("/profile")
+        this.props.handleUpdateCurrentUser(user)
+      })
+      .catch(console.error)
     } else {
       alert("Your passwords do not match.")
     }

@@ -40,7 +40,7 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         friends: object
-      }, () => console.log(object))
+      })
     })
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
@@ -50,7 +50,7 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         meetups: object
-      }, () => console.log(object))
+      })
     })
   }
 
@@ -113,7 +113,7 @@ class App extends React.Component {
             this.setState({
               lat: this.state.lat += lat,
               long: this.state.long += long
-            },()=>{console.log(this.state)})
+            })
           })
          
     })}
@@ -123,6 +123,7 @@ class App extends React.Component {
   static contextType = AuthContext
 
   render(){  
+    console.log(this.state)
     return (
       <div className="App">
         <Router>
@@ -147,8 +148,8 @@ class App extends React.Component {
         friendsLng = {this.state.long}
         />}/>
         <Route exact path={`/profile`} component={() => <Profile />}/>
-        <Route exact path={`/register`} render={() => <Register handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
-        <Route exact path={`/login`} render={() => <Login handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
+        <Route exact path={`/register`} render={routeProps => <Register {...routeProps} handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
+        <Route exact path={`/login`} render={routeProps => <Login {...routeProps} handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
         </Router>
       </div>
     );
