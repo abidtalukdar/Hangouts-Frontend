@@ -23,7 +23,14 @@ class App extends React.Component {
 
   state = {
     friends: [],
-    friendsInvited: []  
+    friendsInvited: [],
+    currentUser: null
+  }
+
+  handleUpdateCurrentUser = (user) => {
+    this.setState({
+      currentUser: user
+    })
   }
 
   componentDidMount(){
@@ -37,20 +44,20 @@ class App extends React.Component {
   }
 
   render(){
+    // console.log(this.state)
     return (
       <div className="App">
         <Router>
         <Navbar />  
-        <AuthContextProvider>        
-        <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
-        <Route exact path={`/register`} component={Register} /> 
-        <Route exact path={`/login`} component={Login} />
-        <LocationContextProvider>
-        <Route exact path={`/meetup`} render={() => 
-        <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
-        </LocationContextProvider>
-        <Route exact path={`/profile`} component={() => <Profile />}/>
-        </AuthContextProvider>
+          <AuthContextProvider>
+            <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
+            <Route exact path={`/register`} render={() => <Register handleUpdateCurrentUser={this.handleUpdateCurrentUser} />} /> 
+            <Route exact path={`/login`} render={() => <Login handleUpdateCurrentUser={this.handleUpdateCurrentUser} />} />
+            <LocationContextProvider>
+            <Route exact path={`/meetup`} render={() => <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
+            </LocationContextProvider>
+            <Route exact path={`/profile`} component={() => <Profile />}/>
+          </AuthContextProvider>
         </Router>
       </div>
     );
