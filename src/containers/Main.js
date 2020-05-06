@@ -14,18 +14,14 @@ import {
 
 class Main extends React.Component {
 
-
-
-
   static contextType = AuthContext
-
 
   render() {
     return (
       <main className="main">
         {!this.context.user? <Redirect to="/register" />:null}
         <LocationContextProvider>
-        <Friends friends={this.props.friends}/>
+        <Friends friends={this.props.friends} friendsInvited={this.props.friendsInvited} />
         <section className="section">
           <div className="meetup-map">
             <Map restaurants={[]} />

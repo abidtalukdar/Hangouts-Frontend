@@ -154,6 +154,15 @@ html, body {
   max-width: 13rem;
 }
 
+.friend {
+  display: flex;
+  justify-content: space-between;
+}
+
+.friend svg {
+  width: 2rem;
+}
+
 .friend:hover {
   background-color: rgb(48, 41, 43);
   transition: 600ms;
