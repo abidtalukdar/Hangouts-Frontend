@@ -8,7 +8,6 @@ export default function Friend(props) {
   const { first_name, last_name, image, default_address } = props.friend
   const { friendsInvited } = props
   const [open, setOpen] = useState(false);
-
   const handleFriendsInvited = () => {
     setAdd(!add)
     if(friendsInvited.includes(props.friend)){
@@ -22,7 +21,7 @@ export default function Friend(props) {
   }
 
   const [add, setAdd] = useState(false);
-
+  
   return (
     <div>
       <div className="friend-header">

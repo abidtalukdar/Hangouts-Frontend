@@ -129,8 +129,10 @@ class App extends React.Component {
         invite={this.inviteFriendFromList} 
         />
         }/> 
-        <Route exact path={`/meetup`} render={() => 
-        <MeetupCreate friends={this.state.friends} 
+        <Route exact path={`/meetup`} render={routeProps => 
+        <MeetupCreate 
+        {...routeProps}
+        friends={this.state.friends} 
         friendsInvited={this.state.friendsInvited}
         handleNewMeetups={this.handleNewMeetups}
         invite={this.inviteFriendToEvent} 

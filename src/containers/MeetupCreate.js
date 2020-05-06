@@ -73,16 +73,16 @@ class MeetupCreate extends React.Component {
     e.preventDefault()
 
     let user = this.context.user
-    let {dateSelected, restaurantSelected, timeSelected } = this.state 
+    let {dateSelected, restaurantSelected, timeSelected} = this.state 
     let friendsInvited = this.props.friendsInvited
 
-    let data ={
-      user,
-      dateSelected,
-      timeSelected,
-      restaurantSelected,
-      friendsInvited
-    }
+  let data ={
+    user,
+    dateSelected,
+    restaurantSelected,
+    friendsInvited,
+    timeSelected
+  }
 
     fetch(`http://localhost:3000/meetups`,{
       method: 'POST', 
@@ -93,14 +93,16 @@ class MeetupCreate extends React.Component {
     })
     .then(obj => obj.json())
     .then(obj => {
-      console.log(obj)
       this.props.handleNewMeetups(obj)
+      this.props.history.push("/")
     })
+
   }
 
   static contextType = AuthContext
 
   render() {
+    
     const friendOptions = this.props.friends.map(friend => {
       return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
