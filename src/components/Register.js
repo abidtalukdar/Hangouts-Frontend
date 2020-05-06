@@ -3,7 +3,6 @@ import React from 'react';
 import {Button} from 'semantic-ui-react'
 import { AuthContext } from '../contexts/AuthContext'
 
-
 class Register extends React.Component {
   state = {
     username: "",
@@ -17,6 +16,22 @@ class Register extends React.Component {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    if (this.state.password === this.state.password_confirmation) {
+      fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state)
+      })
+      .then(response => response.json())
+      .then(user => this.props.handleUpdateCurrentUser(user))
+    } else {
+      alert("Your passwords do not match.")
+    }
+  }
 
   render() {
     const { username, password } = this.state
