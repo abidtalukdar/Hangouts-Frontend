@@ -3,7 +3,6 @@ import React from 'react';
 import {Button} from 'semantic-ui-react'
 import { AuthContext } from '../contexts/AuthContext'
 
-
 class Register extends React.Component {
   state = {
     email: "",
@@ -36,7 +35,6 @@ class Register extends React.Component {
       alert("Your passwords do not match.")
     }
   }
-
 
   render() {
     const { email, first_name, last_name, default_address, password, password_confirmation } = this.state

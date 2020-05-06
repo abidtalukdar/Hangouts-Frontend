@@ -23,7 +23,14 @@ class App extends React.Component {
     long:0,
     currentLat: 0,
     currentLong: 0,
-    currentLocation: ""
+    currentLocation: "",
+    currentUser: null
+  }
+
+  handleUpdateCurrentUser = (user) => {
+    this.setState({
+      currentUser: user
+    })
   }
 
   componentDidMount(){
@@ -140,8 +147,8 @@ class App extends React.Component {
         friendsLng = {this.state.long}
         />}/>
         <Route exact path={`/profile`} component={() => <Profile />}/>
-        <Route exact path={`/register`} component={() => <Register />}/>
-        <Route exact path={`/login`} component={() => <Login />}/>
+        <Route exact path={`/register`} render={() => <Register handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
+        <Route exact path={`/login`} render={() => <Login handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
         </Router>
       </div>
     );
