@@ -19,6 +19,7 @@ class App extends React.Component {
   state = {
     friends: [],
     friendsInvited: [],
+    meetups: [],
     lat: 0,
     long:0,
     currentLat: 0,
