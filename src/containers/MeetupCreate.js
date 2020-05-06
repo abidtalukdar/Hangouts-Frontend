@@ -73,14 +73,15 @@ class MeetupCreate extends React.Component {
     e.preventDefault()
 
     let user = this.context.user
-    let {dateSelected, restaurantSelected} = this.state 
+    let {dateSelected, restaurantSelected, timeSelected} = this.state 
     let friendsInvited = this.props.friendsInvited
 
   let data ={
     user,
     dateSelected,
     restaurantSelected,
-    friendsInvited
+    friendsInvited,
+    timeSelected
   }
 
     fetch(`http://localhost:3000/meetups`,{
@@ -91,13 +92,17 @@ class MeetupCreate extends React.Component {
       body: JSON.stringify(data),
     })
     .then(obj => obj.json())
-    .then(obj => console.log(obj))
+    .then(obj => {
+      this.props.handleNewMeetups(obj)
+      this.props.history.push("/")
+    })
 
   }
 
   static contextType = AuthContext
 
   render() {
+    
     const friendOptions = this.props.friends.map(friend => {
       return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
