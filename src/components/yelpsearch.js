@@ -1,5 +1,4 @@
 import React from 'react';
-import { Search } from 'semantic-ui-react'
 
 class YelpSearch extends React.Component {
   state = {
@@ -9,8 +8,7 @@ class YelpSearch extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    // let cors_url = 'https://cors-anywhere.herokuapp.com'
-    // let yelp_url = `https://api.yelp.com/v3/businesses/search?term=${this.state.value}&radius=1500&limit=6&latitude=${this.props.lat}&longitude=${this.props.lng}`
+
     fetch(`http://localhost:3000/meetupsearch?lat=${this.props.lat}&lng=${this.props.lng}&value=${this.state.value}` ,{
       headers: new Headers({
           'Content-Type': 'application/json'
@@ -21,8 +19,6 @@ class YelpSearch extends React.Component {
       this.props.results(locations)
       })
 
-
-   
   }
 
   handleChange = (event) => {

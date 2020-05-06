@@ -7,10 +7,12 @@ import Register from './components/Register'
 import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
+
 import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
+
 class App extends React.Component {
   state = {
     friends: [],
@@ -23,11 +25,13 @@ class App extends React.Component {
     currentLocation: "",
     currentUser: null
   }
+
   handleUpdateCurrentUser = (user) => {
     this.setState({
       currentUser: user
     })
   }
+  
   componentDidMount(){
     let userId = this.context.user
     fetch(`http://localhost:3000/friends/${userId}`)
@@ -67,7 +71,6 @@ class App extends React.Component {
     })
   }
 
-
   handleNewMeetups = (meetup) => {
     this.setState({ meetups: [meetup, ...this.state.meetups]})
   }
@@ -83,6 +86,7 @@ class App extends React.Component {
   inviteFriendFromList = () =>{
     this.bigMaths()
   }
+  
   bigMaths = () =>{
     let currentLat = this.state.currentLat
     let currentLong = this.state.currentLong
