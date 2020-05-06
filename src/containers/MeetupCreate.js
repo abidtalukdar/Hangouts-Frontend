@@ -95,8 +95,6 @@ class MeetupCreate extends React.Component {
 
   }
 
-
-
   static contextType = AuthContext
 
   render() {
@@ -133,7 +131,7 @@ class MeetupCreate extends React.Component {
                 />
                 <Button>Recalculate Locations</Button>
               </div>
-              <Button type='submit'>Create Hangout</Button>
+              <Button onClick={this.submitMeetup}>Create Hangout</Button>
             </div>
           </form>
   
