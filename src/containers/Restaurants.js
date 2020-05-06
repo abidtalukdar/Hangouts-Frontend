@@ -59,7 +59,6 @@ setRestaurants = () =>{
   
 
   render() {
-    console.log(this.state)
     return (
       <div>
         <h2>Restaurants Near You:</h2>

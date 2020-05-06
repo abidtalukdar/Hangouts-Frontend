@@ -5,12 +5,14 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
+import { LocationContext } from './contexts/LocationContext'
+
 
 
 ReactDOM.render(
   <React.StrictMode>
   <AuthContextProvider>        
-    <App />
+  <App />    
   </AuthContextProvider>        
   </React.StrictMode>,
   document.getElementById('root')

@@ -14,7 +14,6 @@ import {Redirect} from "react-router-dom";
 class MeetupCreate extends React.Component {
 
   state = {
-    friendsInvited: ["2","3"],
     dateSelected: undefined,
     restaurantSelected: [],
     startDate: new Date(new Date().setDate(new Date().getDate()-1)),
@@ -33,9 +32,6 @@ class MeetupCreate extends React.Component {
     }, ()=>console.log(this.state))
   }
 
-  inviteFriendToEvent = (e, select) => {
-    this.setState({friendsInvited: select.value}, ()=>console.log(this.state))
-  }
 
   onChangeResults = (locations) =>{
     this.setState({
@@ -50,13 +46,40 @@ class MeetupCreate extends React.Component {
     return x
   }
 
+  submitMeetup = (e) =>{
+    e.preventDefault()
+
+    let user = this.context.user
+    let {dateSelected, restaurantSelected} = this.state 
+    let friendsInvited = this.props.friendsInvited
+
+  let data ={
+    user,
+    dateSelected,
+    restaurantSelected,
+    friendsInvited
+  }
+
+    fetch(`http://localhost:3000/meetups`,{
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(obj => obj.json())
+    .then(obj => console.log(obj))
+
+  }
+
+
 
   static contextType = AuthContext
 
 
   render() {
     const friendOptions = this.props.friends.map(friend => {
-      return { key: `${friend.id}`, text: `${friend.first_name}`, value: `${friend.id}` }
+      return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
 
     
@@ -82,13 +105,14 @@ class MeetupCreate extends React.Component {
                 </div>
                 <div className="hangout-friends">
                   <label className="hangout">Invited:</label>
-                  <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
-                  value = {this.state.friendsInvited}
+                  <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.props.invite}
+                  value = {this.props.friendsInvited}
                   />
                 </div>
               </div>
-              <Button type='submit'>Create Hangout</Button>
+            <Button onClick={this.submitMeetup}>Create Hangout</Button>
             </form>
+
   
             <div className="create-map">
               <Map restaurants={this.state.results}/>

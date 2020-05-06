@@ -15,17 +15,16 @@ import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
+  Route
 } from "react-router-dom";
 
 class App extends React.Component {
 
   state = {
     friends: [],
-    friendsInvited: []  
+    friendsInvited: [],
+    lat: 0,
+    long:0 
   }
 
   componentDidMount(){
@@ -39,10 +38,36 @@ class App extends React.Component {
     })
   }
 
+
+  inviteFriendToEvent = (e, select) => {
+    this.setState({friendsInvited: select.value}, ()=> {
+      let lat = 0
+      let long = 0  
+      this.state.friendsInvited.forEach(friend => 
+         { 
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+          .then(r => r.json())
+          .then(object =>{
+            lat += object.results[0].geometry.location.lat 
+            long += object.results[0].geometry.location.lat
+            
+            this.setState((prevState) => {  
+              lat: prevState.lat += lat
+            })
+
+            this.setState((prevState) => {
+              long: prevState.long += long
+            })
+          })
+        })
+    })
+  }
+
+  
   static contextType = AuthContext
 
   render(){
- 
+    console.log(this.props)
     return (
       <div className="App">
         <Router>
@@ -50,7 +75,7 @@ class App extends React.Component {
         <Route exact path={`/`} render={() => <Main friends={this.state.friends} />} /> 
         <LocationContextProvider>
         <Route exact path={`/meetup`} render={() => 
-        <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} />}/>
+        <MeetupCreate friends={this.state.friends} friendsInvited={this.state.friendsInvited} invite={this.inviteFriendToEvent} />}/>
         </LocationContextProvider>
         <Route exact path={`/profile`} component={() => <Profile />}/>
         <Route exact path={`/register`} component={() => <Register />}/>
