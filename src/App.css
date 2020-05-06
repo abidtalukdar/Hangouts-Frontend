@@ -129,7 +129,6 @@ html, body {
 }
 
 .friends-list li {
-  margin-bottom: 1rem;
   padding: 1rem;
   color: white;
   transition: 600ms;
@@ -141,6 +140,7 @@ html, body {
 }
 
 .friends h2{
+  margin: auto 0;
   font-family: 'Righteous', cursive;
   font-size: 1.25rem;
 }
@@ -157,13 +157,25 @@ html, body {
 .friend {
   display: flex;
   justify-content: space-between;
+  flex-grow: 1;
 }
 
-.friend svg {
+.friend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friend-invite {
+  height: 50%;
+}
+
+.friend-header svg {
   width: 2rem;
+  color: white;
 }
 
-.friend:hover {
+.friend-header:hover {
   background-color: rgb(48, 41, 43);
   transition: 600ms;
   font-family: 'Righteous', cursive;
@@ -421,8 +433,6 @@ html, body {
 }
 
 .leaflet-popup-content-wrapper {
-  width: 15rem;
-  height: 20rem;
   display: flex;
   flex-direction: column;
 }
@@ -431,10 +441,16 @@ html, body {
   margin: 0;
 }
 
+.popup-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
 .popup-image {
   width: 90%;
+  max-height: 10rem;
   object-fit: cover;
-  height: 10rem;
   display: block;
 }
 

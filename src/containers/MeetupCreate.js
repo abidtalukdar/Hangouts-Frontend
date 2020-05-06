@@ -18,6 +18,9 @@ class MeetupCreate extends React.Component {
   getTime = () => {
     let date = new Date()
     let minute = date.getMinutes()
+    if(minute < 10) {
+      minute = "0" + minute
+    }
     let meridiem = "AM"
     let hour = date.getHours()
     if(hour > 12){
@@ -35,7 +38,6 @@ class MeetupCreate extends React.Component {
     startDate: new Date(new Date().setDate(new Date().getDate()-1)),
     results: []
   }
-
 
   onChangeCalendar = (e,data) =>{
     this.setState({
@@ -55,7 +57,6 @@ class MeetupCreate extends React.Component {
     }, ()=>console.log(this.state))
   }
 
-
   onChangeResults = (locations) =>{
     this.setState({
       results: locations.businesses
@@ -73,16 +74,16 @@ class MeetupCreate extends React.Component {
     e.preventDefault()
 
     let user = this.context.user
-    let {dateSelected, restaurantSelected} = this.state 
+    let {dateSelected, restaurantSelected, timeSelected} = this.state 
     let friendsInvited = this.props.friendsInvited
 
-  let data ={
-    user,
-    dateSelected,
-    restaurantSelected,
-    friendsInvited
-  }
-
+    let data ={
+      user,
+      dateSelected,
+      timeSelected,
+      restaurantSelected,
+      friendsInvited
+    }
     fetch(`http://localhost:3000/meetups`,{
       method: 'POST', 
       headers: {
@@ -91,11 +92,11 @@ class MeetupCreate extends React.Component {
       body: JSON.stringify(data),
     })
     .then(obj => obj.json())
-    .then(obj => console.log(obj))
-
+    .then(obj => {
+      console.log(obj)
+      this.props.handleNewMeetups(obj)
+    })
   }
-
-
 
   static contextType = AuthContext
 
@@ -137,16 +138,14 @@ class MeetupCreate extends React.Component {
             </div>
           </form>
   
-            <div className="create-map">
-              <Map restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
-            </div>
+          <div className="create-map">
+            <Map restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
           </div>
-        </section>
-      );
-    }
+        </div>
+      </section>
+    );
   }
+}
   
 
 export default MeetupCreate;
-
-

@@ -10,24 +10,29 @@ export default function Friend(props) {
   const [open, setOpen] = useState(false);
 
   const handleFriendsInvited = () => {
+    setAdd(!add)
     if(friendsInvited.includes(props.friend)){
       let index = friendsInvited.indexOf(props.friend)
-      friendsInvited.splice(index, 1) 
+      friendsInvited.splice(index, 1)
+      console.log(friendsInvited)
       }
-      else{
+      else {
       friendsInvited.push(props.friend)
       props.invite()
+      console.log(friendsInvited)
       }
   }
 
+  const [add, setAdd] = useState(false);
+
   return (
     <div>
-      <li className="friend" onClick={() => setOpen(!open)}>
-        <h2>
-          {first_name} {last_name}
-        </h2>
-        <div onClick={handleFriendsInvited}>{friendsInvited.includes(props.friend) ? <InvitedIcon/>:<SentIcon />}</div>
-      </li>
+      <div className="friend-header">
+        <li className="friend" onClick={() => setOpen(!open)}>
+          <h2>{first_name} {last_name}</h2>
+        </li>
+        <div className="friend-invite" onClick={handleFriendsInvited}>{add ? <InvitedIcon/> : <SentIcon/>}</div>
+      </div>
       <CSSTransition in={open} timeout={400} classNames="display" unmountOnExit>
         <div className="friend-details">
           <img src={image} alt="friend" />

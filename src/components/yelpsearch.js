@@ -21,6 +21,7 @@ class YelpSearch extends React.Component {
       .then(response => response.json())
       .then(locations => {
         this.props.results(locations)
+        console.log(locations)
         })
   }
 

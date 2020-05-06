@@ -4,7 +4,6 @@ import { Card } from 'semantic-ui-react'
 import {LocationContext} from '../contexts/LocationContext'
 
 
-
 class Restaurants extends React.Component {
 
   state = {
@@ -16,7 +15,6 @@ class Restaurants extends React.Component {
     ,lat: 0
     ,lng: 0
   }
-
 
   componentDidMount(){
     navigator.geolocation.getCurrentPosition(
@@ -30,9 +28,6 @@ class Restaurants extends React.Component {
   )}
 
 
-
-
-   
 
 setRestaurants = () =>{
     let cors_url = 'https://cors-anywhere.herokuapp.com'
@@ -49,9 +44,7 @@ setRestaurants = () =>{
         suggestions: restaurants.businesses
       })
     })
-}
-
- 
+  }
 
   renderCards = () =>{
     let x = this.state.suggestions.map(suggestion=>{
@@ -60,7 +53,6 @@ setRestaurants = () =>{
     return x
  }
   
-
   render() {
     console.log(this.state)
     return (

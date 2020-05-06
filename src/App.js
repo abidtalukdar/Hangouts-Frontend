@@ -8,7 +8,6 @@ import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
-
 import {
   BrowserRouter as Router,
   Route
@@ -19,6 +18,7 @@ class App extends React.Component {
   state = {
     friends: [],
     friendsInvited: [],
+    meetups: [],
     lat: 0,
     long:0,
     currentLat: 0,
@@ -33,9 +33,21 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         friends: object
-      })
+      }, () => console.log(object))
     })
+    navigator.geolocation.getCurrentPosition(
+      (position) => {(this.geolocationCallback(position))}
+    )
+    fetch('http://localhost:3000/meetups')
+    .then(r => r.json())
+    .then(object => {
+      this.setState({
+        meetups: object
+      }, () => console.log(object))
+    })
+  }
 
+<<<<<<< HEAD
       navigator.geolocation.getCurrentPosition(
         (position) => {(this.geolocationCallback(position))}
       )
@@ -51,18 +63,31 @@ class App extends React.Component {
         }, () => this.geoCodeLocation())
 
     }
+=======
+  geolocationCallback(position) {
+    this.setState({
+      currentLat:position.coords.latitude,
+      currentLong:position.coords.longitude,
+      lat:position.coords.latitude,
+      long:position.coords.longitude,
+    }, () => this.geoCodeLocation())
+  }
+>>>>>>> 06166ad87a44481a911102108bab3d5ce72f9f9a
 
-    geoCodeLocation = () => {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.currentLat},${this.state.currentLong}&key=${process.env.REACT_APP_GOOGLE_API}`)
-        .then(r => r.json())
-        .then(object => {
-        this.setState({...this.state
-          ,
-          currentLocation: object.results[0].formatted_address
-        })
+  geoCodeLocation = () => {
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.currentLat},${this.state.currentLong}&key=${process.env.REACT_APP_GOOGLE_API}`)
+      .then(r => r.json())
+      .then(object => {
+      this.setState({
+        ...this.state, currentLocation: object.results[0].formatted_address
       })
-    }
+    })
+  }
 
+
+  handleNewMeetups = (meetup) => {
+    this.setState({ meetups: [meetup, ...this.state.meetups]})
+  }
 
   inviteFriendToEvent = (e, select) => {
     this.setState({
@@ -77,7 +102,6 @@ class App extends React.Component {
   }
 
   bigMaths = () =>{
-
     let currentLat = this.state.currentLat
     let currentLong = this.state.currentLong
     let friendsInvited = this.state.friendsInvited.length+1
@@ -106,7 +130,6 @@ class App extends React.Component {
     })}
     )
   }
-
   
   static contextType = AuthContext
 
@@ -118,6 +141,7 @@ class App extends React.Component {
         <Route exact path={`/`} render={() => 
         <Main friends={this.state.friends} 
         friendsInvited={this.state.friendsInvited}
+        meetups={this.state.meetups}
         lat = {this.state.currentLat} 
         long={this.state.currentLong}
         invite={this.inviteFriendFromList} 
@@ -125,7 +149,8 @@ class App extends React.Component {
         }/> 
         <Route exact path={`/meetup`} render={() => 
         <MeetupCreate friends={this.state.friends} 
-        friendsInvited={this.state.friendsInvited} 
+        friendsInvited={this.state.friendsInvited}
+        handleNewMeetups={this.handleNewMeetups}
         invite={this.inviteFriendToEvent} 
         lat = {this.state.currentLat}
         lng = {this.state.currentLong}
@@ -142,10 +167,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-
-  
-
-    
