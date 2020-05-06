@@ -1,3 +1,4 @@
+import { ReactComponent as ProfileIcon } from '../icons/profile.svg'
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import {Redirect} from "react-router-dom";

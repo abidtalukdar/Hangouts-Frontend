@@ -7,6 +7,7 @@ class MapContainer extends React.Component {
       zoom: 11
     } 
 
+  
     render() {
       console.log(this.props)
     const position = [this.props.lat, this.props.lng]
@@ -28,17 +29,14 @@ class MapContainer extends React.Component {
             <div className="popup">
               <h3>{result.name}</h3>
               <img className="popup-image" src={result.image_url}/>
-              <div className="popup-text">
-                <span>{result.location.display_address.join(', ')}</span>
-                <span>{result.display_phone}</span>
-                <span>Rating {result.rating}</span>
-                <span>Price Range {result.price}</span>
-              </div>
+              {result.location.display_address.join(', ')} <br></br>
+              {result.display_phone}<br></br>
+              {result.rating}<br></br>
+              {result.price}
             </div>
             </Popup></Marker>
           }):null  
         }
-
         </Marker>
       </Map>
     </div>
