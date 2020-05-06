@@ -14,6 +14,31 @@ class Login extends React.Component {
     })
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(r =>{
+        if (!r.ok) {
+          throw r
+        }
+        return r.json()
+      }
+      )
+      .then(user => {
+        this.props.history.push("/profile")
+        this.props.handleUpdateCurrentUser(user)
+      })
+      .catch(console.error)
+
+  }
+
+
   render() {
     const { username, password } = this.state
     return (
