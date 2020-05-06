@@ -57,7 +57,7 @@ setRestaurants = () =>{
     })
   .then(r => r.json())
   .then(restaurants => {   this.setState({
-    suggestions: restaurants.businesses,
+    suggestions: restaurants.businesses
   })
 })}
  

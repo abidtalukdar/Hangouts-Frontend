@@ -15,6 +15,7 @@ class Main extends React.Component {
 
   static contextType = AuthContext
 
+
   render() {
     return (
       <main className="main">
@@ -25,7 +26,7 @@ class Main extends React.Component {
         <section className="section">
           <div className="meetup-map">
             <Map restaurants={[]} lat ={this.props.lat} lng ={this.props.long} />
-            <Meetups />
+            <Meetups meetups={this.props.meetups} />
           </div>
           <Restaurants lat={this.props.lat} lng = {this.props.long} />
         </section>
