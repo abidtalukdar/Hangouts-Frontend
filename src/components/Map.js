@@ -4,8 +4,11 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 class MapContainer extends React.Component {
 
     state = {
-      zoom: 11
+      zoom: 11,
+      friendsCoordinates: []
     } 
+      
+    
 
   
     render() {
@@ -22,6 +25,7 @@ class MapContainer extends React.Component {
           <Popup>
             {/* You are near {this.context.currentLocation} */}
           </Popup>
+        </Marker>
           {this.props.restaurants.length > 0? 
           this.props.restaurants.map(result => {
           return <Marker key={result.id} position={[result.coordinates.latitude,result.coordinates.longitude]}><Popup>
@@ -36,7 +40,27 @@ class MapContainer extends React.Component {
             </Popup></Marker>
           }):null  
         }
-        </Marker>
+
+        {this.props.friendsLocations !== undefined? 
+          this.props.friendsLocations.map(result => {
+          return <Marker key={"test"} position={[result.lat,result.long]}><Popup>
+            <div className="popup">
+              <h3>{result.name}</h3>
+              <h3>{result.address}</h3>
+              {/* <img className="popup-image" src={result.image_url}/>
+              {result.location.display_address.join(', ')} <br></br>
+              {result.display_phone}<br></br>
+              {result.rating}<br></br>
+              {result.price} */}
+            </div>
+            </Popup></Marker>
+          }):null  
+        }
+
+
+
+        
+        
       </Map>
     </div>
     )

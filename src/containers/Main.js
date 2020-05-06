@@ -14,7 +14,7 @@ import {
 class Main extends React.Component {
 
   static contextType = AuthContext
-
+ 
 
   render() {
     return (
@@ -25,7 +25,7 @@ class Main extends React.Component {
         invite = {this.props.invite}/>
         <section className="section">
           <div className="meetup-map">
-            <Map restaurants={[]} lat ={this.props.lat} lng ={this.props.long} />
+            <Map restaurants={[]} friendsLocations={this.props.friendsLocations} lat ={this.props.lat} lng ={this.props.long} />
             <Meetups meetups={this.props.meetups}/>
           </div>
           <Restaurants/>
