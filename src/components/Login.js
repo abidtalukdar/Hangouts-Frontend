@@ -4,7 +4,7 @@ import {Button} from 'semantic-ui-react'
 
 class Login extends React.Component {
   state = {
-    username: "",
+    email: "",
     password: "",
   }
 
@@ -14,15 +14,39 @@ class Login extends React.Component {
     })
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(r =>{
+        if (!r.ok) {
+          throw r
+        }
+        return r.json()
+      }
+      )
+      .then(user => {
+        this.props.history.push("/profile")
+        this.props.handleUpdateCurrentUser(user)
+      })
+      .catch(console.error)
+
+  }
+
+
   render() {
-    const { username, password } = this.state
+    const { email, password } = this.state
     return (
       <div className="form-container">
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}> 
-        {/* need to create handleSubmit function */}
-          <label>Username:</label>
-          <input type="text" name="username" onChange={this.handleInputChange} value={username} />
+          <label>Email:</label>
+          <input type="text" name="email" onChange={this.handleInputChange} value={email} />
           <label>Password:</label>
           <input type="password" name="password" onChange={this.handleInputChange} value={password} />
           <Button type='submit'>Submit</Button>

@@ -26,7 +26,11 @@ class Main extends React.Component {
         <section className="section">
           <div className="meetup-map">
             <Map restaurants={[]} lat ={this.props.lat} lng ={this.props.long} />
+<<<<<<< HEAD
             <Meetups meetups={this.props.meetups} />
+=======
+            <Meetups meetups={this.props.meetups}/>
+>>>>>>> Development
           </div>
           <Restaurants lat={this.props.lat} lng = {this.props.long} />
         </section>

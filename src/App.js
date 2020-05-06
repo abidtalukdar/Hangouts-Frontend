@@ -15,6 +15,7 @@ class App extends React.Component {
   state = {
     friends: [],
     friendsInvited: [],
+    meetups: [],
     lat: 0,
     long:0,
     currentLat: 0,
@@ -47,6 +48,7 @@ class App extends React.Component {
       }, () => console.log(object))
     })
   }
+      
   geolocationCallback(position) {
     this.setState({
       currentLat:position.coords.latitude,
@@ -64,9 +66,12 @@ class App extends React.Component {
       })
     })
   }
+
+
   handleNewMeetups = (meetup) => {
     this.setState({ meetups: [meetup, ...this.state.meetups]})
   }
+  
   inviteFriendToEvent = (e, select) => {
     this.setState({
       lat: 0,
@@ -74,6 +79,7 @@ class App extends React.Component {
     })
     this.setState({friendsInvited: select.value}, ()=> this.bigMaths())
   }
+  
   inviteFriendFromList = () =>{
     this.bigMaths()
   }
@@ -137,4 +143,12 @@ class App extends React.Component {
     );
   }
 }
+
 export default App;
+
+
+
+
+  
+
+    
