@@ -31,6 +31,7 @@ class YelpSearch extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <form id="yelpsearch" className="ui search" onSubmit={this.handleSubmit}>
         <p>Search Restaurant Locations</p>

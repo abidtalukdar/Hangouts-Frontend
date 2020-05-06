@@ -9,7 +9,6 @@ class MapContainer extends React.Component {
 
   
     render() {
-      console.log(this.props)
     const position = [this.props.lat, this.props.lng]
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
