@@ -8,16 +8,20 @@ export default function Friend(props) {
   const { first_name, last_name, image, default_address } = props.friend
   const { friendsInvited } = props
   const [open, setOpen] = useState(false);
-  const [invited, setInvited] = useState(false);
 
   const handleFriendsInvited = () => {
-    setInvited(!invited)
-    if(!invited){
-      friendsInvited.push(props.friend)
-    } else {
+    if(friendsInvited.includes(props.friend)){
       let index = friendsInvited.indexOf(props.friend)
       friendsInvited.splice(index, 1)
-    }
+      console.log(friendsInvited)
+      console.log(friendsInvited.includes(props.friend))
+      }
+      else {
+      friendsInvited.push(props.friend)
+      props.invite()
+      console.log(friendsInvited)
+      console.log(friendsInvited.includes(props.friend))
+      }
   }
 
   return (
@@ -26,7 +30,7 @@ export default function Friend(props) {
         <li className="friend" onClick={() => setOpen(!open)}>
           <h2>{first_name} {last_name}</h2>
         </li>
-        <div className="friend-invite" onClick={handleFriendsInvited}>{invited ? <InvitedIcon/>:<SentIcon />}</div>
+        <div className="friend-invite" onClick={handleFriendsInvited}>{friendsInvited.includes(props.friend) ? <InvitedIcon/>:<SentIcon/>}</div>
       </div>
       <CSSTransition in={open} timeout={400} classNames="display" unmountOnExit>
         <div className="friend-details">

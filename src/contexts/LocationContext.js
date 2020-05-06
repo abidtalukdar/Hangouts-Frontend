@@ -8,7 +8,7 @@ class LocationContextProvider extends React.Component{
         lat: 0,
         lng: 0,
         currentLocation: "",
-        friendsCoordinates: []
+
     }
 
     componentDidMount(){
@@ -37,7 +37,7 @@ class LocationContextProvider extends React.Component{
 
     render() {
         return(
-            <LocationContext.Provider value={{...this.state, try: this.try}}>
+            <LocationContext.Provider value={{...this.state}}>
             {this.props.children}
             </LocationContext.Provider>
         )

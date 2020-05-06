@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 class AuthContextProvider extends React.Component{
 
     state = {
-       user: "1" 
+       user: 3
     }
 
 

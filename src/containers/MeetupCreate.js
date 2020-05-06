@@ -32,7 +32,6 @@ class MeetupCreate extends React.Component {
   }
 
   state = {
-    friendsInvited: ["2","3"],
     dateSelected: undefined,
     timeSelected: this.getTime(),
     restaurantSelected: [],
@@ -58,10 +57,6 @@ class MeetupCreate extends React.Component {
     }, ()=>console.log(this.state))
   }
 
-  inviteFriendToEvent = (e, select) => {
-    this.setState({friendsInvited: select.value}, ()=>console.log(this.state))
-  }
-
   onChangeResults = (locations) =>{
     this.setState({
       results: locations.businesses
@@ -75,11 +70,35 @@ class MeetupCreate extends React.Component {
     return x
   }
 
+  submitMeetup = (e) =>{
+    e.preventDefault()
+
+    let user = this.context.user
+    let {dateSelected, restaurantSelected} = this.state 
+    let friendsInvited = this.props.friendsInvited
+
+  let data ={
+    user,
+    dateSelected,
+    restaurantSelected,
+    friendsInvited
+  }
+    fetch(`http://localhost:3000/meetups`,{
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(obj => obj.json())
+    .then(obj => console.log(obj))
+  }
+
   static contextType = AuthContext
 
   render() {
     const friendOptions = this.props.friends.map(friend => {
-      return { key: `${friend.id}`, text: `${friend.first_name}`, value: `${friend.id}` }
+      return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
     
     return (
@@ -89,7 +108,7 @@ class MeetupCreate extends React.Component {
         <div className="create-container">
         {!this.context.user? <Redirect to="/register" />:null}
           <form className="create-form">
-            <YelpSearch  results = {this.onChangeResults}/>
+            <YelpSearch  lat={this.props.friendsLat} lng={this.props.friendsLng} results = {this.onChangeResults}/>
 
             <div className="create-hangout">
               <h2>Set it up!</h2>
@@ -106,25 +125,23 @@ class MeetupCreate extends React.Component {
               </div>
               <div className="hangout-friends">
                 <label className="hangout">Invited:</label>
-                <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
-                value = {this.state.friendsInvited}
+                <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.props.invite}
+                value = {this.props.friendsInvited}
                 />
                 <Button>Recalculate Locations</Button>
               </div>
-              <Button type='submit'>Create Hangout</Button>
+              <Button onClick={this.submitMeetup} type='submit'>Create Hangout</Button>
             </div>
           </form>
   
-            <div className="create-map">
-              <Map restaurants={this.state.results}/>
-            </div>
+          <div className="create-map">
+            <Map restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
           </div>
-        </section>
-      );
-    }
+        </div>
+      </section>
+    );
   }
+}
   
 
 export default MeetupCreate;
-
-

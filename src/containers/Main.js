@@ -3,7 +3,6 @@ import Friends from './Friends'
 import Map from '../components/Map'
 import Restaurants from './Restaurants'
 import Meetups from './Meetups'
-import LocationContextProvider from '../contexts/LocationContext'
 import { AuthContext } from '../contexts/AuthContext'
 
 import {
@@ -20,16 +19,16 @@ class Main extends React.Component {
     return (
       <main className="main">
         {!this.context.user? <Redirect to="/register" />:null}
-        <LocationContextProvider>
-        <Friends friends={this.props.friends} friendsInvited={this.props.friendsInvited} />
+        <Friends friends={this.props.friends} 
+        friendsInvited={this.props.friendsInvited} 
+        invite = {this.props.invite}/>
         <section className="section">
           <div className="meetup-map">
-            <Map restaurants={[]} />
+            <Map restaurants={[]} lat ={this.props.lat} lng ={this.props.long} />
             <Meetups />
           </div>
-          <Restaurants />
+          <Restaurants lat={this.props.lat} lng = {this.props.long} />
         </section>
-        </LocationContextProvider>
       </main>
     );
   }
