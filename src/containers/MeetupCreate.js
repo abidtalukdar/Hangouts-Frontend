@@ -104,7 +104,6 @@ class MeetupCreate extends React.Component {
       return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
     
-    
     return (
       <section className="create-section">
         <h2 className="create-header">Create Hangout</h2>
@@ -112,7 +111,7 @@ class MeetupCreate extends React.Component {
         <div className="create-container">
         {!this.context.user? <Redirect to="/register" />:null}
           <form className="create-form">
-            <YelpSearch  results = {this.onChangeResults}/>
+            <YelpSearch  lat={this.props.friendsLat} lng={this.props.friendsLng} results = {this.onChangeResults}/>
 
             <div className="create-hangout">
               <h2>Set it up!</h2>
@@ -129,8 +128,8 @@ class MeetupCreate extends React.Component {
               </div>
               <div className="hangout-friends">
                 <label className="hangout">Invited:</label>
-                <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.inviteFriendToEvent}
-                value = {this.state.friendsInvited}
+                <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.props.invite}
+                value = {this.props.friendsInvited}
                 />
                 <Button>Recalculate Locations</Button>
               </div>
@@ -139,7 +138,7 @@ class MeetupCreate extends React.Component {
           </form>
   
             <div className="create-map">
-              <Map restaurants={this.state.results}/>
+              <Map restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
             </div>
           </div>
         </section>

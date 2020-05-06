@@ -13,27 +13,18 @@ class Restaurants extends React.Component {
     ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
     ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
     ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}]
-    ,lat: 0
-    ,lng: 0
+ 
   }
 
 
-
-componentDidMount(){
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          lat:position.coords.latitude,
-          lng:position.coords.longitude
-      }, () =>{this.setRestaurants()}
-    )
+  componentDidMount(){
+    this.setRestaurants()
   }
-  )}
+
 
 setRestaurants = () =>{
-  console.log('hi')
   let cors_url = 'https://cors-anywhere.herokuapp.com'
-  let yelp_url = `https://api.yelp.com/v3/businesses/search?term=food&radius=1500&limit=4&latitude=${this.state.lat}&longitude=${this.state.lng}`
+  let yelp_url = `https://api.yelp.com/v3/businesses/search?term=food&radius=1500&limit=4&latitude=${this.props.lat}&longitude=${this.props.lng}`
   fetch(cors_url + '/' + yelp_url ,{
       headers: new Headers({
           'Authorization': `Bearer ${process.env.REACT_APP_YELP_API}`,
