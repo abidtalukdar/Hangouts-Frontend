@@ -5,9 +5,12 @@ import { AuthContext } from '../contexts/AuthContext'
 
 class Register extends React.Component {
   state = {
-    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    default_address: "",
     password: "",
-    confirmPassword: ""
+    password_confirmation: ""
   }
 
   handleInputChange = event => {
@@ -43,18 +46,23 @@ class Register extends React.Component {
   }
 
   render() {
-    const { username, password } = this.state
+    const { email, first_name, last_name, default_address, password, password_confirmation } = this.state
     return (
       <div className="form-container">
         <h3>Register</h3>
         <form onSubmit={this.handleSubmit}>
-          {/* need to create handleSubmit function */}
-          <label>Username:</label>
-          <input type="text" name="username" onChange={this.handleInputChange} value={username} />
+          <label>Email:</label>
+          <input type="text" placeholder="example@exp.com" name="email" onChange={this.handleInputChange} value={email} />
+          <label>First Name:</label>
+          <input type="text" placeholder="e.g. John" name="first_name" onChange={this.handleInputChange} value={first_name} />
+          <label>Last Name:</label>
+          <input type="text" placeholder="e.g. Doe" name="last_name" onChange={this.handleInputChange} value={last_name} />
+          <label>Address:</label>
+          <input type="text" placeholder="e.g. 81 Prospect St, Brooklyn, NY 11201" name="default_address" onChange={this.handleInputChange} value={default_address} />
           <label>Password:</label>
-          <input type="password" name="password" onChange={this.handleInputChange} value={password} />
+          <input type="password" placeholder="Must have 8 to 20 characters" name="password" onChange={this.handleInputChange} value={password} />
           <label> Confirm Password:</label>
-          <input type="password" name="confirmPassword" onChange={this.handleInputChange} value={password} />
+          <input type="password" placeholder="Please don't use 'password'"name="password_confirmation" onChange={this.handleInputChange} value={password_confirmation} />
           <Button type='submit'>Submit</Button>
         </form>
       </div>
