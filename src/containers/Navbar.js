@@ -19,7 +19,7 @@ class Navbar extends React.Component {
       {this.context.user?
       <nav className="navbar">
         <Navitem><Link to='/'>Hangouts</Link></Navitem>
-        <Navitem text="Hangout"><Link to="/meetup"><MeetupIcon/></Link></Navitem>
+        <Navitem text="Hangout"><Link to="/hangout"><MeetupIcon/></Link></Navitem>
         <Navitem text="Home"><Link to="/home"><HomeIcon/></Link></Navitem>
         <Navitem text="Profile"><Link to="/profile"><ProfileIcon/></Link></Navitem>
       </nav>: 

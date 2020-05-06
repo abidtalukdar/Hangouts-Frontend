@@ -120,7 +120,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
         <Navbar />
-        <Route exact path={`/`} render={() => 
+        <Route exact path={`/home`} render={() => 
         <Main friends={this.state.friends} 
         friendsInvited={this.state.friendsInvited}
         meetups={this.state.meetups}
@@ -129,7 +129,7 @@ class App extends React.Component {
         invite={this.inviteFriendFromList} 
         />
         }/> 
-        <Route exact path={`/meetup`} render={routeProps => 
+        <Route exact path={`/hangout`} render={routeProps => 
         <MeetupCreate 
         {...routeProps}
         friends={this.state.friends} 
