@@ -26,12 +26,12 @@ class MapContainer extends React.Component {
           this.props.restaurants.map(result => {
           return <Marker key={result.id} position={[result.coordinates.latitude,result.coordinates.longitude]}><Popup>
             <div className="popup">
-              <h3>{result.name}</h3>
+              <h4>{result.name}</h4>
               <img className="popup-image" src={result.image_url}/>
-              {result.location.display_address.join(', ')} <br></br>
-              {result.display_phone}<br></br>
-              {result.rating}<br></br>
-              {result.price}
+              <p>{result.location.display_address.join(', ')}</p>
+              <p>{result.display_phone}</p>
+              <p>Rating <strong>{result.rating}</strong></p>
+              <p>Price Range <strong>{result.price}</strong></p>
             </div>
             </Popup></Marker>
           }):null  

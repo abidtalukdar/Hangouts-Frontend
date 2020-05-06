@@ -441,6 +441,20 @@ html, body {
   margin: 0;
 }
 
+.popup {
+  font-size: 13px;
+  font-family: "Lato",'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.popup h4 {
+  font-family: "Lato",'Helvetica Neue',Arial,Helvetica,sans-serif;
+  margin: 0;
+}
+
+.leaflet-popup-content {
+  margin: 5px;
+}
+
 .popup-text {
   display: flex;
   flex-direction: column;
@@ -449,9 +463,11 @@ html, body {
 
 .popup-image {
   width: 90%;
-  max-height: 10rem;
+  height: 10rem;
+  width: 14rem;
   object-fit: cover;
   display: block;
+  background-color: rgb(218, 203, 203);
 }
 
 .create-container{

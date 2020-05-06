@@ -9,11 +9,11 @@ class Meetup extends React.Component {
   handleClick = (e) => {
     this.setState({ open: !this.state.open })
   }
-
+  
   render() {
-    const { location_name, location, date, time} = this.props.meetup
+    let { location_name, location_address, date, time ,display_phone} = this.props.meetup
     const open = this.state.open
-    // console.log(this.props)
+    console.log(this.props.meetup)
     
     return (
       <Accordion styled>
@@ -24,8 +24,9 @@ class Meetup extends React.Component {
           {location_name} | {date}
         </Accordion.Title>
         <Accordion.Content active={open === true}>
-          <p>{location}</p>
           <p>{time}</p>
+          <p>{location_address}</p>
+          <p>{display_phone}</p>
         </Accordion.Content>
       </Accordion>
     );
