@@ -1,5 +1,7 @@
 import React from 'react';
-import { Accordion, Icon } from 'semantic-ui-react'
+import { Card, Accordion, Icon } from 'semantic-ui-react'
+import styled from 'styled-components';
+
 
 class Meetup extends React.Component {
 

@@ -8,6 +8,7 @@ import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
+
 import {
   BrowserRouter as Router,
   Route
@@ -18,7 +19,6 @@ class App extends React.Component {
   state = {
     friends: [],
     friendsInvited: [],
-    meetups: [],
     lat: 0,
     long:0,
     currentLat: 0,
@@ -40,7 +40,7 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         friends: object
-      })
+      }, () => console.log(object))
     })
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
@@ -50,10 +50,10 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         meetups: object
-      })
+      }, () => console.log(object))
     })
   }
-
+      
   geolocationCallback(position) {
     this.setState({
       currentLat:position.coords.latitude,
@@ -77,7 +77,7 @@ class App extends React.Component {
   handleNewMeetups = (meetup) => {
     this.setState({ meetups: [meetup, ...this.state.meetups]})
   }
-
+  
   inviteFriendToEvent = (e, select) => {
     this.setState({
       lat: 0,
@@ -85,7 +85,7 @@ class App extends React.Component {
     })
     this.setState({friendsInvited: select.value}, ()=> this.bigMaths())
   }
-
+  
   inviteFriendFromList = () =>{
     this.bigMaths()
   }
@@ -96,7 +96,6 @@ class App extends React.Component {
     let friendsInvited = this.state.friendsInvited.length+1
     let testLat = currentLat/friendsInvited
     let testLong = currentLong/friendsInvited
-
     this.setState({
       lat: testLat,
       long: testLong
@@ -113,17 +112,16 @@ class App extends React.Component {
             this.setState({
               lat: this.state.lat += lat,
               long: this.state.long += long
-            })
+            },()=>{console.log(this.state)})
           })
-         
     })}
     )
   }
+
   
   static contextType = AuthContext
 
   render(){  
-    console.log(this.state)
     return (
       <div className="App">
         <Router>
@@ -157,3 +155,10 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+
+
+  
+
+    

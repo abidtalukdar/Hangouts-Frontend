@@ -19,6 +19,11 @@ const Restaurant = (props) => {
     textAlign: "center"
   }
 
+
+
+
+
+
     return (
       <Card style={{width:"23%", padding: "10px"}}>
         <HoverImage src={props.img} alt="restaurant"/>

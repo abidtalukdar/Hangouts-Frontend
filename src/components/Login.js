@@ -4,7 +4,7 @@ import {Button} from 'semantic-ui-react'
 
 class Login extends React.Component {
   state = {
-    email: "",
+    username: "",
     password: "",
   }
 
@@ -40,13 +40,14 @@ class Login extends React.Component {
 
 
   render() {
-    const { email, password } = this.state
+    const { username, password } = this.state
     return (
       <div className="form-container">
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}> 
-          <label>Email:</label>
-          <input type="text" name="email" onChange={this.handleInputChange} value={email} />
+        {/* need to create handleSubmit function */}
+          <label>Username:</label>
+          <input type="text" name="username" onChange={this.handleInputChange} value={username} />
           <label>Password:</label>
           <input type="password" name="password" onChange={this.handleInputChange} value={password} />
           <Button type='submit'>Submit</Button>
