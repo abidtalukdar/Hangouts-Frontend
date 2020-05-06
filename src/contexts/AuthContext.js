@@ -5,12 +5,13 @@ export const AuthContext = createContext();
 class AuthContextProvider extends React.Component{
 
     state = {
-       user: "1" 
+       user: 3
     }
 
 
     render() {
         return(
+            
             <AuthContext.Provider value={{...this.state}}>
             {this.props.children}
             </AuthContext.Provider>

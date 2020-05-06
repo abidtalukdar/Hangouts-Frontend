@@ -1,17 +1,48 @@
 import React from 'react';
 import Restaurant from '../components/Restaurant'
 import { Card } from 'semantic-ui-react'
+import {LocationContext} from '../contexts/LocationContext'
+
 
 class Restaurants extends React.Component {
+
+  state = {
+    suggestions: [
+    {image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
+    ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
+    ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
+    ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}]
+ 
+  }
+
+  componentDidMount(){
+    this.setRestaurants()
+  }
+
+setRestaurants = () =>{
+  let cors_url = 'https://cors-anywhere.herokuapp.com'
+  let yelp_url = `https://api.yelp.com/v3/businesses/search?term=food&radius=1500&limit=4&latitude=${this.props.lat}&longitude=${this.props.lng}`
+  fetch(cors_url + '/' + yelp_url ,{
+      headers: new Headers({
+          'Authorization': `Bearer ${process.env.REACT_APP_YELP_API}`,
+          'Content-Type': 'application/json'
+      })
+    })
+  }
+
+  renderCards = () =>{
+    let x = this.state.suggestions.map(suggestion=>{
+      return <Restaurant name = {suggestion.name} img={suggestion.image_url} location={suggestion.location} rating={suggestion.rating} />
+    })
+    return x
+ }
+  
   render() {
     return (
       <div>
         <h2>Restaurants Near You:</h2>
         <Card.Group itemsPerRow={5}>
-          <Restaurant img={'https://www.singleplatform.com/wp-content/uploads/2018/12/5-Tips-for-Improving-Restaurant-Ambiance.jpg'}/> 
-          <Restaurant img={'https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg'}/> 
-          <Restaurant img={'https://media.cntraveler.com/photos/5b22bfdff04a775484b99dfc/master/pass/Alo-Restaurant__2018_Raffi-Photo-2.jpg'} title={'Sky Room'} /> 
-          <Restaurant img={'https://media.cntraveler.com/photos/5b22bfdff04a775484b99dfc/master/pass/Alo-Restaurant__2018_Raffi-Photo-2.jpg'} title={'Sky Room'} /> 
+          {this.renderCards()}
         </Card.Group>
       </div>
     );

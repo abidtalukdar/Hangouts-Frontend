@@ -1,6 +1,8 @@
 import React from 'react';
 // import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
+import { AuthContext } from '../contexts/AuthContext'
+
 
 class Register extends React.Component {
   state = {
@@ -34,6 +36,7 @@ class Register extends React.Component {
       alert("Your passwords do not match.")
     }
   }
+
 
   render() {
     const { email, first_name, last_name, default_address, password, password_confirmation } = this.state

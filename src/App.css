@@ -33,7 +33,7 @@ html, body {
   background-color: #EB5E55;
   width: 100%;
   display: flex;
-  height: 5rem;
+  height: 4rem;
   justify-content: space-evenly;
   color: blanchedalmond;
   list-style: none;
@@ -74,6 +74,7 @@ html, body {
   display: inline-block;
   visibility: visible;
   opacity: 1;
+  color: white;
 }
 
 .navitem:hover {
@@ -128,7 +129,6 @@ html, body {
 }
 
 .friends-list li {
-  margin-bottom: 1rem;
   padding: 1rem;
   color: white;
   transition: 600ms;
@@ -140,6 +140,7 @@ html, body {
 }
 
 .friends h2{
+  margin: auto 0;
   font-family: 'Righteous', cursive;
   font-size: 1.25rem;
 }
@@ -153,7 +154,28 @@ html, body {
   max-width: 13rem;
 }
 
-.friend:hover {
+.friend {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.friend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friend-invite {
+  height: 50%;
+}
+
+.friend-header svg {
+  width: 2rem;
+  color: white;
+}
+
+.friend-header:hover {
   background-color: rgb(48, 41, 43);
   transition: 600ms;
   font-family: 'Righteous', cursive;
@@ -161,7 +183,7 @@ html, body {
 }
 
 .section {
-  margin: 2.5rem;
+  margin: 2.5rem 1.5rem;
   flex-direction: column;
 }
 
@@ -171,7 +193,7 @@ html, body {
 }
 
 .meetup-container {
-  width: 300px;
+  width: 250px;
   height: 400px;
   margin: 0 0 1.5rem 1.5rem;
 }
@@ -204,7 +226,6 @@ html, body {
   transition: opacity 300ms, transform 300ms;
 }
 
-
 .profile-section {
   background-color: #3A3335;
   width: 100vw;
@@ -213,18 +234,18 @@ html, body {
 }
 
 .profile-div {
-  top: 2rem;
+  top: 5rem;
   left: 0;
   bottom: 0;
   right: 0;
-  box-shadow: 3px 2px 3px;
+  box-shadow: 0 0 15px;
   border-radius: 5px;
-  width: 30%;
+  width: 23%;
   height: 75%;
   margin: auto;
   position: absolute;
   transform-style: preserve-3d;
-  transition: all 0.5s ease;
+  transition: all 1s ease;
 }
 
 .profile-front {
@@ -232,7 +253,7 @@ html, body {
   width: 100%;
   height: 100%;
   margin: auto;
-  padding: 3rem;
+  padding: 1rem;
   backface-visibility: hidden;
   background-color: rgb(218, 203, 203);
   border-radius: 5px;
@@ -255,30 +276,191 @@ html, body {
   transition: 700ms ease-in-out;
 }
 
+.profile-front svg {
+  width: 4rem;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.profile-header h3 {
+  margin: 0 0 1rem 0;
+}
+
+.profile-image-container {
+  justify-content: center;
+  display: flex;
+  padding: 1rem;
+}
+
+.profile-image-circle {
+  width: 10rem;
+  height: 10rem;
+  background-color: rgb(143, 77, 77);
+  border-radius: 50%;
+  bottom: 3rem;
+  box-shadow: 0 0 10px  rgba(0,0,0,10);
+}
+
+.profile-image {
+  width: 9rem;
+  height: 9rem;
+  background-color: rgb(190, 101, 101);
+  border-radius: 50%;
+  margin: .5rem auto;
+}
+
+#yelpsearch {
+  margin: auto;
+  width: 20rem;
+  text-align: center;
+}
+
 .hangout{
   font-size: 20px;
+  margin-bottom: 0.5rem;
 }
 
+.hangout-div {
+  margin-bottom: 1rem;
+  height: 3rem;
+  text-align: center;
+}
+
+.hangout-div svg {
+  width: 2rem;
+  color: #3A3335;
+  margin-right: 0.5rem;
+  position: relative;
+  top: 0.75rem;
+}
+
+.hangout-time {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.hangout-time svg {
+  width: 2rem;
+  color: #3A3335;
+  margin-right: 0.65rem;
+  position: relative;
+  height: 37px;
+}
+
+.hangout-friends {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
 
 .create-form{
-  float: left;
-  position: absolute;
-  margin-left: 40px;
-  margin-top: 2%;
+  text-align: center;
 }
 
+.create-section {
+  background-color:#3A3335;
+}
 
 .create-map{
-  margin-right: 20px;
   float: right;
+  display: flex;
+}
+
+.create-header {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  color: white;
+  font-family: 'Righteous', cursive;
+}
+
+.create-hangout {
+  position: relative;
+  margin: 0 1rem;
+  text-align: center;
+  top: 1rem;
+}
+
+.create-hangout h2, label{
+  color: #3A3335;
+  text-align: center;
+  font-family: "Righteous", cursive;
+  margin: 0;
+}
+
+.hangout-friends .ui.button {
+  background-color: #3A3335;
+  color: white;
+  box-shadow: 0 0 5px black;
+  width: 295px;
+}
+
+.hangout-friends:hover .ui.button {
+  filter: brightness(1.2);
+  background-color: #3A3335;
+  color: white;
+  box-shadow: 0 0 5px black;
+}
+
+.ui.input {
+  width: 255px;
+}
+
+.ui.selection.dropdown {
+  width: 255px;
+}
+
+.ui.fluid.dropdown {
+  width: 295px;
+}
+
+.ui.button {
+  background-color: #EB5E55;
+  color: white;
+  box-shadow: 0 0 5px black;
+}
+
+.ui.button:hover {
+  filter: brightness(1.2);
+  background-color: #EB5E55;
+  color: white;
+}
+
+.leaflet-popup-content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-popup-content-wrapper h3 {
+  margin: 0;
+}
+
+.popup-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+.popup-image {
+  width: 90%;
+  max-height: 10rem;
+  object-fit: cover;
+  display: block;
 }
 
 .create-container{
-  width: 85%; 
+  display: flex;
+  justify-content: space-around;
   height: 550px;
-  border: 2px solid #EB5E55;
   border-radius: 25px;
-  margin:auto;
-  margin-top: 50px;
-  text-align: center;
+  margin: 0 1rem 1rem 1rem;
+  padding: 2rem;
+  background-color: rgb(218, 203, 203);
 }
+
