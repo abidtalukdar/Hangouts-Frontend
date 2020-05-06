@@ -94,7 +94,7 @@ class MeetupCreate extends React.Component {
     .then(obj => obj.json())
     .then(obj => {
       this.props.handleNewMeetups(obj)
-      this.props.history.push("/")
+      this.props.history.push("/home")
     })
 
   }
