@@ -17,15 +17,11 @@ class LocationContextProvider extends React.Component{
         )
     }
 
-
-  
-
     geolocationCallback(position) {
         this.setState({
           lat:position.coords.latitude,
           lng:position.coords.longitude
         }, () => this.geoCodeLocation())
-
      }
 
      geoCodeLocation = () => {

@@ -4,7 +4,6 @@ import { Card } from 'semantic-ui-react'
 import {LocationContext} from '../contexts/LocationContext'
 
 
-
 class Restaurants extends React.Component {
 
   state = {
@@ -17,9 +16,7 @@ class Restaurants extends React.Component {
     ,lng: 0
   }
 
-
-
-componentDidMount(){
+  componentDidMount(){
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -30,25 +27,22 @@ componentDidMount(){
   }
   )}
 
-setRestaurants = () =>{
-  console.log('hi')
-  let cors_url = 'https://cors-anywhere.herokuapp.com'
-  let yelp_url = `https://api.yelp.com/v3/businesses/search?term=food&radius=1500&limit=4&latitude=${this.state.lat}&longitude=${this.state.lng}`
-  fetch(cors_url + '/' + yelp_url ,{
-      headers: new Headers({
-          'Authorization': `Bearer ${process.env.REACT_APP_YELP_API}`,
-          'Content-Type': 'application/json'
+  setRestaurants = () =>{
+    let cors_url = 'https://cors-anywhere.herokuapp.com'
+    let yelp_url = `https://api.yelp.com/v3/businesses/search?term=food&radius=1500&limit=4&latitude=${this.state.lat}&longitude=${this.state.lng}`
+    fetch(cors_url + '/' + yelp_url ,{
+        headers: new Headers({
+            'Authorization': `Bearer ${process.env.REACT_APP_YELP_API}`,
+            'Content-Type': 'application/json'
+        })
+      })
+    .then(r => r.json())
+    .then(restaurants => {
+      this.setState({
+        suggestions: restaurants.businesses,
       })
     })
-  .then(r => r.json())
-  .then(restaurants => {
-    this.setState({
-      suggestions: restaurants.businesses,
-    })
-  })
-}
-
- 
+  }
 
   renderCards = () =>{
     let x = this.state.suggestions.map(suggestion=>{
@@ -57,7 +51,6 @@ setRestaurants = () =>{
     return x
  }
   
-
   render() {
     console.log(this.state)
     return (

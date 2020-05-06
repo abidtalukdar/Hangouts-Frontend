@@ -22,12 +22,12 @@ export default function Friend(props) {
 
   return (
     <div>
-      <li className="friend" onClick={() => setOpen(!open)}>
-        <h2>
-          {first_name} {last_name}
-        </h2>
-        <div onClick={handleFriendsInvited}>{invited ? <InvitedIcon/>:<SentIcon />}</div>
-      </li>
+      <div className="friend-header">
+        <li className="friend" onClick={() => setOpen(!open)}>
+          <h2>{first_name} {last_name}</h2>
+        </li>
+        <div className="friend-invite" onClick={handleFriendsInvited}>{invited ? <InvitedIcon/>:<SentIcon />}</div>
+      </div>
       <CSSTransition in={open} timeout={400} classNames="display" unmountOnExit>
         <div className="friend-details">
           <img src={image} alt="friend" />

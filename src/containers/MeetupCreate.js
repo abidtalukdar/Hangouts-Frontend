@@ -18,6 +18,9 @@ class MeetupCreate extends React.Component {
   getTime = () => {
     let date = new Date()
     let minute = date.getMinutes()
+    if(minute < 10) {
+      minute = "0" + minute
+    }
     let meridiem = "AM"
     let hour = date.getHours()
     if(hour > 12){
@@ -36,7 +39,6 @@ class MeetupCreate extends React.Component {
     startDate: new Date(new Date().setDate(new Date().getDate()-1)),
     results: []
   }
-
 
   onChangeCalendar = (e,data) =>{
     this.setState({
@@ -73,14 +75,12 @@ class MeetupCreate extends React.Component {
     return x
   }
 
-
   static contextType = AuthContext
 
   render() {
     const friendOptions = this.props.friends.map(friend => {
       return { key: `${friend.id}`, text: `${friend.first_name}`, value: `${friend.id}` }
     })
-    
     
     return (
       <section className="create-section">
