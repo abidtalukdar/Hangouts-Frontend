@@ -43,7 +43,6 @@ class App extends React.Component {
 
 
       geolocationCallback(position) {
-        console.log('hi')
         this.setState({
           currentLat:position.coords.latitude,
           currentLong:position.coords.longitude,

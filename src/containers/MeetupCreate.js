@@ -133,7 +133,7 @@ class MeetupCreate extends React.Component {
                 />
                 <Button>Recalculate Locations</Button>
               </div>
-              <Button type='submit'>Create Hangout</Button>
+              <Button onClick={this.submitMeetup} type='submit'>Create Hangout</Button>
             </div>
           </form>
   
