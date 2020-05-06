@@ -29,7 +29,6 @@ class MeetupCreate extends React.Component {
   }
 
   state = {
-    friendsInvited: ["2","3"],
     dateSelected: undefined,
     timeSelected: this.getTime(),
     restaurantSelected: [],
@@ -56,9 +55,6 @@ class MeetupCreate extends React.Component {
     }, ()=>console.log(this.state))
   }
 
-  inviteFriendToEvent = (e, select) => {
-    this.setState({friendsInvited: select.value}, ()=>console.log(this.state))
-  }
 
   onChangeResults = (locations) =>{
     this.setState({
@@ -73,12 +69,39 @@ class MeetupCreate extends React.Component {
     return x
   }
 
+  submitMeetup = (e) =>{
+    e.preventDefault()
+
+    let user = this.context.user
+    let {dateSelected, restaurantSelected} = this.state 
+    let friendsInvited = this.props.friendsInvited
+
+  let data ={
+    user,
+    dateSelected,
+    restaurantSelected,
+    friendsInvited
+  }
+
+    fetch(`http://localhost:3000/meetups`,{
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(obj => obj.json())
+    .then(obj => console.log(obj))
+
+  }
+
+
 
   static contextType = AuthContext
 
   render() {
     const friendOptions = this.props.friends.map(friend => {
-      return { key: `${friend.id}`, text: `${friend.first_name}`, value: `${friend.id}` }
+      return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
     
     
