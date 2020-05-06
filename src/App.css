@@ -433,8 +433,6 @@ html, body {
 }
 
 .leaflet-popup-content-wrapper {
-  width: 15rem;
-  height: 20rem;
   display: flex;
   flex-direction: column;
 }
@@ -451,8 +449,8 @@ html, body {
 
 .popup-image {
   width: 90%;
+  max-height: 10rem;
   object-fit: cover;
-  height: 10rem;
   display: block;
 }
 
