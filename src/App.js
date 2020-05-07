@@ -21,6 +21,7 @@ class App extends React.Component {
     friendsInvited: [],
     friendsLocation:[],
     meetups: [],
+    restaurants: [],
     lat: 0,
     long:0,
     currentLat: 0,
@@ -31,7 +32,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-  
     fetch("http://localhost:3000/autologin", {
       credentials: "include"
     })
@@ -66,7 +66,6 @@ class App extends React.Component {
     })
   }
 
-
   componentDidUpdate(prevProps,prevState,snapshot){
     if (this.state.userId !== prevState.userId) {
       let userId = this.state.userId.id
@@ -82,7 +81,7 @@ class App extends React.Component {
             .then(object =>{
               let lat = (object.results[0].geometry.location.lat)
               let long = (object.results[0].geometry.location.lng)
-              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address, image: friend.image}
               // console.log(test)
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
@@ -106,7 +105,6 @@ class App extends React.Component {
     }
   }
 
-
   geolocationCallback(position) {
     this.setState({
       currentLat:position.coords.latitude,
@@ -126,6 +124,8 @@ class App extends React.Component {
     })
   }
 
+
+
   handleAddFriend = (addedFriendId) => {
     console.log(addedFriendId)
   }
@@ -139,7 +139,7 @@ class App extends React.Component {
       lat: 0,
       long: 0
     })
-    this.setState({friendsInvited: select.value}, ()=> this.bigMaths())
+    this.setState({friendsInvited: select.value}, () => this.bigMaths())
   }
 
   inviteFriendFromList = () =>{
@@ -174,7 +174,6 @@ class App extends React.Component {
     )
   }
 
-
   logOut = () =>{
 
   }
@@ -202,6 +201,7 @@ class App extends React.Component {
             <MeetupCreate 
             {...routeProps}
             friends={this.state.friends}
+            friendsLocation={this.state.friendsLocation}
             friendsInvited={this.state.friendsInvited}
             handleNewMeetups={this.handleNewMeetups}
             invite={this.inviteFriendToEvent} 

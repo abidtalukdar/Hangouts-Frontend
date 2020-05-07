@@ -96,7 +96,6 @@ class MeetupCreate extends React.Component {
 
   }
 
-
   render() {
     
     const friendOptions = this.props.friends.map(friend => {
@@ -137,7 +136,7 @@ class MeetupCreate extends React.Component {
           </form>
   
             <div className="create-map">
-              <MapCreate restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
+              <MapCreate friends={this.props.friendsLocation} friendsInvited={this.props.friendsInvited} restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
             </div>
           </div>
         </section>

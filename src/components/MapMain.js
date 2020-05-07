@@ -1,19 +1,22 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { divIcon } from 'leaflet';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 class MapMain extends React.Component {
 
     state = {
       zoom: 11,
-      friendsCoordinates: []
+      friendsCoordinates: [],
     } 
+   
 
     render() {
-    
+    console.log(this.props.restaurants.businesses)
     const position = [this.props.lat, this.props.lng]
     const pinU = renderToStaticMarkup(<i id="user" class="fas fa-map-pin"></i>)
     const pinF = renderToStaticMarkup(<i id="friend" class="fas fa-map-pin"></i>)
-    const pointer = renderToStaticMarkup(<i class="fas fa-map-pin"></i>);
+    const pointer = renderToStaticMarkup(<i id="place" class="fas fa-map-marker-alt"></i>);
     const place = divIcon({
       html: pointer,
     });
@@ -37,7 +40,8 @@ class MapMain extends React.Component {
             {/* You are near {this.context.currentLocation} */}
           </Popup>
         </Marker>
-          {this.props.restaurants.length > 0? 
+
+        {this.props.restaurants !== undefined? 
           this.props.restaurants.map(result => {
           return <Marker icon={place} key={result.id} position={[result.coordinates.latitude,result.coordinates.longitude]}><Popup>
             <div className="popup">
@@ -57,6 +61,7 @@ class MapMain extends React.Component {
           return <Marker icon={personF} key={"test"} position={[result.lat,result.long]}><Popup>
             <div className="popup">
               <h3>{result.name}</h3>
+              <img className="popup-image" src={result.image} alt={result.name}/>
               <h3>{result.address}</h3>
             </div>
             </Popup></Marker>

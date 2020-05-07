@@ -120,6 +120,10 @@ html, body {
   overflow-y: scroll;
 }
 
+.friends-list:last-child {
+  margin-top: 2rem;
+}
+
 .friends-list {
   list-style: none;
   display: flex;
@@ -483,4 +487,30 @@ html, body {
 #login {
   top: 75%;
   left: 48%;
+}
+
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}
+
+#friend {
+  color: rgb(72, 164, 226);
+  font-size: 2rem;
+  bottom: 1rem;
+  position:relative;
+}
+
+#user {
+  color: #EB5E55;
+  font-size: 2rem;
+  bottom: 1rem;
+  position:relative;
+}
+
+#place {
+  color: #55DDE0;
+  font-size: 2rem;
+  bottom: 1rem;
+  position:relative;
 }

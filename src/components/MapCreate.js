@@ -1,12 +1,24 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { divIcon } from 'leaflet';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 class MapCreate extends React.Component {
 
     state = {
       zoom: 11,
-      friendsCoordinates: []
+      friendsCoordinates: [],
+      friends: []
     } 
+
+    componentWillMount() {
+      if(this.props.friendsInvited.length > 0){
+        let invited = this.props.friends.filter(friend => this.props.friendsInvited.find(invited => invited.id === friend.id))
+        this.setState({
+          friends: [...this.state.friends, invited]
+        })
+      }
+    }
 
     render() {
     
@@ -52,11 +64,12 @@ class MapCreate extends React.Component {
           }):null  
         }
 
-        {this.props.friends !== undefined? 
-          this.props.friends.map(result => {
+        {this.state.friends.length > 0? 
+          this.state.friends.map(result => {
           return <Marker icon={personF} key={"test"} position={[result.lat,result.long]}><Popup>
             <div className="popup">
               <h3>{result.name}</h3>
+              <img className="popup-image" src={result.image} alt={result.name}/>
               <h3>{result.address}</h3>
             </div>
             </Popup></Marker>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Friends from './Friends'
-import Map from '../components/MapCreate'
+import MapMain from '../components/MapMain'
 import Restaurants from './Restaurants'
 import Meetups from './Meetups'
 
@@ -12,9 +12,15 @@ import {
 
 class Main extends React.Component {
  
+  state = {
+    restaurants: []
+  }
 
-
-
+  handleGetRestaurants = (restaurants) => {
+    this.setState({
+      restaurants: restaurants.businesses
+    })
+  }
 
   render() {
     return (
@@ -27,10 +33,10 @@ class Main extends React.Component {
         invite = {this.props.invite}/>
         <section className="section">
           <div className="meetup-map">
-            <MapMain restaurants={[]} friends={this.props.friendsLocation} lat ={this.props.lat} lng ={this.props.long} />
+            <MapMain restaurants={this.state.restaurants} friends={this.props.friendsLocation} lat={this.props.lat} lng ={this.props.long} />
             <Meetups meetups={this.props.meetups}/>
           </div>
-          <Restaurants/>
+          <Restaurants handleGetRestaurants={this.handleGetRestaurants} />
         </section>
       </main>
     );
