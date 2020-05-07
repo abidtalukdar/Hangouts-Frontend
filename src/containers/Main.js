@@ -21,6 +21,8 @@ class Main extends React.Component {
       <main className="main">
         {!this.context.user? <Redirect to="/register" />:null}
         <Friends friends={this.props.friends} 
+        notfriends={this.props.notfriends}
+        handleAddFriend={this.props.handleAddFriend}
         friendsInvited={this.props.friendsInvited} 
         invite = {this.props.invite}/>
         <section className="section">

@@ -33,6 +33,8 @@ class Register extends React.Component {
       })
       .then(r => {
         if (!r.ok) {
+          alert('An account with this email already exists.')
+          this.props.history.push("/register")
           throw r
         }
         return r.json()
