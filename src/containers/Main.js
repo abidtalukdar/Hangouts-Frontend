@@ -3,7 +3,6 @@ import Friends from './Friends'
 import Map from '../components/Map'
 import Restaurants from './Restaurants'
 import Meetups from './Meetups'
-import { AuthContext } from '../contexts/AuthContext'
 
 import {
   BrowserRouter as Router,
@@ -12,14 +11,15 @@ import {
 } from "react-router-dom";
 
 class Main extends React.Component {
-
-  static contextType = AuthContext
  
+
+
+
 
   render() {
     return (
       <main className="main">
-        {!this.context.user? <Redirect to="/register" />:null}
+      {this.props.user === "pending" ? <Redirect to="/register" />:null}
         <Friends friends={this.props.friends} 
         notfriends={this.props.notfriends}
         handleAddFriend={this.props.handleAddFriend}

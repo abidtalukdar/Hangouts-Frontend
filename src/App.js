@@ -10,7 +10,8 @@ import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -25,12 +26,28 @@ class App extends React.Component {
     currentLat: 0,
     currentLong: 0,
     currentLocation: "",
-    userId: ""
+    userId: "pending"
     // currentUser: null
   }
 
   componentDidMount() {
   
+    fetch("http://localhost:3000/autologin", {
+      credentials: "include"
+    })
+      .then(r => {
+        if (!r.ok) {
+          throw r
+        }
+        return r.json()
+      })
+      .then(user => {
+        this.setState({
+          loggedIn:true
+        })
+        this.handleUpdateCurrentUser(user)
+      })
+      .catch(console.error)
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
@@ -45,7 +62,7 @@ class App extends React.Component {
 
 
   componentDidUpdate(prevProps,prevState,snapshot){
-    if (this.state.userId !== prevState.userId) {
+    if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
       let userId = this.state.userId.id
       fetch(`http://localhost:3000/friends/${userId}`)
       .then(r => r.json())
@@ -60,12 +77,14 @@ class App extends React.Component {
               let lat = (object.results[0].geometry.location.lat)
               let long = (object.results[0].geometry.location.lng)
               let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
-              // console.log(test)
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
               }))
             })
-          })})})
+          })
+        
+        
+        })})
           fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
           .then(object => {
@@ -73,15 +92,16 @@ class App extends React.Component {
               meetups: object
             })
           })
-      fetch(`http://localhost:3000/notfriends/${userId}`)
-      .then(r => r.json())
-      .then(object => {
-        this.setState({
-          notfriends: object
-        })
-      })
+      // fetch(`http://localhost:3000/notfriends/${userId}`)
+      // .then(r => r.json())
+      // .then(object => {
+      //   this.setState({
+      //     notfriends: object
+      //   })
+      // })
     }
   }
+
 
   geolocationCallback(position) {
     this.setState({
@@ -163,7 +183,10 @@ class App extends React.Component {
     )
   }
 
-  static contextType = AuthContext
+
+  logOut = () =>{
+
+  }
 
   render(){  
     // console.log(this.state)
@@ -171,7 +194,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <AuthContextProvider>
-            <Navbar />
+            <Navbar user={this.state.userId} updateUser={this.handleUpdateCurrentUser}/>
             <Route exact path={`/home`} render={() => 
             <Main friends={this.state.friends} 
             notfriends={this.state.notfriends}
@@ -182,6 +205,7 @@ class App extends React.Component {
             lat = {this.state.currentLat} 
             long={this.state.currentLong}
             invite={this.inviteFriendFromList} 
+            user={this.state.userId}
             />}/> 
             <Route exact path={`/hangout`} render={routeProps => 
             <MeetupCreate 
@@ -194,9 +218,10 @@ class App extends React.Component {
             lng = {this.state.currentLong}
             friendsLat = {this.state.lat}
             friendsLng = {this.state.long}
+            user={this.state.userId}
             />}/>
-            <Route exact path={`/profile`} component={Profile} />
-            <Route exact path={`/register`} component={Register} />
+            <Route exact path={`/profile`} render={routeProps => <Profile user={this.state.userId}/>} />
+            <Route exact path={`/register`} render={routeProps => <Register user={this.state.userId}/>} />
             <Route exact path={`/login`} render={routeProps=> <Login {...routeProps} updateUser={this.handleUpdateCurrentUser}/>}/>
           </AuthContextProvider>
         </Router>
