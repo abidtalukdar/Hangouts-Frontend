@@ -25,7 +25,6 @@ class App extends React.Component {
     currentLong: 0,
     currentLocation: "",
     userId: ""
-    // currentUser: null
   }
 
   componentDidMount() {
