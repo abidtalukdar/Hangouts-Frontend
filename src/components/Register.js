@@ -1,7 +1,6 @@
 import React from 'react';
 // import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
-import { AuthContext } from '../contexts/AuthContext'
 
 class Register extends React.Component {
   state = {
@@ -13,7 +12,6 @@ class Register extends React.Component {
     password_confirmation: ""
   }
 
-  static contextType = AuthContext
 
   handleInputChange = event => {
     this.setState({
@@ -33,8 +31,7 @@ class Register extends React.Component {
       })
       .then(r => {
         if (!r.ok) {
-          alert('An account with this email already exists.')
-          this.props.history.push("/register")
+          alert('hey you did something wrong')
           throw r
         }
         return r.json()
