@@ -82,8 +82,6 @@ class App extends React.Component {
               }))
             })
           })
-        
-        
         })})
           fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
@@ -92,13 +90,13 @@ class App extends React.Component {
               meetups: object
             })
           })
-      // fetch(`http://localhost:3000/notfriends/${userId}`)
-      // .then(r => r.json())
-      // .then(object => {
-      //   this.setState({
-      //     notfriends: object
-      //   })
-      // })
+      fetch(`http://localhost:3000/notfriends/${userId}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          notfriends: object
+        })
+      })
     }
   }
 
