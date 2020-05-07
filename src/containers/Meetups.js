@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Accordion, Icon } from 'semantic-ui-react'
 import Meetup from '../components/Meetup'
 class Meetups extends Component {
+
   renderMeetup = () => {
     return this.props.meetups.map(meetup => 
       <Meetup key={meetup.id} meetup={meetup}/>

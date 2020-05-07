@@ -7,6 +7,7 @@ import Register from './components/Register'
 import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
+
 import {
   BrowserRouter as Router,
   Route
@@ -16,6 +17,7 @@ class App extends React.Component {
   state = {
     friends: [],
     friendsInvited: [],
+    friendsLocation:[],
     meetups: [],
     lat: 0,
     long:0,
@@ -33,8 +35,26 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         friends: object
-      }, () => console.log(object))
+      },()=>{
+
+        this.state.friends.forEach(friend =>{
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+          .then(r => r.json())
+          .then(object =>{
+            let lat = (object.results[0].geometry.location.lat)
+            let long = (object.results[0].geometry.location.lng)
+            let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+            console.log(test)
+            this.setState(() => ({
+              friendsLocation: [...this.state.friendsLocation,test]
+            }))
+          })
+
+
+      })
     })
+  })
+
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
@@ -43,7 +63,7 @@ class App extends React.Component {
     .then(object => {
       this.setState({
         meetups: object
-      }, () => console.log(object))
+      })
     })
   }
 
@@ -65,7 +85,6 @@ class App extends React.Component {
       })
     })
   }
-
 
   handleNewMeetups = (meetup) => {
     this.setState({ meetups: [meetup, ...this.state.meetups]})
@@ -114,6 +133,7 @@ class App extends React.Component {
   static contextType = AuthContext
 
   render(){  
+    console.log(this.state)
     return (
       <div className="App">
         <Router>
@@ -150,10 +170,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-
-  
-
-    

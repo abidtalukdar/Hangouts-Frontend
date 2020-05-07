@@ -19,7 +19,9 @@ export default function Friend(props) {
       props.invite()
       }
   }
+
   const [add, setAdd] = useState(false);
+  
   return (
     <div>
       <div className="friend-header">

@@ -36,30 +36,28 @@ class MeetupCreate extends React.Component {
     results: []
   }
 
-
   onChangeCalendar = (e,data) =>{
     this.setState({
       dateSelected: data.value
-    }, ()=>console.log(this.state))
+    })
   }
 
   onChangeTime = (e, {name, value}) =>{
     this.setState({
       timeSelected: value
-    }, ()=>console.log(this.state))
+    })
   }
 
   onChangeLocation = (e,value) =>{
     this.setState({
       restaurantSelected: [value.value]
-    }, ()=>console.log(this.state))
+    })
   }
-
 
   onChangeResults = (locations) =>{
     this.setState({
       results: locations.businesses
-    }, ()=> console.log(this.state))
+    })
   }
 
   restaurantLocations = () =>{
