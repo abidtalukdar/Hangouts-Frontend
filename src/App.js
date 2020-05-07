@@ -10,7 +10,8 @@ import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -24,12 +25,29 @@ class App extends React.Component {
     currentLat: 0,
     currentLong: 0,
     currentLocation: "",
-    userId: ""
+    userId: "pending"
     // currentUser: null
   }
 
   componentDidMount() {
   
+
+    fetch("http://localhost:3000/autologin", {
+      credentials: "include"
+    })
+      .then(r => {
+        if (!r.ok) {
+          throw r
+        }
+        return r.json()
+      })
+      .then(user => {
+        this.handleUpdateCurrentUser(user)
+        this.context.handleUpdateCurrentUser(user)
+      })
+      .catch(console.error)
+
+
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
@@ -73,7 +91,8 @@ componentDidUpdate(prevProps,prevState,snapshot){
           this.setState({
             meetups: object
           })
-    })
+          })
+
 }}
 
 
@@ -146,12 +165,11 @@ componentDidUpdate(prevProps,prevState,snapshot){
   static contextType = AuthContext
 
   render(){  
-    console.log(this.state)
     return (
       <div className="App">
         <Router>
           <AuthContextProvider>
-            <Navbar />
+            <Navbar user={this.state.userId}/>
             <Route exact path={`/home`} render={() => 
             <Main friends={this.state.friends} 
             friendsInvited={this.state.friendsInvited}
@@ -160,6 +178,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
             lat = {this.state.currentLat} 
             long={this.state.currentLong}
             invite={this.inviteFriendFromList} 
+            user={this.state.userId}
             />}/> 
             <Route exact path={`/hangout`} render={routeProps => 
             <MeetupCreate 
@@ -172,8 +191,9 @@ componentDidUpdate(prevProps,prevState,snapshot){
             lng = {this.state.currentLong}
             friendsLat = {this.state.lat}
             friendsLng = {this.state.long}
+            user={this.state.userId}
             />}/>
-            <Route exact path={`/profile`} component={Profile} />
+            <Route exact path={`/profile`} render={routeProps => <Profile user={this.state.userId}/>} />
             <Route exact path={`/register`} component={Register} />
             <Route exact path={`/login`} render={routeProps=> <Login {...routeProps} updateUser={this.handleUpdateCurrentUser}/>}/>
           </AuthContextProvider>

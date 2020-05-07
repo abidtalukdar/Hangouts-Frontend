@@ -9,10 +9,9 @@ class AuthContextProvider extends React.Component{
     }
 
     handleUpdateCurrentUser = (user) => {
-      console.log(user)
       this.setState({
         user: user
-      }, () => console.log(this.state))
+      }, ()=>{console.log(this.state)})
     }
 
     render() {

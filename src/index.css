@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+
+input::placeholder {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
 /* Forms */
 .form-container {
   margin: 1rem auto;
