@@ -23,17 +23,12 @@ class App extends React.Component {
     long:0,
     currentLat: 0,
     currentLong: 0,
-    currentLocation: "",
-    currentUser: null
+    currentLocation: ""
+    // currentUser: null
   }
 
-  handleUpdateCurrentUser = (user) => {
-    this.setState({
-      currentUser: user
-    })
-  }
-  
-  componentDidMount(){
+  componentDidMount() {
+    console.log(this.context)
     let userId = this.context.user
     fetch(`http://localhost:3000/friends/${userId}`)
     .then(r => r.json())
@@ -71,7 +66,7 @@ class App extends React.Component {
       })
     })
   }
-      
+
   geolocationCallback(position) {
     this.setState({
       currentLat:position.coords.latitude,
@@ -80,6 +75,7 @@ class App extends React.Component {
       long:position.coords.longitude,
     }, () => this.geoCodeLocation())
   }
+
   geoCodeLocation = () => {
       fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.currentLat},${this.state.currentLong}&key=${process.env.REACT_APP_GOOGLE_API}`)
       .then(r => r.json())
@@ -93,7 +89,7 @@ class App extends React.Component {
   handleNewMeetups = (meetup) => {
     this.setState({ meetups: [meetup, ...this.state.meetups]})
   }
-  
+
   inviteFriendToEvent = (e, select) => {
     this.setState({
       lat: 0,
@@ -101,11 +97,11 @@ class App extends React.Component {
     })
     this.setState({friendsInvited: select.value}, ()=> this.bigMaths())
   }
-  
+
   inviteFriendFromList = () =>{
     this.bigMaths()
   }
-  
+
   bigMaths = () =>{
     let currentLat = this.state.currentLat
     let currentLong = this.state.currentLong
@@ -133,38 +129,40 @@ class App extends React.Component {
     })}
     )
   }
+
   static contextType = AuthContext
+
   render(){  
     console.log(this.state)
     return (
       <div className="App">
         <Router>
-        <Navbar />
-        <Route exact path={`/home`} render={() => 
-        <Main friends={this.state.friends} 
-        friendsInvited={this.state.friendsInvited}
-        friendsLocations={this.state.friendsLocation}
-        meetups={this.state.meetups}
-        lat = {this.state.currentLat} 
-        long={this.state.currentLong}
-        invite={this.inviteFriendFromList} 
-        />
-        }/> 
-        <Route exact path={`/hangout`} render={routeProps => 
-        <MeetupCreate 
-        {...routeProps}
-        friends={this.state.friends} 
-        friendsInvited={this.state.friendsInvited}
-        handleNewMeetups={this.handleNewMeetups}
-        invite={this.inviteFriendToEvent} 
-        lat = {this.state.currentLat}
-        lng = {this.state.currentLong}
-        friendsLat = {this.state.lat}
-        friendsLng = {this.state.long}
-        />}/>
-        <Route exact path={`/profile`} component={() => <Profile />}/>
-        <Route exact path={`/register`} render={routeProps => <Register {...routeProps} handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
-        <Route exact path={`/login`} render={routeProps => <Login {...routeProps} handleUpdateCurrentUser={this.handleUpdateCurrentUser} />}/>
+          <AuthContextProvider>
+            <Navbar />
+            <Route exact path={`/home`} render={() => 
+            <Main friends={this.state.friends} 
+            friendsInvited={this.state.friendsInvited}
+            meetups={this.state.meetups}
+            lat = {this.state.currentLat} 
+            long={this.state.currentLong}
+            invite={this.inviteFriendFromList} 
+            />}/> 
+            <Route exact path={`/hangout`} render={routeProps => 
+            <MeetupCreate 
+            {...routeProps}
+            friends={this.state.friends} 
+            friendsInvited={this.state.friendsInvited}
+            handleNewMeetups={this.handleNewMeetups}
+            invite={this.inviteFriendToEvent} 
+            lat = {this.state.currentLat}
+            lng = {this.state.currentLong}
+            friendsLat = {this.state.lat}
+            friendsLng = {this.state.long}
+            />}/>
+            <Route exact path={`/profile`} component={Profile} />
+            <Route exact path={`/register`} component={Register} />
+            <Route exact path={`/login`} component={Login} />
+          </AuthContextProvider>
         </Router>
       </div>
     );
@@ -172,10 +170,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-
-  
-
-    

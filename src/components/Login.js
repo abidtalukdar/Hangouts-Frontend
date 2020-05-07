@@ -1,12 +1,16 @@
 import React from 'react';
 // import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
+import { AuthContext } from '../contexts/AuthContext'
+
 
 class Login extends React.Component {
   state = {
     email: "",
     password: "",
   }
+
+  static contextType = AuthContext
 
   handleInputChange = event => {
     this.setState({
@@ -23,7 +27,7 @@ class Login extends React.Component {
       },
       body: JSON.stringify(this.state)
     })
-      .then(r =>{
+      .then(r => {
         if (!r.ok) {
           throw r
         }
@@ -32,10 +36,9 @@ class Login extends React.Component {
       )
       .then(user => {
         this.props.history.push("/profile")
-        this.props.handleUpdateCurrentUser(user)
+        this.context.handleUpdateCurrentUser(user)
       })
       .catch(console.error)
-
   }
 
 

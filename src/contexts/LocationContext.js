@@ -28,23 +28,23 @@ class LocationContextProvider extends React.Component{
 
      }
 
-     geoCodeLocation = () => {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
-        .then(r => r.json())
-        .then(object => {
-         this.setState({...this.state
-           ,
-           currentLocation: object.results[0].formatted_address
-         })
-       })
-     }
+    geoCodeLocation = () => {
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${process.env.REACT_APP_GOOGLE_API}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({...this.state
+          ,
+          currentLocation: object.results[0].formatted_address
+        })
+      })
+    }
 
     render() {
-        return(
-            <LocationContext.Provider value={{...this.state}}>
-            {this.props.children}
-            </LocationContext.Provider>
-        )
+      return(
+        <LocationContext.Provider value={{...this.state}}>
+        {this.props.children}
+        </LocationContext.Provider>
+      )
     }
 }
 
