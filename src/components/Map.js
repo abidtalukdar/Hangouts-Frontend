@@ -7,12 +7,9 @@ class MapContainer extends React.Component {
       zoom: 11,
       friendsCoordinates: []
     } 
-      
-    
 
-  
     render() {
-      console.log(this.props)
+      // console.log(this.props)
     const position = [this.props.lat, this.props.lng]
     return (
     <div style={{textAlign: "center", marginBottom: "20px"}}>
