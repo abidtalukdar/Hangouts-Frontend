@@ -23,38 +23,13 @@ class App extends React.Component {
     long:0,
     currentLat: 0,
     currentLong: 0,
-    currentLocation: ""
+    currentLocation: "",
+    userId: ""
     // currentUser: null
   }
 
   componentDidMount() {
-    console.log(this.context)
-    let userId = this.context.user
-    fetch(`http://localhost:3000/friends/${userId}`)
-    .then(r => r.json())
-    .then(object => {
-      this.setState({
-        friends: object
-      },()=>{
-
-        this.state.friends.forEach(friend =>{
-          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
-          .then(r => r.json())
-          .then(object =>{
-            let lat = (object.results[0].geometry.location.lat)
-            let long = (object.results[0].geometry.location.lng)
-            let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
-            console.log(test)
-            this.setState(() => ({
-              friendsLocation: [...this.state.friendsLocation,test]
-            }))
-          })
-
-
-      })
-    })
-  })
-
+  
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
@@ -66,6 +41,47 @@ class App extends React.Component {
       })
     })
   }
+
+
+
+  handleUpdateCurrentUser = (user) => {
+    this.setState({
+      userId: user
+    })
+  }
+
+
+componentDidUpdate(prevProps,prevState,snapshot){
+    if (this.state.userId !== prevState.userId) {
+    let userId = this.state.userId.id
+    fetch(`http://localhost:3000/friends/${userId}`)
+    .then(r => r.json())
+    .then(object => {
+      this.setState({
+        friends: object
+      },()=>{
+        this.state.friends.forEach(friend =>{
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+          .then(r => r.json())
+          .then(object =>{
+            let lat = (object.results[0].geometry.location.lat)
+            let long = (object.results[0].geometry.location.lng)
+            let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+            // console.log(test)
+            this.setState(() => ({
+              friendsLocation: [...this.state.friendsLocation,test]
+            }))
+          })
+
+
+      })
+    })
+  }
+)}}
+
+
+  
+
 
   geolocationCallback(position) {
     this.setState({
@@ -133,7 +149,8 @@ class App extends React.Component {
   static contextType = AuthContext
 
   render(){  
-    console.log(this.state)
+    // console.log(this.props)
+    // console.log(this.state)
     return (
       <div className="App">
         <Router>
@@ -143,6 +160,7 @@ class App extends React.Component {
             <Main friends={this.state.friends} 
             friendsInvited={this.state.friendsInvited}
             meetups={this.state.meetups}
+            friendsLocation={this.state.friendsLocation}
             lat = {this.state.currentLat} 
             long={this.state.currentLong}
             invite={this.inviteFriendFromList} 
@@ -161,7 +179,7 @@ class App extends React.Component {
             />}/>
             <Route exact path={`/profile`} component={Profile} />
             <Route exact path={`/register`} component={Register} />
-            <Route exact path={`/login`} component={Login} />
+            <Route exact path={`/login`} render={routeProps=> <Login {...routeProps} updateUser={this.handleUpdateCurrentUser}/>}/>
           </AuthContextProvider>
         </Router>
       </div>

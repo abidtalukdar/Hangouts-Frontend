@@ -13,7 +13,7 @@ class Meetup extends React.Component {
   render() {
     let { location_name, location_address, date, time ,display_phone} = this.props.meetup
     const open = this.state.open
-    console.log(this.props.meetup)
+    // console.log(this.props.meetup)
     
     return (
       <Accordion styled>

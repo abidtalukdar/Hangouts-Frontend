@@ -35,8 +35,9 @@ class Login extends React.Component {
       }
       )
       .then(user => {
-        this.props.history.push("/profile")
         this.context.handleUpdateCurrentUser(user)
+        this.props.updateUser(user)
+        this.props.history.push("/profile")
       })
       .catch(console.error)
   }
