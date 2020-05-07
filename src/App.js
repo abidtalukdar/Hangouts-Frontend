@@ -82,8 +82,6 @@ class App extends React.Component {
               }))
             })
           })
-        
-        
         })})
           fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
@@ -92,13 +90,13 @@ class App extends React.Component {
               meetups: object
             })
           })
-      // fetch(`http://localhost:3000/notfriends/${userId}`)
-      // .then(r => r.json())
-      // .then(object => {
-      //   this.setState({
-      //     notfriends: object
-      //   })
-      // })
+      fetch(`http://localhost:3000/notfriends/${userId}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          notfriends: object
+        })
+      })
     }
   }
 
@@ -122,8 +120,21 @@ class App extends React.Component {
     })
   }
 
-  handleAddFriend = (addedFriendId) => {
-    console.log(addedFriendId)
+  handleAddFriend = (addedFriend) => {
+    const friendshipObj = {user_id: this.state.userId.id, friend_id: addedFriend.id }
+    fetch(`http://localhost:3000/friendships`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(friendshipObj)
+    })
+    .then(response => response.json())
+    .then(object => {
+      this.setState({friends: [...this.state.friends, addedFriend]})
+    })
+    let updatedNotFriends = this.state.notfriends.filter(suggestedFriend => suggestedFriend.id !== addedFriend.id)
+    this.setState({notfriends: updatedNotFriends})
   }
 
   handleNewMeetups = (meetup) => {
@@ -135,10 +146,10 @@ class App extends React.Component {
       lat: 0,
       long: 0
     })
-    this.setState({friendsInvited: select.value}, ()=> this.bigMaths())
+    this.setState({friendsInvited: select.value}, () => this.bigMaths())
   }
 
-  inviteFriendFromList = () =>{
+  inviteFriendFromList = () => {
     this.bigMaths()
   }
 
