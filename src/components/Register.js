@@ -13,6 +13,8 @@ class Register extends React.Component {
     password_confirmation: ""
   }
 
+  static contextType = AuthContext
+
   handleInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -37,7 +39,7 @@ class Register extends React.Component {
       })
       .then(user => {
         this.props.history.push("/profile")
-        this.props.handleUpdateCurrentUser(user)
+        this.context.handleUpdateCurrentUser(user)
       })
       .catch(console.error)
     } else {
