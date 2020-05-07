@@ -49,7 +49,7 @@ class Register extends React.Component {
     const { email, first_name, last_name, default_address, password, password_confirmation } = this.state
     return (
       <div className="form-container">
-      {this.props.user ? <Redirect to="/home" />:null}
+      {this.props.user === "pending" ? null:<Redirect to="/home" />}
         <h3>Register</h3>
         <form onSubmit={this.handleSubmit}>
           <label>Email:</label>

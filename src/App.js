@@ -67,7 +67,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate(prevProps,prevState,snapshot){
-    if (this.state.userId !== prevState.userId) {
+    if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
       let userId = this.state.userId.id
       fetch(`http://localhost:3000/friends/${userId}`)
       .then(r => r.json())
@@ -81,13 +81,18 @@ class App extends React.Component {
             .then(object =>{
               let lat = (object.results[0].geometry.location.lat)
               let long = (object.results[0].geometry.location.lng)
+<<<<<<< HEAD
               let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address, image: friend.image}
               // console.log(test)
+=======
+              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+>>>>>>> 66a2d2b4063181153721fca75010617e8eea6200
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
               }))
             })
-          })})})
+          })
+        })})
           fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
           .then(object => {
@@ -124,10 +129,28 @@ class App extends React.Component {
     })
   }
 
+<<<<<<< HEAD
 
 
   handleAddFriend = (addedFriendId) => {
     console.log(addedFriendId)
+=======
+  handleAddFriend = (addedFriend) => {
+    const friendshipObj = {user_id: this.state.userId.id, friend_id: addedFriend.id }
+    fetch(`http://localhost:3000/friendships`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(friendshipObj)
+    })
+    .then(response => response.json())
+    .then(object => {
+      this.setState({friends: [...this.state.friends, addedFriend]})
+    })
+    let updatedNotFriends = this.state.notfriends.filter(suggestedFriend => suggestedFriend.id !== addedFriend.id)
+    this.setState({notfriends: updatedNotFriends})
+>>>>>>> 66a2d2b4063181153721fca75010617e8eea6200
   }
 
   handleNewMeetups = (meetup) => {
@@ -142,7 +165,7 @@ class App extends React.Component {
     this.setState({friendsInvited: select.value}, () => this.bigMaths())
   }
 
-  inviteFriendFromList = () =>{
+  inviteFriendFromList = () => {
     this.bigMaths()
   }
 

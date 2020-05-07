@@ -20,11 +20,13 @@ class Friends extends React.Component{
   }
   
   render() {
+    console.log(this.props)
+
     return (
       <section className="friends">
         <ul className="friends-list">
           <li className="friend-label">Friends</li>
-            {this.renderFriend()}
+            {this.props.friends===undefined? null:this.renderFriend()}
         </ul>
         <ul id="suggested" className="friends-list">
           <li className="friend-label">Suggested Friends</li>
