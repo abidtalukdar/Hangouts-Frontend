@@ -62,7 +62,7 @@ class App extends React.Component {
 
 
   componentDidUpdate(prevProps,prevState,snapshot){
-    if (this.state.userId !== prevState.userId) {
+    if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
       let userId = this.state.userId.id
       fetch(`http://localhost:3000/friends/${userId}`)
       .then(r => r.json())
@@ -77,12 +77,14 @@ class App extends React.Component {
               let lat = (object.results[0].geometry.location.lat)
               let long = (object.results[0].geometry.location.lng)
               let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
-              // console.log(test)
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
               }))
             })
-          })})})
+          })
+        
+        
+        })})
           fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
           .then(object => {
@@ -90,13 +92,13 @@ class App extends React.Component {
               meetups: object
             })
           })
-      fetch(`http://localhost:3000/notfriends/${userId}`)
-      .then(r => r.json())
-      .then(object => {
-        this.setState({
-          notfriends: object
-        })
-      })
+      // fetch(`http://localhost:3000/notfriends/${userId}`)
+      // .then(r => r.json())
+      // .then(object => {
+      //   this.setState({
+      //     notfriends: object
+      //   })
+      // })
     }
   }
 

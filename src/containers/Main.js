@@ -19,7 +19,7 @@ class Main extends React.Component {
   render() {
     return (
       <main className="main">
-      {!this.props.user ? <Redirect to="/register" />:null}
+      {this.props.user === "pending" ? <Redirect to="/register" />:null}
         <Friends friends={this.props.friends} 
         notfriends={this.props.notfriends}
         handleAddFriend={this.props.handleAddFriend}

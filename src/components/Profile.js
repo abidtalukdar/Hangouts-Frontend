@@ -6,7 +6,7 @@ const Profile = (props) => {
 
   const [showFront, setShowFront] = useState(true)
 
-  
+    console.log(props)
   return (
     
     <section className="profile-section">
