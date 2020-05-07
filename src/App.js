@@ -33,13 +33,7 @@ class App extends React.Component {
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
-    fetch('http://localhost:3000/meetups')
-    .then(r => r.json())
-    .then(object => {
-      this.setState({
-        meetups: object
-      })
-    })
+    
   }
 
 
@@ -72,12 +66,15 @@ componentDidUpdate(prevProps,prevState,snapshot){
               friendsLocation: [...this.state.friendsLocation,test]
             }))
           })
-
-
-      })
+        })})})
+        fetch(`http://localhost:3000/meetups/${userId}`)
+        .then(r => r.json())
+        .then(object => {
+          this.setState({
+            meetups: object
+          })
     })
-  }
-)}}
+}}
 
 
   
@@ -149,8 +146,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
   static contextType = AuthContext
 
   render(){  
-    // console.log(this.props)
-    // console.log(this.state)
+    console.log(this.state)
     return (
       <div className="App">
         <Router>

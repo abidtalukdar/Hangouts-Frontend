@@ -3,14 +3,17 @@ import Meetup from '../components/Meetup'
 class Meetups extends Component {
 
   renderMeetup = () => {
-    return this.props.meetups.map(meetup => 
+    return this.props.meetups.map(meetup =>
+      
       <Meetup key={meetup.id} meetup={meetup}/>
     )
   }
   render() {
+    console.log(this.props)
+    debugger
     return (
       <div className="meetup-container">
-        {this.props.meetups ? this.renderMeetup() : <h2>There are no planned Hangouts</h2>}
+        {this.props.meetups? this.renderMeetup() : <h2>There are no planned Hangouts</h2>}
       </div>
     );
   }
