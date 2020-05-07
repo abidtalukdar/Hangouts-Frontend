@@ -31,11 +31,12 @@ class Register extends React.Component {
       })
       .then(r => {
         if (!r.ok) {
+          alert('hey you did something wrong')
           throw r
         }
         return r.json()
       })
-      .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page
+      .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page if invalid sign up
         this.props.history.push("/login")
       })
       .catch(console.error)

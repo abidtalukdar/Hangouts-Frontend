@@ -12,7 +12,6 @@ code {
     monospace;
 }
 
-
 input::placeholder {
   font-size: 0.9em;
   font-style: italic;
@@ -47,7 +46,6 @@ input::placeholder {
   margin-top: 0.25rem;
   margin-bottom: 0.75rem;
   padding: 0.25rem;
-  font-weight: bold;
   border: none;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 2px;
