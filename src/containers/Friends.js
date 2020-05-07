@@ -1,5 +1,7 @@
 import React from 'react';
-import Friend from '../components/Friend'
+import Friend from '../components/Friend';
+import SuggestedFriend from '../components/SuggestedFriend';
+
 
 
 class Friends extends React.Component{
@@ -10,12 +12,23 @@ class Friends extends React.Component{
     )
   }
   
+  renderSuggestedFriend = () => {
+    return this.props.notfriends.map(suggestedFriend => 
+      <SuggestedFriend key={suggestedFriend.id} suggestedFriend={suggestedFriend} handleAddFriend={this.props.handleAddFriend}
+      />
+    )
+  }
+  
   render() {
     return (
       <section className="friends">
         <ul className="friends-list">
           <li className="friend-label">Friends</li>
             {this.renderFriend()}
+        </ul>
+        <ul className="friends-list">
+          <li className="friend-label">Suggested Friends</li>
+            {this.renderSuggestedFriend()}
         </ul>
       </section>
     );

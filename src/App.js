@@ -17,6 +17,7 @@ import {
 class App extends React.Component {
   state = {
     friends: [],
+    notfriends: [],
     friendsInvited: [],
     friendsLocation:[],
     meetups: [],
@@ -53,8 +54,6 @@ class App extends React.Component {
     
   }
 
-
-
   handleUpdateCurrentUser = (user) => {
     this.setState({
       userId: user
@@ -62,40 +61,44 @@ class App extends React.Component {
   }
 
 
-componentDidUpdate(prevProps,prevState,snapshot){
-    if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
-    let userId = this.state.userId.id
-    fetch(`http://localhost:3000/friends/${userId}`)
-    .then(r => r.json())
-    .then(object => {
-      this.setState({
-        friends: object
-      },()=>{
-        this.state.friends.forEach(friend =>{
-          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+  componentDidUpdate(prevProps,prevState,snapshot){
+    if (this.state.userId !== prevState.userId) {
+      let userId = this.state.userId.id
+      fetch(`http://localhost:3000/friends/${userId}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          friends: object
+        },()=>{
+          this.state.friends.forEach(friend =>{
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+            .then(r => r.json())
+            .then(object =>{
+              let lat = (object.results[0].geometry.location.lat)
+              let long = (object.results[0].geometry.location.lng)
+              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+              // console.log(test)
+              this.setState(() => ({
+                friendsLocation: [...this.state.friendsLocation,test]
+              }))
+            })
+          })})})
+          fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
-          .then(object =>{
-            let lat = (object.results[0].geometry.location.lat)
-            let long = (object.results[0].geometry.location.lng)
-            let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
-            // console.log(test)
-            this.setState(() => ({
-              friendsLocation: [...this.state.friendsLocation,test]
-            }))
+          .then(object => {
+            this.setState({
+              meetups: object
+            })
           })
-        })})})
-        fetch(`http://localhost:3000/meetups/${userId}`)
-        .then(r => r.json())
-        .then(object => {
-          this.setState({
-            meetups: object
-          })
-          })
-
-}}
-
-
-  
+      fetch(`http://localhost:3000/notfriends/${userId}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          notfriends: object
+        })
+      })
+    }
+  }
 
 
   geolocationCallback(position) {
@@ -115,6 +118,10 @@ componentDidUpdate(prevProps,prevState,snapshot){
         ...this.state, currentLocation: object.results[0].formatted_address
       })
     })
+  }
+
+  handleAddFriend = (addedFriendId) => {
+    console.log(addedFriendId)
   }
 
   handleNewMeetups = (meetup) => {
@@ -142,7 +149,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
     this.setState({
       lat: testLat,
       long: testLong
-    }, ()=>{
+    }, () => {
       this.state.friendsInvited.forEach(friend => 
          { 
           fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
@@ -167,6 +174,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
   }
 
   render(){  
+    // console.log(this.state)
     return (
       <div className="App">
         <Router>
@@ -174,6 +182,8 @@ componentDidUpdate(prevProps,prevState,snapshot){
             <Navbar user={this.state.userId} updateUser={this.handleUpdateCurrentUser}/>
             <Route exact path={`/home`} render={() => 
             <Main friends={this.state.friends} 
+            notfriends={this.state.notfriends}
+            handleAddFriend={this.handleAddFriend}
             friendsInvited={this.state.friendsInvited}
             meetups={this.state.meetups}
             friendsLocation={this.state.friendsLocation}
@@ -185,7 +195,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
             <Route exact path={`/hangout`} render={routeProps => 
             <MeetupCreate 
             {...routeProps}
-            friends={this.state.friends} 
+            friends={this.state.friends}
             friendsInvited={this.state.friendsInvited}
             handleNewMeetups={this.handleNewMeetups}
             invite={this.inviteFriendToEvent} 
