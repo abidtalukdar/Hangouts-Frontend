@@ -102,8 +102,20 @@ class App extends React.Component {
     })
   }
 
-  handleAddFriend = (addedFriendId) => {
-    console.log(addedFriendId)
+  handleAddFriend = (addedFriend) => {
+    const friendshipObj = {user_id: this.state.userId.id, friend_id: addedFriend.id }
+    console.log(friendshipObj)
+    fetch(`http://localhost:3000/friendships`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(friendshipObj)
+    })
+    .then(response => response.json())
+    .then(object => {
+      this.setState({friends: [...this.state.friends, addedFriend]})
+    })
   }
 
   handleNewMeetups = (meetup) => {
@@ -115,10 +127,10 @@ class App extends React.Component {
       lat: 0,
       long: 0
     })
-    this.setState({friendsInvited: select.value}, ()=> this.bigMaths())
+    this.setState({friendsInvited: select.value}, () => this.bigMaths())
   }
 
-  inviteFriendFromList = () =>{
+  inviteFriendFromList = () => {
     this.bigMaths()
   }
 

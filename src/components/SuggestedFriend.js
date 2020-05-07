@@ -8,7 +8,7 @@ export default function Friend(props) {
   const [open, setOpen] = useState(false);
   const handleAdd = () => {
     setAdd(true)
-    this.props.handleAddFriend(this.suggestedFriend.id)
+    props.handleAddFriend(props.suggestedFriend)
   }
 
   const [add, setAdd] = useState(false);
