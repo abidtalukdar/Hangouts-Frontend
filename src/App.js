@@ -104,7 +104,6 @@ class App extends React.Component {
 
   handleAddFriend = (addedFriend) => {
     const friendshipObj = {user_id: this.state.userId.id, friend_id: addedFriend.id }
-    console.log(friendshipObj)
     fetch(`http://localhost:3000/friendships`, {
       method: 'POST',
       headers: {
@@ -116,6 +115,8 @@ class App extends React.Component {
     .then(object => {
       this.setState({friends: [...this.state.friends, addedFriend]})
     })
+    let updatedNotFriends = this.state.notfriends.filter(suggestedFriend => suggestedFriend.id !== addedFriend.id)
+    this.setState({notfriends: updatedNotFriends})
   }
 
   handleNewMeetups = (meetup) => {
