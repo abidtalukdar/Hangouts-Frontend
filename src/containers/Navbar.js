@@ -9,8 +9,6 @@ import { AuthContext } from '../contexts/AuthContext'
 
 class Navbar extends React.Component {
 
-
-
   static contextType = AuthContext
 
   render() {

@@ -479,3 +479,8 @@ html, body {
   padding: 2rem;
   background-color: rgb(218, 203, 203);
 }
+
+#login {
+  top: 75%;
+  left: 48%;
+}

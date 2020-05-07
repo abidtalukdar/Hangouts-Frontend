@@ -27,7 +27,6 @@ class Restaurants extends React.Component {
   }
   
   setRestaurants = () =>{
-    
     let location = {lat: this.state.lat, lng: this.state.lng}
     fetch(`http://localhost:3000/search?lat=${location.lat}&lng=${location.lng}` ,{
         headers: new Headers({
