@@ -37,7 +37,7 @@ class Register extends React.Component {
         }
         return r.json()
       })
-      .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page
+      .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page if invalid sign up
         this.props.history.push("/login")
       })
       .catch(console.error)
