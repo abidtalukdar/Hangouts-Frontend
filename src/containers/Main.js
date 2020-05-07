@@ -13,11 +13,13 @@ import {
 class Main extends React.Component {
  
 
+
+
+
   render() {
-    console.log(this.props)
     return (
       <main className="main">
-        {!this.props.user? <Redirect to="/register" />:null}
+      {!this.props.user ? <Redirect to="/register" />:null}
         <Friends friends={this.props.friends} 
         friendsInvited={this.props.friendsInvited} 
         invite = {this.props.invite}/>

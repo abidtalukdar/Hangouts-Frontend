@@ -108,7 +108,7 @@ class MeetupCreate extends React.Component {
         <h2 className="create-header">Create Hangout</h2>
 
         <div className="create-container">
-        {!this.props.user? <Redirect to="/register" />:null}
+        {this.props.user === "pending"? <Redirect to="/register" />:null}
           <form className="create-form">
             <YelpSearch  lat={this.props.friendsLat} lng={this.props.friendsLng} results = {this.onChangeResults}/>
 

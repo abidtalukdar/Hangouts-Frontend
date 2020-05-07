@@ -8,8 +8,9 @@ const Profile = (props) => {
 
   
   return (
+    
     <section className="profile-section">
-      {!props.user? <Redirect to="/register" />:null}
+    {props.user === "pending"? <Redirect to="/register" />:null}
       <div className={showFront ? "profile-div":"profile-div flip"} onClick={() => setShowFront(!showFront)}>
         <div className="profile-front" >
           <article className="profile-image-container">

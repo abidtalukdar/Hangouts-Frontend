@@ -31,7 +31,6 @@ class App extends React.Component {
 
   componentDidMount() {
   
-
     fetch("http://localhost:3000/autologin", {
       credentials: "include"
     })
@@ -42,12 +41,12 @@ class App extends React.Component {
         return r.json()
       })
       .then(user => {
+        this.setState({
+          loggedIn:true
+        })
         this.handleUpdateCurrentUser(user)
-        this.context.handleUpdateCurrentUser(user)
       })
       .catch(console.error)
-
-
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
@@ -64,7 +63,7 @@ class App extends React.Component {
 
 
 componentDidUpdate(prevProps,prevState,snapshot){
-    if (this.state.userId !== prevState.userId) {
+    if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
     let userId = this.state.userId.id
     fetch(`http://localhost:3000/friends/${userId}`)
     .then(r => r.json())
@@ -162,14 +161,17 @@ componentDidUpdate(prevProps,prevState,snapshot){
     )
   }
 
-  static contextType = AuthContext
+
+  logOut = () =>{
+
+  }
 
   render(){  
     return (
       <div className="App">
         <Router>
           <AuthContextProvider>
-            <Navbar user={this.state.userId}/>
+            <Navbar user={this.state.userId} updateUser={this.handleUpdateCurrentUser}/>
             <Route exact path={`/home`} render={() => 
             <Main friends={this.state.friends} 
             friendsInvited={this.state.friendsInvited}
@@ -194,7 +196,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
             user={this.state.userId}
             />}/>
             <Route exact path={`/profile`} render={routeProps => <Profile user={this.state.userId}/>} />
-            <Route exact path={`/register`} component={Register} />
+            <Route exact path={`/register`} render={routeProps => <Register user={this.state.userId}/>} />
             <Route exact path={`/login`} render={routeProps=> <Login {...routeProps} updateUser={this.handleUpdateCurrentUser}/>}/>
           </AuthContextProvider>
         </Router>

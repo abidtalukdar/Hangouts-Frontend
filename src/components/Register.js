@@ -1,5 +1,5 @@
 import React from 'react';
-// import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route,Redirect} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
 
 class Register extends React.Component {
@@ -49,6 +49,7 @@ class Register extends React.Component {
     const { email, first_name, last_name, default_address, password, password_confirmation } = this.state
     return (
       <div className="form-container">
+      {this.props.user ? <Redirect to="/home" />:null}
         <h3>Register</h3>
         <form onSubmit={this.handleSubmit}>
           <label>Email:</label>
