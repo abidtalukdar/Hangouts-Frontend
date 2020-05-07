@@ -1,7 +1,6 @@
 import React from 'react';
-// import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route,Redirect} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
-import { AuthContext } from '../contexts/AuthContext'
 
 class Register extends React.Component {
   state = {
@@ -13,7 +12,6 @@ class Register extends React.Component {
     password_confirmation: ""
   }
 
-  static contextType = AuthContext
 
   handleInputChange = event => {
     this.setState({
@@ -33,11 +31,12 @@ class Register extends React.Component {
       })
       .then(r => {
         if (!r.ok) {
+          alert('hey you did something wrong')
           throw r
         }
         return r.json()
       })
-      .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page
+      .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page if invalid sign up
         this.props.history.push("/login")
       })
       .catch(console.error)
@@ -50,6 +49,7 @@ class Register extends React.Component {
     const { email, first_name, last_name, default_address, password, password_confirmation } = this.state
     return (
       <div className="form-container">
+      {this.props.user ? <Redirect to="/home" />:null}
         <h3>Register</h3>
         <form onSubmit={this.handleSubmit}>
           <label>Email:</label>

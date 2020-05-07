@@ -34,7 +34,7 @@ class Restaurants extends React.Component {
         })
       })
     .then(r => r.json())
-    .then(restaurants => {   this.setState({suggestions: restaurants.businesses})
+    .then(restaurants => {this.setState({suggestions: restaurants.businesses})
     })
   }
 

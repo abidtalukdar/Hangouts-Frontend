@@ -10,12 +10,14 @@ import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 class App extends React.Component {
   state = {
     friends: [],
+    notfriends: [],
     friendsInvited: [],
     friendsLocation:[],
     meetups: [],
@@ -24,11 +26,28 @@ class App extends React.Component {
     currentLat: 0,
     currentLong: 0,
     currentLocation: "",
-    userId: ""
+    userId: "pending"
+    // currentUser: null
   }
 
   componentDidMount() {
   
+    fetch("http://localhost:3000/autologin", {
+      credentials: "include"
+    })
+      .then(r => {
+        if (!r.ok) {
+          throw r
+        }
+        return r.json()
+      })
+      .then(user => {
+        this.setState({
+          loggedIn:true
+        })
+        this.handleUpdateCurrentUser(user)
+      })
+      .catch(console.error)
     navigator.geolocation.getCurrentPosition(
       (position) => {(this.geolocationCallback(position))}
     )
@@ -41,8 +60,6 @@ class App extends React.Component {
     })
   }
 
-
-
   handleUpdateCurrentUser = (user) => {
     this.setState({
       userId: user
@@ -50,36 +67,44 @@ class App extends React.Component {
   }
 
 
-componentDidUpdate(prevProps,prevState,snapshot){
+  componentDidUpdate(prevProps,prevState,snapshot){
     if (this.state.userId !== prevState.userId) {
-    let userId = this.state.userId.id
-    fetch(`http://localhost:3000/friends/${userId}`)
-    .then(r => r.json())
-    .then(object => {
-      this.setState({
-        friends: object
-      },()=>{
-        this.state.friends.forEach(friend =>{
-          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+      let userId = this.state.userId.id
+      fetch(`http://localhost:3000/friends/${userId}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          friends: object
+        },()=>{
+          this.state.friends.forEach(friend =>{
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+            .then(r => r.json())
+            .then(object =>{
+              let lat = (object.results[0].geometry.location.lat)
+              let long = (object.results[0].geometry.location.lng)
+              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+              // console.log(test)
+              this.setState(() => ({
+                friendsLocation: [...this.state.friendsLocation,test]
+              }))
+            })
+          })})})
+          fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
-          .then(object =>{
-            let lat = (object.results[0].geometry.location.lat)
-            let long = (object.results[0].geometry.location.lng)
-            let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
-            // console.log(test)
-            this.setState(() => ({
-              friendsLocation: [...this.state.friendsLocation,test]
-            }))
+          .then(object => {
+            this.setState({
+              meetups: object
+            })
           })
-
-
+      fetch(`http://localhost:3000/notfriends/${userId}`)
+      .then(r => r.json())
+      .then(object => {
+        this.setState({
+          notfriends: object
+        })
       })
-    })
+    }
   }
-)}}
-
-
-  
 
 
   geolocationCallback(position) {
@@ -99,6 +124,10 @@ componentDidUpdate(prevProps,prevState,snapshot){
         ...this.state, currentLocation: object.results[0].formatted_address
       })
     })
+  }
+
+  handleAddFriend = (addedFriendId) => {
+    console.log(addedFriendId)
   }
 
   handleNewMeetups = (meetup) => {
@@ -126,7 +155,7 @@ componentDidUpdate(prevProps,prevState,snapshot){
     this.setState({
       lat: testLat,
       long: testLong
-    }, ()=>{
+    }, () => {
       this.state.friendsInvited.forEach(friend => 
          { 
           fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
@@ -145,29 +174,34 @@ componentDidUpdate(prevProps,prevState,snapshot){
     )
   }
 
-  static contextType = AuthContext
+
+  logOut = () =>{
+
+  }
 
   render(){  
-    // console.log(this.props)
     // console.log(this.state)
     return (
       <div className="App">
         <Router>
           <AuthContextProvider>
-            <Navbar />
+            <Navbar user={this.state.userId} updateUser={this.handleUpdateCurrentUser}/>
             <Route exact path={`/home`} render={() => 
             <Main friends={this.state.friends} 
+            notfriends={this.state.notfriends}
+            handleAddFriend={this.handleAddFriend}
             friendsInvited={this.state.friendsInvited}
             meetups={this.state.meetups}
             friendsLocation={this.state.friendsLocation}
             lat = {this.state.currentLat} 
             long={this.state.currentLong}
             invite={this.inviteFriendFromList} 
+            user={this.state.userId}
             />}/> 
             <Route exact path={`/hangout`} render={routeProps => 
             <MeetupCreate 
             {...routeProps}
-            friends={this.state.friends} 
+            friends={this.state.friends}
             friendsInvited={this.state.friendsInvited}
             handleNewMeetups={this.handleNewMeetups}
             invite={this.inviteFriendToEvent} 
@@ -175,9 +209,10 @@ componentDidUpdate(prevProps,prevState,snapshot){
             lng = {this.state.currentLong}
             friendsLat = {this.state.lat}
             friendsLng = {this.state.long}
+            user={this.state.userId}
             />}/>
-            <Route exact path={`/profile`} component={Profile} />
-            <Route exact path={`/register`} component={Register} />
+            <Route exact path={`/profile`} render={routeProps => <Profile user={this.state.userId}/>} />
+            <Route exact path={`/register`} render={routeProps => <Register user={this.state.userId}/>} />
             <Route exact path={`/login`} render={routeProps=> <Login {...routeProps} updateUser={this.handleUpdateCurrentUser}/>}/>
           </AuthContextProvider>
         </Router>

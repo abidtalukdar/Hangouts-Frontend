@@ -1,8 +1,6 @@
 import React from 'react';
 // import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
 import {Button} from 'semantic-ui-react'
-import { AuthContext } from '../contexts/AuthContext'
-
 
 class Login extends React.Component {
   state = {
@@ -10,7 +8,6 @@ class Login extends React.Component {
     password: "",
   }
 
-  static contextType = AuthContext
 
   handleInputChange = event => {
     this.setState({
@@ -22,6 +19,7 @@ class Login extends React.Component {
     event.preventDefault()
     fetch("http://localhost:3000/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -36,7 +34,6 @@ class Login extends React.Component {
       }
       )
       .then(user => {
-        this.context.handleUpdateCurrentUser(user)
         this.props.updateUser(user)
         this.props.history.push("/home")
       })

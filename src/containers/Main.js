@@ -1,9 +1,8 @@
 import React from 'react';
 import Friends from './Friends'
-import Map from '../components/Map'
+import Map from '../components/MapCreate'
 import Restaurants from './Restaurants'
 import Meetups from './Meetups'
-import { AuthContext } from '../contexts/AuthContext'
 
 import {
   BrowserRouter as Router,
@@ -12,20 +11,23 @@ import {
 } from "react-router-dom";
 
 class Main extends React.Component {
-
-  static contextType = AuthContext
  
+
+
+
 
   render() {
     return (
       <main className="main">
-        {!this.context.user? <Redirect to="/register" />:null}
+      {!this.props.user ? <Redirect to="/register" />:null}
         <Friends friends={this.props.friends} 
+        notfriends={this.props.notfriends}
+        handleAddFriend={this.props.handleAddFriend}
         friendsInvited={this.props.friendsInvited} 
         invite = {this.props.invite}/>
         <section className="section">
           <div className="meetup-map">
-            <Map restaurants={[]} friends={this.props.friendsLocation} lat ={this.props.lat} lng ={this.props.long} />
+            <MapMain restaurants={[]} friends={this.props.friendsLocation} lat ={this.props.lat} lng ={this.props.long} />
             <Meetups meetups={this.props.meetups}/>
           </div>
           <Restaurants/>

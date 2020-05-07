@@ -5,11 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Dropdown, Select, Button } from 'semantic-ui-react'
 import { TimeInput } from 'semantic-ui-calendar-react' 
 import YelpSearch from '../components/yelpsearch'
-import Map from '../components/Map'
+import MapCreate from '../components/MapCreate'
 import { ReactComponent as Calendar } from '../icons/calendar.svg'
 import { ReactComponent as Location } from '../icons/location.svg'
 import { ReactComponent as Time } from '../icons/time.svg'
-import { AuthContext } from '../contexts/AuthContext'
 import { Redirect } from "react-router-dom";
 
 
@@ -70,7 +69,7 @@ class MeetupCreate extends React.Component {
   submitMeetup = (e) =>{
     e.preventDefault()
 
-    let user = this.context.user
+    let user = this.props.user
     let {dateSelected, restaurantSelected, timeSelected} = this.state 
     let friendsInvited = this.props.friendsInvited
 
@@ -97,7 +96,6 @@ class MeetupCreate extends React.Component {
 
   }
 
-  static contextType = AuthContext
 
   render() {
     
@@ -110,7 +108,7 @@ class MeetupCreate extends React.Component {
         <h2 className="create-header">Create Hangout</h2>
 
         <div className="create-container">
-        {!this.context.user? <Redirect to="/register" />:null}
+        {this.props.user === "pending"? <Redirect to="/register" />:null}
           <form className="create-form">
             <YelpSearch  lat={this.props.friendsLat} lng={this.props.friendsLng} results = {this.onChangeResults}/>
 
@@ -139,7 +137,7 @@ class MeetupCreate extends React.Component {
           </form>
   
             <div className="create-map">
-              <Map restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
+              <MapCreate restaurants={this.state.results} lat={this.props.lat} lng={this.props.lng}/>
             </div>
           </div>
         </section>
