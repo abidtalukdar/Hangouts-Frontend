@@ -29,6 +29,7 @@ class Login extends React.Component {
     })
       .then(r => {
         if (!r.ok) {
+          alert('u no get in ')
           throw r
         }
         return r.json()
@@ -37,7 +38,7 @@ class Login extends React.Component {
       .then(user => {
         this.context.handleUpdateCurrentUser(user)
         this.props.updateUser(user)
-        this.props.history.push("/profile")
+        this.props.history.push("/home")
       })
       .catch(console.error)
   }

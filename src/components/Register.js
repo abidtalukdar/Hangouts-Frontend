@@ -38,8 +38,7 @@ class Register extends React.Component {
         return r.json()
       })
       .then(user => { // console.log(user) add logic here to make sure user gets re rendered to register page
-        this.props.history.push("/profile")
-        this.context.handleUpdateCurrentUser(user)
+        this.props.history.push("/login")
       })
       .catch(console.error)
     } else {
