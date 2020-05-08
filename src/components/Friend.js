@@ -4,11 +4,26 @@ import { ReactComponent as SentIcon } from '../icons/sent.svg'
 import { ReactComponent as InviteIcon } from '../icons/invite.svg'
 import { ReactComponent as InvitedIcon } from '../icons/invited.svg'
 
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+      this.sound.play();
+  }
+}
+let click = new sound("../icons/click.mp3")
+
 export default function Friend(props) {
   const { first_name, last_name, image, default_address } = props.friend
   const { friendsInvited } = props
   const [open, setOpen] = useState(false);
+
   const handleFriendsInvited = () => {
+    click.play()
     setAdd(!add)
     if(friendsInvited.includes(props.friend)){
       let index = friendsInvited.indexOf(props.friend)

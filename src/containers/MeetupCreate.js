@@ -11,7 +11,6 @@ import { ReactComponent as Location } from '../icons/location.svg'
 import { ReactComponent as Time } from '../icons/time.svg'
 import { Redirect } from "react-router-dom";
 
-
 class MeetupCreate extends React.Component {
 
   getTime = () => {
@@ -71,7 +70,6 @@ class MeetupCreate extends React.Component {
 
   submitMeetup = (e) =>{
     e.preventDefault()
-
     let user = this.props.user
     let {dateSelected, restaurantSelected, timeSelected} = this.state 
     let friendsInvited = this.props.friendsInvited
