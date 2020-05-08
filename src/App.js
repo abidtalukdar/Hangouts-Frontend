@@ -68,10 +68,16 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps,prevState,snapshot){
     if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
+      
       let userId = this.state.userId.id
+      
       fetch(`http://localhost:3000/friends/${userId}`)
       .then(r => r.json())
       .then(object => {
+        this.setState({
+          friends: [],
+          friendsLocation: []
+        })
         this.setState({
           friends: object
         },()=>{
@@ -184,6 +190,13 @@ class App extends React.Component {
     this.bigMaths()
   }
 
+
+  test = () =>{
+    this.setState({
+      friends: []
+    })
+  }
+
   bigMaths = () =>{
     let currentLat = this.state.currentLat
     let currentLong = this.state.currentLong
@@ -229,7 +242,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <AuthContextProvider>
-            <Navbar user={this.state.userId} updateUser={this.handleUpdateCurrentUser}/>
+            <Navbar user={this.state.userId} updateUser={this.handleUpdateCurrentUser} test={this.test}/>
             <Route exact path={`/home`} render={() => 
             <Main friends={this.state.friends} 
             notfriends={this.state.notfriends}

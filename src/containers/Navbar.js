@@ -22,8 +22,12 @@ class Navbar extends React.Component {
       .then(r => r.json())
       .then(() => {
         this.props.updateUser("pending")
+        this.props.test()
       })
   }
+
+
+
 
 
   render() {
