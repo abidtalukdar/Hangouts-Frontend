@@ -9,10 +9,9 @@ class Meetups extends Component {
     )
   }
   render() {
-    console.log(this.props)
     return (
       <div className="meetup-container">
-        {/* {this.props.meetups!==undefined? this.renderMeetup() : <h2>There are no planned Hangouts</h2>} */}
+        {this.props.meetups!=="pending"? this.renderMeetup() : <h2>There are no planned Hangouts</h2>}
       </div>
     );
   }

@@ -20,8 +20,6 @@ class Friends extends React.Component{
   }
   
   render() {
-    console.log(this.props)
-
     return (
       <section className="friends">
         <ul className="friends-list">

@@ -70,7 +70,10 @@ class App extends React.Component {
         this.setState({
           friends: object
         },()=>{
+
           this.state.friends.forEach(friend =>{
+            if(friend.default_location_preference === true){
+            console.log(friend)
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
             .then(r => r.json())
             .then(object =>{
@@ -80,7 +83,16 @@ class App extends React.Component {
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
               }))
-            })
+            })}
+            else{
+              let address = friend.current_address.split(" ")
+              let lat = parseFloat(address[0])
+              let long = parseFloat(address[1])
+              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+              this.setState(() => ({
+                friendsLocation: [...this.state.friendsLocation,test]
+              }))
+            }
           })
         
         
@@ -92,6 +104,20 @@ class App extends React.Component {
               meetups: object
             })
           })
+
+          // fetch(`http://localhost:3000/users/${userId}`,{
+          //   method: 'PATCH',
+          //   headers: {
+          //     'Content-type': 'application/json; charset=UTF-8'
+          //     },
+          //   body: JSON.stringify({
+          //     currentLocation: [this.state.currentLat,this.state.currentLong]
+          //   })
+          // })
+          // .then(r => r.json())
+          // .then(object => console.log(object))
+          
+
       // fetch(`http://localhost:3000/notfriends/${userId}`)
       // .then(r => r.json())
       // .then(object => {
@@ -153,30 +179,38 @@ class App extends React.Component {
       long: testLong
     }, () => {
       this.state.friendsInvited.forEach(friend => 
-         { 
+         {
+          let lat = 0
+          let long = 0
+          if(friend.default_location_preference === true){
           fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
           .then(r => r.json())
           .then(object =>{
-            let lat = 0
-            let long = 0
             lat = (object.results[0].geometry.location.lat/friendsInvited)
             long = (object.results[0].geometry.location.lng/friendsInvited)
             this.setState({
               lat: this.state.lat += lat,
               long: this.state.long += long
             },()=>{console.log(this.state)})
-          })
+          })}
+          else if(friend.default_location_preference === false){
+            let address = friend.current_address.split(" ")
+            lat = parseFloat(address[0])/friendsInvited
+            long = parseFloat(address[1])/friendsInvited
+            this.setState({
+              lat: this.state.lat += lat,
+              long: this.state.long += long
+            })
+          }
     })}
     )
   }
 
 
-  logOut = () =>{
-
-  }
+  
 
   render(){  
-    // console.log(this.state)
+    console.log(this.state)
     return (
       <div className="App">
         <Router>
