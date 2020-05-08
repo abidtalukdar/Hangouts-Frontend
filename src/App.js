@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import MeetupCreate from './containers/MeetupCreate'
 import Profile from './components/Profile'
+import Welcome from './components/welcome'
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext'
 
 import {
@@ -190,7 +191,6 @@ class App extends React.Component {
     this.bigMaths()
   }
 
-
   test = () =>{
     this.setState({
       friends: []
@@ -269,6 +269,7 @@ class App extends React.Component {
             friendsLng = {this.state.long}
             user={this.state.userId}
             />}/>
+            <Route exact path={`/welcome`} render={Welcome} />
             <Route exact path={`/profile`} render={routeProps => <Profile user={this.state.userId}/>} />
             <Route exact path={`/register`} render={routeProps => <Register user={this.state.userId}/>} />
             <Route exact path={`/login`} render={routeProps=> <Login {...routeProps} updateUser={this.handleUpdateCurrentUser}/>}/>

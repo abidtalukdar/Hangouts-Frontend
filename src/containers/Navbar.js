@@ -26,22 +26,18 @@ class Navbar extends React.Component {
       })
   }
 
-
-
-
-
   render() {
     return (
       <>
       {this.props.user === "pending"?
+        <nav className="navbar">
+        <Navitem><Link to="/welcome">Hangouts</Link></Navitem>
+        <Navitem text="Register"><Link to="/register"><RegisterIcon/></Link></Navitem>
+        <Navitem text="Login"><Link to="/login"><LoginIcon/></Link></Navitem>
+        </nav>
+        :
       <nav className="navbar">
-      <Navitem>Hangouts</Navitem>
-      <Navitem text="Register"><Link to="/register"><RegisterIcon/></Link></Navitem>
-      <Navitem text="Login"><Link to="/login"><LoginIcon/></Link></Navitem>
-      </nav>
-      :
-      <nav className="navbar">
-        <Navitem><Link to='/'>Hangouts</Link></Navitem>
+        <Navitem><Link to='/welcome'>Hangouts</Link></Navitem>
         <Navitem text="Hangout"><Link to="/hangout"><MeetupIcon/></Link></Navitem>
         <Navitem text="Home"><Link to="/home"><HomeIcon/></Link></Navitem>
         <Navitem text="Profile"><Link to="/profile"><ProfileIcon/></Link></Navitem>
