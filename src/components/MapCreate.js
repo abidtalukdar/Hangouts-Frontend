@@ -20,14 +20,21 @@ class MapCreate extends React.Component {
       }
     }
 
-    componentDidUpdate() {
-
+    componentDidUpdate(prevProps, prevState) {
+      console.log('hi!')
+      if(this.props.friendsInvited !== prevProps.friendsInvited) {
+        let invited = this.props.friends.filter(friend => this.props.friendsInvited.find(invited => invited.id === friend.id))
+        this.setState({
+          friends: invited
+        })
+      }
     }
+
+
 
     
 
     render() {
-    console.log(this.props.friends)
     const position = [this.props.lat, this.props.lng]
     const pinU = renderToStaticMarkup(<i id="user" class="fas fa-map-pin"></i>)
     const pinF = renderToStaticMarkup(<i id="friend" class="fas fa-map-pin"></i>)

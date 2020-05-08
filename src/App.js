@@ -69,9 +69,7 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps,prevState,snapshot){
     if (this.state.userId !== prevState.userId && this.state.userId !== "pending") {
-      
       let userId = this.state.userId.id
-      
       fetch(`http://localhost:3000/friends/${userId}`)
       .then(r => r.json())
       .then(object => {
@@ -101,7 +99,7 @@ class App extends React.Component {
               let address = friend.current_address.split(" ")
               let lat = parseFloat(address[0])
               let long = parseFloat(address[1])
-              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
+              let test = {id: friend.id, lat:lat, long:long, name: friend.first_name, address:friend.default_address, image: friend.image}
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
               }))
@@ -170,10 +168,21 @@ class App extends React.Component {
     })
     .then(response => response.json())
     .then(object => {
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addedFriend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
+            .then(r => r.json())
+            .then(object =>{
+              let lat = (object.results[0].geometry.location.lat)
+              let long = (object.results[0].geometry.location.lng)
+              let test = {id: addedFriend.id, lat:lat, long:long, name: addedFriend.first_name, address: addedFriend.default_address, image: addedFriend.image}
+              this.setState(() => ({
+                friendsLocation: [...this.state.friendsLocation,test]
+              }))
+            })
       this.setState({friends: [...this.state.friends, addedFriend]})
     })
     let updatedNotFriends = this.state.notfriends.filter(suggestedFriend => suggestedFriend.id !== addedFriend.id)
     this.setState({notfriends: updatedNotFriends})
+
   }
 
   handleNewMeetups = (meetup) => {
