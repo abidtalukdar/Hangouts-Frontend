@@ -16,7 +16,7 @@ const Profile = (props) => {
           <article className="profile-image-container">
             <div className="profile-image-circle">
               <div className="profile-image">
-                <img src={image}/>
+                <img className="profile-image" src={image}/>
               </div>
             </div>
           </article>
