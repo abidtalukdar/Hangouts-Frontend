@@ -76,7 +76,8 @@ class App extends React.Component {
       .then(object => {
         this.setState({
           friends: [],
-          friendsLocation: []
+          friendsLocation: [],
+          friendsInvited: []
         })
         this.setState({
           friends: object
