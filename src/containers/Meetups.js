@@ -9,7 +9,7 @@ class Meetups extends Component {
     )
   }
   render() {
-    return (
+      return (
       <div className="meetup-container">
         {this.props.meetups!=="pending"? this.renderMeetup() : <h2>There are no planned Hangouts</h2>}
       </div>

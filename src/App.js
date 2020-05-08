@@ -73,7 +73,6 @@ class App extends React.Component {
 
           this.state.friends.forEach(friend =>{
             if(friend.default_location_preference === true){
-            console.log(friend)
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${friend.default_address}&key=${process.env.REACT_APP_GOOGLE_API}`)
             .then(r => r.json())
             .then(object =>{
@@ -98,6 +97,7 @@ class App extends React.Component {
           fetch(`http://localhost:3000/meetups/${userId}`)
           .then(r => r.json())
           .then(object => {
+            console.log(object)
             this.setState({
               meetups: object
             })
@@ -110,26 +110,19 @@ class App extends React.Component {
         })
       })
 
-          // fetch(`http://localhost:3000/users/${userId}`,{
-          //   method: 'PATCH',
-          //   headers: {
-          //     'Content-type': 'application/json; charset=UTF-8'
-          //     },
-          //   body: JSON.stringify({
-          //     currentLocation: [this.state.currentLat,this.state.currentLong]
-          //   })
-          // })
-          // .then(r => r.json())
-          // .then(object => console.log(object))
+          fetch(`http://localhost:3000/users/${userId}`,{
+            method: 'PATCH',
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8'
+              },
+            body: JSON.stringify({
+              currentLocation: [this.state.currentLat,this.state.currentLong]
+            })
+          })
+          .then(r => r.json())
+          .then(object => console.log(object))
           
 
-      // fetch(`http://localhost:3000/notfriends/${userId}`)
-      // .then(r => r.json())
-      // .then(object => {
-      //   this.setState({
-      //     notfriends: object
-      //   })
-      // })
     }
   }
 
@@ -215,6 +208,7 @@ class App extends React.Component {
             let address = friend.current_address.split(" ")
             lat = parseFloat(address[0])/friendsInvited
             long = parseFloat(address[1])/friendsInvited
+            console.log(lat, long)
             this.setState({
               lat: this.state.lat += lat,
               long: this.state.long += long

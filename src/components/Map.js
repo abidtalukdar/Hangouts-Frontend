@@ -41,6 +41,7 @@ class MapContainer extends React.Component {
 
         {this.props.friends !== undefined? 
           this.props.friends.map(result => {
+            {console.log(result)}
           return <Marker key={"test"} position={[result.lat,result.long]}><Popup>
             <div className="popup">
               <h3>{result.name}</h3>
