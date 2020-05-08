@@ -11,21 +11,27 @@ class MapCreate extends React.Component {
       friends: []
     } 
 
-    componentWillMount() {
+    componentDidMount() {
       if(this.props.friendsInvited.length > 0){
         let invited = this.props.friends.filter(friend => this.props.friendsInvited.find(invited => invited.id === friend.id))
         this.setState({
-          friends: [...this.state.friends, invited]
+          friends: invited
         })
       }
     }
 
-    render() {
+    componentDidUpdate() {
+
+    }
+
     
+
+    render() {
+    console.log(this.props.friends)
     const position = [this.props.lat, this.props.lng]
     const pinU = renderToStaticMarkup(<i id="user" class="fas fa-map-pin"></i>)
     const pinF = renderToStaticMarkup(<i id="friend" class="fas fa-map-pin"></i>)
-    const pointer = renderToStaticMarkup(<i class="fas fa-map-pin"></i>);
+    const pointer = renderToStaticMarkup(<i id="place" class="fas fa-map-marker-alt"></i>);
     const place = divIcon({
       html: pointer,
     });
@@ -49,7 +55,8 @@ class MapCreate extends React.Component {
             {/* You are near {this.context.currentLocation} */}
           </Popup>
         </Marker>
-          {this.props.restaurants.length > 0? 
+
+        {this.props.restaurants.length > 0? 
           this.props.restaurants.map(result => {
           return <Marker icon={place} key={result.id} position={[result.coordinates.latitude,result.coordinates.longitude]}><Popup>
             <div className="popup">
@@ -61,7 +68,7 @@ class MapCreate extends React.Component {
               <p>Price Range <strong>{result.price}</strong></p>
             </div>
             </Popup></Marker>
-          }):null  
+          }):null
         }
 
         {this.state.friends.length > 0? 
@@ -79,8 +86,6 @@ class MapCreate extends React.Component {
     </div>
     )
     }
-
-
     
 }
 

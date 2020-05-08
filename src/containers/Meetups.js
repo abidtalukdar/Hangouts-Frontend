@@ -4,15 +4,13 @@ class Meetups extends Component {
 
   renderMeetup = () => {
     return this.props.meetups.map(meetup =>
-      
       <Meetup key={meetup.id} meetup={meetup}/>
     )
   }
   render() {
-    console.log(this.props)
     return (
       <div className="meetup-container">
-        {/* {this.props.meetups!==undefined? this.renderMeetup() : <h2>There are no planned Hangouts</h2>} */}
+        {this.props.meetups.length > 0? this.renderMeetup() : <h3>You have no planned Hangouts</h3>}
       </div>
     );
   }

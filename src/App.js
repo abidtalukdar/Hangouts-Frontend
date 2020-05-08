@@ -81,12 +81,8 @@ class App extends React.Component {
             .then(object =>{
               let lat = (object.results[0].geometry.location.lat)
               let long = (object.results[0].geometry.location.lng)
-<<<<<<< HEAD
-              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address, image: friend.image}
+              let test = {id: friend.id, lat:lat, long:long, name: friend.first_name, address:friend.default_address, image: friend.image}
               // console.log(test)
-=======
-              let test = {lat:lat, long:long, name: friend.first_name, address:friend.default_address}
->>>>>>> 66a2d2b4063181153721fca75010617e8eea6200
               this.setState(() => ({
                 friendsLocation: [...this.state.friendsLocation,test]
               }))
@@ -129,12 +125,6 @@ class App extends React.Component {
     })
   }
 
-<<<<<<< HEAD
-
-
-  handleAddFriend = (addedFriendId) => {
-    console.log(addedFriendId)
-=======
   handleAddFriend = (addedFriend) => {
     const friendshipObj = {user_id: this.state.userId.id, friend_id: addedFriend.id }
     fetch(`http://localhost:3000/friendships`, {
@@ -150,7 +140,6 @@ class App extends React.Component {
     })
     let updatedNotFriends = this.state.notfriends.filter(suggestedFriend => suggestedFriend.id !== addedFriend.id)
     this.setState({notfriends: updatedNotFriends})
->>>>>>> 66a2d2b4063181153721fca75010617e8eea6200
   }
 
   handleNewMeetups = (meetup) => {

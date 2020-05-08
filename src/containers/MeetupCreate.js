@@ -17,6 +17,9 @@ class MeetupCreate extends React.Component {
   getTime = () => {
     let date = new Date()
     let minute = date.getMinutes()
+    if(minute < 10){
+      minute = "0" + minute
+    }
     let meridiem = "AM"
     let hour = date.getHours()
     if(hour > 12){
@@ -73,13 +76,13 @@ class MeetupCreate extends React.Component {
     let {dateSelected, restaurantSelected, timeSelected} = this.state 
     let friendsInvited = this.props.friendsInvited
 
-  let data ={
-    user,
-    dateSelected,
-    restaurantSelected,
-    friendsInvited,
-    timeSelected
-  }
+    let data ={
+      user,
+      dateSelected,
+      restaurantSelected,
+      friendsInvited,
+      timeSelected
+    }
 
     fetch(`http://localhost:3000/meetups`,{
       method: 'POST', 
@@ -98,6 +101,7 @@ class MeetupCreate extends React.Component {
 
   render() {
     
+    console.log(this.props.friendsLocation)
     const friendOptions = this.props.friends.map(friend => {
       return { key: `${friend.id}`, text: `${friend.first_name}`, value: friend }
     })
@@ -129,7 +133,7 @@ class MeetupCreate extends React.Component {
                 <Dropdown placeholder='Select Friends' fluid multiple selection options={friendOptions} onChange={this.props.invite}
                 value = {this.props.friendsInvited}
                 />
-                <Button>Recalculate Locations</Button>
+                {/* <Button>Recalculate Locations</Button> */}
               </div>
               <Button onClick={this.submitMeetup}>Create Hangout</Button>
             </div>

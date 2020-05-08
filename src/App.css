@@ -443,6 +443,7 @@ html, body {
 
 .leaflet-popup-content-wrapper h3 {
   margin: 0;
+  max-width: 14rem;
 }
 
 .popup {
@@ -457,6 +458,7 @@ html, body {
 
 .leaflet-popup-content {
   margin: 5px;
+  max-width: 14rem;
 }
 
 .popup-text {
@@ -466,7 +468,6 @@ html, body {
 }
 
 .popup-image {
-  width: 90%;
   height: 10rem;
   width: 14rem;
   object-fit: cover;
@@ -503,14 +504,15 @@ html, body {
 
 #user {
   color: #EB5E55;
+  font-size: 2.5rem;
+  bottom: 1.25rem;
+  position:relative;
+}
+
+#place {
+  color: rgb(13, 137, 139);
   font-size: 2rem;
   bottom: 1rem;
   position:relative;
 }
 
-#place {
-  color: #55DDE0;
-  font-size: 2rem;
-  bottom: 1rem;
-  position:relative;
-}

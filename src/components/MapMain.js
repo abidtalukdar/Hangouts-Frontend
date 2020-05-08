@@ -9,10 +9,8 @@ class MapMain extends React.Component {
       zoom: 11,
       friendsCoordinates: [],
     } 
-   
 
     render() {
-    console.log(this.props.restaurants.businesses)
     const position = [this.props.lat, this.props.lng]
     const pinU = renderToStaticMarkup(<i id="user" class="fas fa-map-pin"></i>)
     const pinF = renderToStaticMarkup(<i id="friend" class="fas fa-map-pin"></i>)
@@ -35,9 +33,9 @@ class MapMain extends React.Component {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
-        <Marker icon={personU} position={position}>
+        <Marker zIndexOffset={1000} icon={personU} position={position}>
           <Popup>
-            {/* You are near {this.context.currentLocation} */}
+            You are near {this.context.currentLocation}
           </Popup>
         </Marker>
 
@@ -62,7 +60,7 @@ class MapMain extends React.Component {
             <div className="popup">
               <h3>{result.name}</h3>
               <img className="popup-image" src={result.image} alt={result.name}/>
-              <h3>{result.address}</h3>
+              <p>{result.address}</p>
             </div>
             </Popup></Marker>
           }):null  
