@@ -1,17 +1,60 @@
 import React from 'react';
 import Restaurant from '../components/Restaurant'
 import { Card } from 'semantic-ui-react'
+import {LocationContext} from '../contexts/LocationContext'
 
 class Restaurants extends React.Component {
+
+  state = {
+    suggestions: [
+    {image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
+    ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
+    ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}
+    ,{image_url: "https://miro.medium.com/max/1080/0*DqHGYPBA-ANwsma2.gif"}]
+    ,lat: 0
+    ,lng: 0
+  }
+
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          lat:position.coords.latitude,
+          lng:position.coords.longitude
+          }, () =>{this.setRestaurants()}
+        )
+    })
+  }
+  
+  setRestaurants = () =>{
+    let location = {lat: this.state.lat, lng: this.state.lng}
+    fetch(`http://localhost:3000/search?lat=${location.lat}&lng=${location.lng}` ,{
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+      })
+    .then(r => r.json())
+    .then(restaurants => {
+      this.props.handleGetRestaurants(restaurants)
+      this.setState({suggestions: restaurants.businesses})
+    })
+  }
+
+  renderCards = () =>{
+    let x = this.state.suggestions.map(suggestion=>{
+      return <Restaurant name = {suggestion.name} img={suggestion.image_url} location={suggestion.location} rating={suggestion.rating} />
+    })
+    return x
+ }
   render() {
     return (
-      <Card.Group itemsPerRow={5}>
-        <Restaurant img={'https://www.singleplatform.com/wp-content/uploads/2018/12/5-Tips-for-Improving-Restaurant-Ambiance.jpg'}/> 
-        <Restaurant img={'https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg'}/> 
-        <Restaurant img={'https://media.cntraveler.com/photos/5b22bfdff04a775484b99dfc/master/pass/Alo-Restaurant__2018_Raffi-Photo-2.jpg'} title={'Sky Room'} /> 
-      </Card.Group>
+      <div>
+        <h2>Restaurants Near You:</h2>
+        <Card.Group itemsPerRow={5}>
+          {this.renderCards()}
+        </Card.Group>
+      </div>
     );
   }
 }
-
 export default Restaurants;

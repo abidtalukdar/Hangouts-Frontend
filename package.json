@@ -6,13 +6,23 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "classnames": "^2.2.6",
+    "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
     "react": "^16.13.1",
+    "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.6.3",
+    "react-router-dom": "^5.1.2",
+    "react-router-native": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-search-bar-semantic-ui": "^1.1.1",
+    "react-semantic-ui-datepickers": "^2.6.0-beta.0",
+    "react-transition-group": "^4.3.0",
+    "semantic-ui-calendar-react": "^0.15.3",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^0.88.2",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3"
   }
 }
